@@ -1,131 +1,36 @@
-# Agavi AI Production Bundle
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This bundle gives you a live-path setup for:
+## Getting Started
 
-- hosting the site on Cloudflare Pages
-- capturing real contact form submissions
-- forwarding leads to Make.com / Zapier
-- optionally pushing leads into your local OpenClaw assistant named Agavi
+First, run the development server:
 
-## Files
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-- `index.html`
-  - Production website
-  - Form posts to `/api/contact`
-- `functions/api/contact.js`
-  - Cloudflare Pages Function
-  - Validates form data
-  - Forwards leads to Make and optionally to Agavi
-- `.env.example`
-  - Environment variables to configure
-- `openclaw/agavi_receiver_example.py`
-  - Example FastAPI receiver for local/OpenClaw intake
-- `openclaw/agavi_lead_prompt.md`
-  - Lead analysis prompt for Agavi
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Recommended Architecture
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Visitor → agaviai.com → Cloudflare Pages → `/api/contact`
-→ Make.com webhook
-→ Email + CRM + Google Sheets / Airtable
-→ Optional direct webhook to Agavi / OpenClaw
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Best Setup
+## Learn More
 
-### Cloudflare Pages
-Use Cloudflare Pages for hosting and Pages Functions for the form endpoint.
+To learn more about Next.js, take a look at the following resources:
 
-### Make.com scenario
-Create a scenario with this sequence:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-1. **Custom Webhook**
-   - Receives the JSON from `functions/api/contact.js`
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-2. **Google Sheets** or **Airtable**
-   - Save the lead
+## Deploy on Vercel
 
-3. **Email**
-   - Notify `jay@agaviai.com`
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-4. **Optional CRM**
-   - HubSpot / Pipedrive / Airtable / Notion / etc.
-
-5. **Optional HTTP module**
-   - POST the lead to your Agavi endpoint if you prefer Make to handle that hop
-
-## Cloudflare Pages Deployment
-
-1. Create a GitHub repo
-2. Upload the contents of this bundle
-3. In Cloudflare Pages:
-   - Create project
-   - Connect the GitHub repo
-   - Framework preset: **None**
-   - Build command: leave blank
-   - Build output directory: `/`
-
-4. Add environment variables:
-   - `MAKE_WEBHOOK_URL`
-   - `AGAVI_WEBHOOK_URL` (optional)
-   - `AGAVI_WEBHOOK_TOKEN` (optional)
-
-5. Add your custom domain:
-   - `agaviai.com`
-   - `www.agaviai.com`
-
-## Important Note About OpenClaw / Local Agavi
-
-A website cannot reach your local OpenClaw machine unless you expose it securely.
-
-Best options:
-- **Cloudflare Tunnel**
-- **Tailscale Funnel**
-- reverse proxy on a cloud VM
-
-The safest path:
-- Website sends to Cloudflare
-- Cloudflare sends to Make
-- Make sends to your Agavi endpoint through a secure tunnel
-
-## Suggested Lead Tables
-
-Minimum fields:
-- submitted_at
-- name
-- company
-- email
-- phone
-- message
-- source
-- ai_summary
-- ai_priority
-- next_action
-- status
-- owner
-
-## Recommended First Production Rollout
-
-### Phase 1
-- Deploy site on Cloudflare Pages
-- Connect form to Make
-- Email yourself every lead
-- Save every lead in Airtable or Google Sheets
-
-### Phase 2
-- Expose Agavi endpoint securely
-- Send leads to Agavi for analysis
-- Write AI summary back to Airtable / Sheets
-
-### Phase 3
-- Auto-generate first-response draft
-- Add lead scoring
-- Add Beatitude Engine fit recommendation
-- Add a diagnostic workflow instead of a simple contact form
-
-## What to do next
-
-1. Publish the site
-2. Create the Make webhook
-3. Set env vars in Cloudflare
-4. Decide whether you want Airtable or Google Sheets as the main lead log
-5. Expose Agavi through Cloudflare Tunnel if you want direct AI intake
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
