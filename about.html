@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About the Founder | Agavi AI</title>
+  <meta name="description" content="Meet Jay Messamore, founder of Agavi AI. With a career spanning commercial banking, middle market relationship management, and business operations, Jay bridges business strategy with intelligent AI systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* SHARED STYLES — keep in sync with index.html */
+    :root{
+      --bg:#020913;
+      --bg2:#071223;
+      --panel:#091627;
+      --panel2:#0c1b2e;
+      --text:#eef6ff;
+      --muted:#aab8c8;
+      --line:rgba(121,166,213,.15);
+      --teal:#5ef6ee;
+      --cyan:#57d6ff;
+      --blue:#6d91ff;
+      --gold:#f0c26e;
+      --green:#9be784;
+      --shadow:0 22px 60px rgba(0,0,0,.35);
+      --glow:0 0 0 1px rgba(109,145,255,.16),0 16px 44px rgba(0,0,0,.32);
+      --radius:22px;
+      --max:1220px;
+      --nav:78px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(94,246,238,.11), transparent 20%),
+        radial-gradient(circle at 74% 12%, rgba(109,145,255,.14), transparent 22%),
+        radial-gradient(circle at 58% 52%, rgba(87,214,255,.08), transparent 26%),
+        linear-gradient(180deg,#020913 0%,#05101c 40%,#04111f 100%);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img,svg{display:block;max-width:100%}
+    button,input,textarea{font:inherit}
+    .container{width:min(calc(100% - 2rem),var(--max));margin:0 auto}
+    .section{padding:104px 0;position:relative}
+    .section::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(113,151,195,.18),transparent);
+    }
+
+    .nav{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(16px);
+      background:rgba(2,9,19,.72);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .nav-inner{
+      min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .brand{display:flex;align-items:center;gap:.9rem;font-weight:800}
+    .brand-mark{
+      width:48px;height:48px;border-radius:14px;display:grid;place-items:center;overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(94,246,238,.24), transparent 56%),
+        linear-gradient(180deg, rgba(11,24,40,.98), rgba(8,17,28,.98));
+      border:1px solid rgba(111,160,214,.18);
+      box-shadow:0 0 0 1px rgba(87,214,255,.08), 0 10px 28px rgba(0,0,0,.38);
+    }
+    .brand-text{line-height:1}
+    .brand-text strong{
+      display:block;font-family:"Montserrat",sans-serif;font-size:1rem;margin-bottom:.18rem;
+    }
+    .brand-text span{
+      display:block;color:#9db1c7;letter-spacing:.16em;font-size:.72rem;text-transform:uppercase;font-weight:800;
+    }
+
+    .nav-links{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+    .nav-links a{color:#dce8f8;font-size:.95rem;transition:transform .2s ease,opacity .2s ease}
+    .nav-links a:hover{transform:translateY(-1px)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.95rem 1.25rem;border-radius:999px;font-weight:700;cursor:pointer;
+      border:1px solid rgba(255,255,255,.08);transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+      box-shadow:var(--glow);
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(90deg,rgba(240,194,110,.15),rgba(87,214,255,.12))}
+    .btn-secondary{background:rgba(255,255,255,.03);color:#dbe8f7}
+
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:.6rem;color:var(--teal);
+      font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;
+    }
+    .eyebrow::before{
+      content:"";width:40px;height:1px;background:linear-gradient(90deg,var(--teal),transparent);
+    }
+
+    h1,h2,h3,h4{
+      font-family:"Montserrat","Inter",sans-serif;
+      letter-spacing:-.03em;line-height:1.06;margin:0 0 .9rem;
+    }
+    h1{font-size:clamp(3rem,7vw,5.9rem);max-width:7.6ch}
+    h2{font-size:clamp(2rem,4vw,3.2rem);max-width:12ch}
+    h3{font-size:1.2rem}
+    p{margin:0;color:var(--muted);line-height:1.65}
+    .lead{font-size:clamp(1.03rem,1.8vw,1.2rem);max-width:31rem}
+
+    .dot-divider{display:flex;justify-content:center;gap:.7rem;margin:0 auto 1.2rem}
+    .dot-divider span{
+      width:9px;height:9px;border-radius:50%;background:var(--teal);
+      box-shadow:0 0 18px rgba(94,246,238,.55);
+    }
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 1.5rem}
+    .panel{
+      position:relative;overflow:hidden;
+      background:linear-gradient(180deg, rgba(9,22,39,.84), rgba(7,18,30,.96));
+      border:1px solid rgba(115,154,198,.12);border-radius:var(--radius);box-shadow:var(--shadow);
+    }
+    .panel::before{
+      content:"";position:absolute;inset:0 0 auto 0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(94,246,238,.34),transparent);opacity:.6;
+    }
+
+    .copy-card{padding:2rem}
+    .about-highlight{display:grid;gap:.85rem;margin-top:1.2rem}
+    .about-highlight .item{
+      padding:1rem 1rem 1rem 1.15rem;border-left:3px solid rgba(94,246,238,.62);
+      border-radius:0 14px 14px 0;background:rgba(255,255,255,.025);
+    }
+
+    .footer{padding:1.6rem 0 2.8rem;color:var(--muted);font-size:.9rem}
+    .footer-inner{
+      display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+      border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;
+    }
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media (max-width:1120px){
+      .grid-2,.founder-hero-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:780px){
+      :root{--nav:70px}
+      .section{padding:82px 0}
+      .nav-links{display:none}
+      .brand-text span{display:none}
+      .founder-hero{min-height:auto;padding:34px 0 56px}
+    }
+
+    /* ── About page specific styles ── */
+    .founder-hero{
+      min-height:calc(100vh - var(--nav));
+      display:flex;align-items:center;padding:60px 0 72px;position:relative;
+    }
+    .founder-hero-grid{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;
+    }
+    .founder-copy h1{
+      max-width:14ch;
+      font-size:clamp(2.6rem,6vw,4.8rem);
+    }
+    .founder-copy .lead{
+      margin:1.2rem 0 2rem;
+      max-width:34rem;
+    }
+    .founder-tags{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.5rem}
+    .founder-tags span{
+      padding:.5rem .8rem;border-radius:999px;font-size:.82rem;color:#e2eefb;
+      background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);
+    }
+
+    .founder-photo{
+      display:flex;align-items:center;justify-content:center;
+    }
+    .photo-placeholder{
+      width:100%;max-width:380px;aspect-ratio:3/4;border-radius:var(--radius);
+      display:grid;place-items:center;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(94,246,238,.08), transparent 56%),
+        linear-gradient(180deg, rgba(9,22,39,.9), rgba(7,18,30,.98));
+      border:1px solid rgba(115,154,198,.18);
+      box-shadow:var(--glow);
+    }
+    .photo-placeholder svg{opacity:.3}
+    .photo-placeholder span{
+      display:block;margin-top:.8rem;font-size:.82rem;color:var(--muted);opacity:.6;
+    }
+
+    .bg-section h2{max-width:18ch}
+    .bg-narrative{margin:.6rem 0 1.6rem;max-width:54rem}
+    .bg-narrative p + p{margin-top:1rem}
+
+    .strength-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.6rem}
+    .strength-card{padding:1.5rem;min-height:180px}
+    .strength-card strong{
+      display:block;font-family:"Montserrat",sans-serif;color:#fff;font-size:1rem;margin-bottom:.5rem;
+    }
+
+    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.6rem}
+    .edu-card{padding:2rem}
+    .edu-card h3{color:var(--teal);margin-bottom:.3rem}
+    .edu-card .edu-institution{
+      font-size:.88rem;color:var(--gold);font-weight:700;margin-bottom:.8rem;display:block;
+    }
+
+    .cta-section{text-align:center}
+    .cta-section h2{max-width:18ch;margin:0 auto .9rem}
+    .cta-section .lead{max-width:38rem;margin:0 auto 2rem}
+    .cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+    @media (max-width:1120px){
+      .strength-grid{grid-template-columns:1fr 1fr}
+      .edu-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:780px){
+      .strength-grid{grid-template-columns:1fr}
+      .cta-actions{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Agavi AI home">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
+            <defs>
+              <linearGradient id="miniLeaf" x1="18" y1="16" x2="98" y2="98" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8AFFF7"/>
+                <stop offset=".52" stop-color="#63D6FF"/>
+                <stop offset="1" stop-color="#F0C26E"/>
+              </linearGradient>
+              <filter id="miniGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2.5" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <rect x="1" y="1" width="118" height="118" rx="20" fill="url(#miniBg)"/>
+            <g filter="url(#miniGlow)" stroke="url(#miniLeaf)" stroke-width="3" fill="rgba(12,34,58,.18)">
+              <path d="M60 92 C54 65 57 40 62 16 C69 40 70 66 60 92 Z"/>
+              <path d="M60 92 C44 71 31 59 17 46 C39 51 54 63 60 92 Z"/>
+              <path d="M60 92 C47 77 36 70 24 63 C41 67 54 76 60 92 Z"/>
+              <path d="M60 92 C52 68 46 54 42 32 C53 48 59 64 60 92 Z"/>
+              <path d="M60 92 C76 71 89 59 103 46 C81 51 66 63 60 92 Z"/>
+              <path d="M60 92 C73 77 84 70 96 63 C79 67 66 76 60 92 Z"/>
+              <path d="M60 92 C68 68 74 54 78 32 C67 48 61 64 60 92 Z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>Agavi AI</strong>
+          <span>Architecting Transformation</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="about.html" style="color:var(--teal)">Founder</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#engine">Beatitude Engine</a>
+        <a href="index.html#why">Why Agavi</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="https://diagnostic.agaviai.com" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700;">Free Diagnostic</a>
+        <a class="btn btn-primary" href="index.html#contact">Schedule a Discovery Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero / Intro ── -->
+  <header class="founder-hero">
+    <div class="container founder-hero-grid">
+      <div class="founder-copy reveal">
+        <div class="eyebrow">Meet the Founder</div>
+        <h1>Jay Messamore</h1>
+        <p class="lead">
+          Bridging business operations and AI — building intelligent systems for companies that want substance over theater.
+        </p>
+        <div class="founder-tags">
+          <span>Commercial Banking</span>
+          <span>Business Strategy</span>
+          <span>AI Consulting</span>
+          <span>Operations</span>
+        </div>
+      </div>
+
+      <div class="founder-photo reveal">
+        <!-- Replace the .photo-placeholder div below with: <img src="your-photo.jpg" alt="Jay Messamore" style="width:100%;max-width:380px;border-radius:var(--radius);box-shadow:var(--glow)"> -->
+        <div class="photo-placeholder">
+          <div style="text-align:center">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ── Professional Background ── -->
+    <section class="section bg-section" id="background">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="reveal">
+          <div class="eyebrow">Background</div>
+          <h2>Business-first. Technology-informed.</h2>
+        </div>
+
+        <div class="panel copy-card reveal">
+          <div class="bg-narrative">
+            <p>
+              Before founding Agavi AI, I spent years in commercial banking and middle market relationship management — working directly with business owners and leadership teams to understand their operations, financial structures, and growth challenges. I managed complex portfolios, assessed risk, and helped companies navigate the decisions that shape their trajectory.
+            </p>
+            <p>
+              That experience taught me something that most technology consultants miss: businesses don't need more tools — they need the right systems, implemented in a way that fits how the organization actually operates. When I saw how many companies were struggling to adopt AI effectively, I knew the gap wasn't technical. It was strategic.
+            </p>
+            <p>
+              Agavi AI was built to close that gap. I bring the same rigor I applied in banking — disciplined analysis, practical execution, and a relentless focus on measurable outcomes — to help businesses harness AI in a way that creates real leverage across every department.
+            </p>
+          </div>
+        </div>
+
+        <div class="strength-grid">
+          <div class="panel strength-card reveal">
+            <strong>Commercial Banking Leadership</strong>
+            <p>Years of managing portfolios, conducting risk assessments, and building deep client relationships across industries. Understanding how capital flows through a business informs every recommendation.</p>
+          </div>
+          <div class="panel strength-card reveal">
+            <strong>Middle Market Expertise</strong>
+            <p>Hands-on experience with growing businesses — understanding the operational realities, resource constraints, and scaling challenges that mid-market companies face every day.</p>
+          </div>
+          <div class="panel strength-card reveal">
+            <strong>Business Operations</strong>
+            <p>A career built on process optimization, workflow design, and systems thinking. Every AI solution starts with understanding the business process it needs to improve.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Education ── -->
+    <section class="section" id="education">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="reveal">
+          <div class="eyebrow">Education</div>
+          <h2>Academic Foundation</h2>
+        </div>
+
+        <div class="edu-grid">
+          <div class="panel edu-card reveal">
+            <h3>Graduate Business Studies (MBA)</h3>
+            <span class="edu-institution">Finance, Strategy &amp; Management</span>
+            <p>
+              Advanced coursework in corporate finance, strategic management, and business analytics — forming the analytical foundation that drives every client engagement at Agavi AI.
+            </p>
+          </div>
+          <div class="panel edu-card reveal">
+            <h3>Continuous Learning</h3>
+            <span class="edu-institution">AI, Automation &amp; Emerging Technology</span>
+            <p>
+              Ongoing study of artificial intelligence, machine learning applications, and automation frameworks — ensuring that recommendations stay current and grounded in what actually works.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="section cta-section">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="reveal">
+          <div class="eyebrow">Get Started</div>
+          <h2>Let's talk about your business.</h2>
+          <p class="lead">
+            Whether you're exploring AI for the first time or looking to optimize what you already have, I'd like to hear about your goals.
+          </p>
+        </div>
+        <div class="cta-actions reveal">
+          <a class="btn btn-primary" href="index.html#contact">Schedule a Discovery Call</a>
+          <a class="btn btn-secondary" href="https://diagnostic.agaviai.com" target="_blank" rel="noopener">Take the Free Diagnostic →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Agavi AI. All rights reserved.</span>
+      <a href="index.html" style="color:var(--muted);text-decoration:underline">Home</a>
+      <span>jay@agaviai.com</span>
+    </div>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.14 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
