@@ -181,18 +181,12 @@
     .founder-photo{
       display:flex;align-items:center;justify-content:center;
     }
-    .photo-placeholder{
-      width:100%;max-width:380px;aspect-ratio:3/4;border-radius:var(--radius);
-      display:grid;place-items:center;
-      background:
-        radial-gradient(circle at 50% 38%, rgba(94,246,238,.08), transparent 56%),
-        linear-gradient(180deg, rgba(9,22,39,.9), rgba(7,18,30,.98));
+    .founder-photo img{
+      width:100%;max-width:380px;border-radius:var(--radius);
       border:1px solid rgba(115,154,198,.18);
       box-shadow:var(--glow);
-    }
-    .photo-placeholder svg{opacity:.3}
-    .photo-placeholder span{
-      display:block;margin-top:.8rem;font-size:.82rem;color:var(--muted);opacity:.6;
+      filter:grayscale(100%) contrast(1.08) brightness(1.05);
+      object-fit:cover;
     }
 
     .bg-section h2{max-width:18ch}
@@ -294,16 +288,7 @@
       </div>
 
       <div class="founder-photo reveal">
-        <!-- Replace the .photo-placeholder div below with: <img src="your-photo.jpg" alt="Jay Messamore" style="width:100%;max-width:380px;border-radius:var(--radius);box-shadow:var(--glow)"> -->
-        <div class="photo-placeholder">
-          <div style="text-align:center">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <span>Photo coming soon</span>
-          </div>
-        </div>
+        <img src="jay-messamore.jpg" alt="Jay Messamore — Founder of Agavi AI">
       </div>
     </div>
   </header>
