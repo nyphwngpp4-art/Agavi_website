@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "agaviwebsite",
+  "compatibility_date": "2026-04-06",
+  "main": "worker.js",
+  "assets": {
+    "directory": "./public",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "none"
+  }
+}
