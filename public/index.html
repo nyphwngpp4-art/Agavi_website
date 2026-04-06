@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agavi AI | AI That Grows With You</title>
+  <meta name="description" content="Agavi AI helps businesses integrate intelligent automation across CRM, Finance, Customer Service, Sales, Operations, and Marketing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#020913;
+      --bg2:#071223;
+      --panel:#091627;
+      --panel2:#0c1b2e;
+      --text:#eef6ff;
+      --muted:#aab8c8;
+      --line:rgba(121,166,213,.15);
+      --teal:#5ef6ee;
+      --cyan:#57d6ff;
+      --blue:#6d91ff;
+      --gold:#f0c26e;
+      --green:#9be784;
+      --shadow:0 22px 60px rgba(0,0,0,.35);
+      --glow:0 0 0 1px rgba(109,145,255,.16),0 16px 44px rgba(0,0,0,.32);
+      --radius:22px;
+      --max:1220px;
+      --nav:78px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(94,246,238,.11), transparent 20%),
+        radial-gradient(circle at 74% 12%, rgba(109,145,255,.14), transparent 22%),
+        radial-gradient(circle at 58% 52%, rgba(87,214,255,.08), transparent 26%),
+        linear-gradient(180deg,#020913 0%,#05101c 40%,#04111f 100%);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img,svg{display:block;max-width:100%}
+    button,input,textarea{font:inherit}
+    .container{width:min(calc(100% - 2rem),var(--max));margin:0 auto}
+    .section{padding:104px 0;position:relative}
+    .section::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(113,151,195,.18),transparent);
+    }
+
+    .nav{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(16px);
+      background:rgba(2,9,19,.72);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .nav-inner{
+      min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .brand{display:flex;align-items:center;gap:.9rem;font-weight:800}
+    .brand-mark{
+      width:48px;height:48px;border-radius:14px;display:grid;place-items:center;overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(94,246,238,.24), transparent 56%),
+        linear-gradient(180deg, rgba(11,24,40,.98), rgba(8,17,28,.98));
+      border:1px solid rgba(111,160,214,.18);
+      box-shadow:0 0 0 1px rgba(87,214,255,.08), 0 10px 28px rgba(0,0,0,.38);
+    }
+    .brand-text{line-height:1}
+    .brand-text strong{
+      display:block;font-family:"Montserrat",sans-serif;font-size:1rem;margin-bottom:.18rem;
+    }
+    .brand-text span{
+      display:block;color:#9db1c7;letter-spacing:.16em;font-size:.72rem;text-transform:uppercase;font-weight:800;
+    }
+
+    .nav-links{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+    .nav-links a{color:#dce8f8;font-size:.95rem;transition:transform .2s ease,opacity .2s ease}
+    .nav-links a:hover{transform:translateY(-1px)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.95rem 1.25rem;border-radius:999px;font-weight:700;cursor:pointer;
+      border:1px solid rgba(255,255,255,.08);transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+      box-shadow:var(--glow);
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(90deg,rgba(240,194,110,.15),rgba(87,214,255,.12))}
+    .btn-secondary{background:rgba(255,255,255,.03);color:#dbe8f7}
+
+    .hero{
+      min-height:calc(100vh - var(--nav));
+      display:flex;align-items:center;padding:38px 0 72px;position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+      background:linear-gradient(90deg, rgba(2,9,19,.95) 0%, rgba(2,9,19,.78) 38%, rgba(2,9,19,.20) 67%, rgba(2,9,19,.04) 100%);
+    }
+    .hero-grid{
+      position:relative;z-index:1;
+      display:grid;grid-template-columns:.9fr 1.1fr;gap:2rem;align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:.6rem;color:var(--teal);
+      font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;
+    }
+    .eyebrow::before{
+      content:"";width:40px;height:1px;background:linear-gradient(90deg,var(--teal),transparent);
+    }
+
+    h1,h2,h3,h4{
+      font-family:"Montserrat","Inter",sans-serif;
+      letter-spacing:-.03em;line-height:1.06;margin:0 0 .9rem;
+    }
+    h1{font-size:clamp(3rem,7vw,5.9rem);max-width:7.6ch}
+    h2{font-size:clamp(2rem,4vw,3.2rem);max-width:12ch}
+    h3{font-size:1.2rem}
+    p{margin:0;color:var(--muted);line-height:1.65}
+    .lead{font-size:clamp(1.03rem,1.8vw,1.2rem);max-width:31rem}
+
+    .hero-copy p{margin:1.1rem 0 2rem}
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+    .hero-tags{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.7rem}
+    .hero-tags span{
+      padding:.58rem .8rem;border-radius:999px;font-size:.82rem;color:#e2eefb;
+      background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);
+    }
+
+    .hero-visual{
+      position:relative;min-height:640px;display:flex;justify-content:flex-end;align-items:center;
+    }
+    .hero-visual::before{
+      content:"";position:absolute;inset:8% 3% 10% 20%;border-radius:50%;
+      background:radial-gradient(circle, rgba(87,214,255,.15), transparent 58%);
+      filter:blur(16px);
+      pointer-events:none;
+    }
+    .hero-agave{width:min(100%,760px);margin-left:auto;filter:drop-shadow(0 22px 68px rgba(0,0,0,.36))}
+
+    .dot-divider{display:flex;justify-content:center;gap:.7rem;margin:0 auto 1.2rem}
+    .dot-divider span{
+      width:9px;height:9px;border-radius:50%;background:var(--teal);
+      box-shadow:0 0 18px rgba(94,246,238,.55);
+    }
+
+    .section-head{
+      display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem;
+    }
+    .section-head p{max-width:38rem}
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 1.5rem}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem;margin-top:2rem}
+    .panel{
+      position:relative;overflow:hidden;
+      background:linear-gradient(180deg, rgba(9,22,39,.84), rgba(7,18,30,.96));
+      border:1px solid rgba(115,154,198,.12);border-radius:var(--radius);box-shadow:var(--shadow);
+    }
+    .panel::before{
+      content:"";position:absolute;inset:0 0 auto 0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(94,246,238,.34),transparent);opacity:.6;
+    }
+
+    .copy-card{padding:2rem}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:1.4rem}
+    .stat{
+      padding:1rem;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);
+    }
+    .stat strong{display:block;font-family:"Montserrat",sans-serif;font-size:1.1rem;color:#fff;margin-bottom:.2rem}
+    .about-highlight{display:grid;gap:.85rem;margin-top:1.2rem}
+    .about-highlight .item{
+      padding:1rem 1rem 1rem 1.15rem;border-left:3px solid rgba(94,246,238,.62);
+      border-radius:0 14px 14px 0;background:rgba(255,255,255,.025);
+    }
+
+    .service-card{padding:1.3rem;min-height:235px}
+    .service-card::after{
+      content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;
+      background:linear-gradient(90deg,var(--teal),var(--blue),var(--gold));
+    }
+    .service-icon{
+      width:50px;height:50px;border-radius:15px;display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(94,246,238,.11), rgba(109,145,255,.10));
+      color:var(--teal);border:1px solid rgba(255,255,255,.08);margin-bottom:1rem;
+    }
+    .service-card .tag{
+      display:inline-block;margin-top:1rem;font-size:.76rem;color:var(--gold);
+      letter-spacing:.08em;text-transform:uppercase;font-weight:800;
+    }
+
+    .engine-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:1.5rem;align-items:center;margin-top:2rem}
+    .engine-copy{padding:2rem}
+    .engine-badge{
+      display:inline-flex;align-items:center;padding:.5rem .8rem;border-radius:999px;
+      background:rgba(240,194,110,.10);border:1px solid rgba(240,194,110,.22);
+      color:var(--gold);font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:1rem 0;
+    }
+    .engine-points{display:grid;gap:.9rem;margin-top:1rem}
+    .engine-point{
+      display:grid;grid-template-columns:auto 1fr;gap:.8rem;padding:1rem;border-radius:16px;
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+    }
+    .engine-point span{
+      width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(94,246,238,.12), rgba(109,145,255,.08));
+      border:1px solid rgba(255,255,255,.06);color:var(--teal);font-family:"Montserrat",sans-serif;font-weight:800;
+    }
+
+    .wheel-panel{
+      padding:1.5rem;min-height:700px;
+      background:
+        radial-gradient(circle at 54% 48%, rgba(87,214,255,.12), transparent 28%),
+        linear-gradient(180deg, rgba(9,22,39,.84), rgba(7,18,30,.96));
+    }
+    .wheel-wrap{
+      position:relative;width:min(100%,700px);height:660px;margin:0 auto;
+    }
+    .wheel-svg{
+      position:absolute;inset:0;width:100%;height:100%;
+      filter:drop-shadow(0 18px 44px rgba(0,0,0,.34));
+    }
+    .wheel-center{
+      position:absolute;z-index:5;
+      width:182px;height:182px;left:50%;top:51%;transform:translate(-50%,-50%);
+      border-radius:50%;display:grid;place-items:center;text-align:center;padding:1rem;
+      background:radial-gradient(circle at 35% 30%, rgba(82,119,255,.16), rgba(5,15,28,.98) 62%);
+      border:1px solid rgba(104,149,201,.22);
+      box-shadow:0 0 0 1px rgba(22,70,120,.24) inset, 0 14px 38px rgba(0,0,0,.30);
+    }
+    .wheel-center h3{font-size:1.36rem;line-height:1.04;margin:0 0 .45rem}
+    .wheel-center p{font-size:.8rem;line-height:1.38;max-width:18ch}
+
+    .phase-tile{
+      position:absolute;z-index:6;width:184px;padding:1rem 1rem 1.05rem;
+      border-radius:18px;background:linear-gradient(180deg, rgba(8,17,29,.97), rgba(7,15,26,.99));
+      border:1px solid rgba(103,149,199,.24);box-shadow:var(--glow);
+    }
+    .phase-tile small{
+      display:block;font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.34rem;
+    }
+    .phase-tile strong{
+      display:block;color:#fff;font-family:"Montserrat",sans-serif;font-size:1rem;margin-bottom:.24rem;
+    }
+    .phase-tile p{font-size:.84rem;line-height:1.45}
+    .phase-1 small,.phase-5 small,.phase-4 small{color:var(--green)}
+    .phase-2 small,.phase-3 small{color:var(--gold)}
+
+    .phase-1{top:58px;left:50%;transform:translateX(-50%)}
+    .phase-2{top:196px;right:26px}
+    .phase-3{bottom:112px;right:50px}
+    .phase-4{bottom:112px;left:50px}
+    .phase-5{top:196px;left:36px}
+
+    .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+    .why-card{padding:1.25rem;min-height:220px}
+    .why-card strong{
+      display:block;font-family:"Montserrat",sans-serif;color:#fff;font-size:1rem;margin-bottom:.45rem;
+    }
+
+    .contact-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:1.5rem;margin-top:2rem}
+    .contact-card,.form-card{padding:2rem}
+    .contact-points{display:grid;gap:.9rem;margin-top:1.3rem}
+    .contact-points .item{
+      padding:1rem 1rem 1rem 1.15rem;border-left:3px solid rgba(94,246,238,.6);
+      background:rgba(255,255,255,.025);border-radius:0 14px 14px 0;
+    }
+
+    form{display:grid;gap:1rem}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    label{display:grid;gap:.45rem;color:#dbe8f7;font-weight:600;font-size:.93rem}
+    input,textarea{
+      width:100%;padding:.95rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);color:#fff;outline:none;transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    input:focus,textarea:focus{
+      border-color:rgba(87,214,255,.42);box-shadow:0 0 0 4px rgba(87,214,255,.12);
+    }
+    textarea{min-height:150px;resize:vertical}
+    .form-note{font-size:.88rem;color:var(--muted)}
+    .status{
+      display:none;padding:.9rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);font-size:.92rem;
+    }
+    .status.show{display:block}
+    .status.success{border-color:rgba(94,246,238,.28);color:#d8fffd}
+    .status.error{border-color:rgba(255,92,120,.28);color:#ffe0e8}
+
+    /* ── Diagnostic CTA section ── */
+    .diag-section{
+      background:linear-gradient(180deg, rgba(7,18,30,.0) 0%, rgba(10,22,38,.9) 40%, rgba(7,18,30,.0) 100%);
+      text-align:center;
+    }
+    .diag-badge{
+      display:inline-flex;align-items:center;gap:.55rem;
+      padding:.45rem 1.1rem;border-radius:999px;margin-bottom:1.4rem;
+      background:rgba(94,246,238,.08);border:1px solid rgba(94,246,238,.22);
+      font-size:.78rem;font-weight:800;color:var(--teal);letter-spacing:.13em;text-transform:uppercase;
+    }
+    .diag-section h2{max-width:18ch;margin:0 auto .9rem}
+    .diag-section .lead{max-width:42rem;margin:0 auto 2.4rem}
+    .diag-cards{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;
+      margin:2.8rem auto 3rem;max-width:860px;
+    }
+    .diag-card{
+      padding:1.6rem 1.4rem;border-radius:var(--radius);text-align:left;
+      background:linear-gradient(160deg,rgba(9,22,39,.9),rgba(7,18,30,.98));
+      border:1px solid rgba(94,246,238,.12);
+    }
+    .diag-card-icon{font-size:1.5rem;margin-bottom:.8rem}
+    .diag-card strong{display:block;font-family:"Montserrat",sans-serif;font-size:.95rem;margin-bottom:.45rem;color:var(--text)}
+    .diag-card p{font-size:.88rem;line-height:1.55}
+    .diag-meta{font-size:.84rem;color:#7a96b2;margin-top:1.1rem}
+    .diag-meta span{margin:0 .6rem}
+    @media(max-width:780px){.diag-cards{grid-template-columns:1fr}}
+
+    .footer{padding:1.6rem 0 2.8rem;color:var(--muted);font-size:.9rem}
+    .footer-inner{
+      display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+      border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;
+    }
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media (max-width:1120px){
+      .hero-grid,.grid-2,.engine-wrap,.contact-grid{grid-template-columns:1fr}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .why-grid{grid-template-columns:repeat(2,1fr)}
+      .hero-visual{min-height:560px}
+    }
+
+    @media (max-width:780px){
+      :root{--nav:70px}
+      .section{padding:82px 0}
+      .nav-links{display:none}
+      .section-head{flex-direction:column;align-items:start}
+      .cards,.why-grid,.stats,.form-row{grid-template-columns:1fr}
+      .hero{padding:34px 0 56px}
+      .hero-grid{gap:1rem}
+      h1{max-width:9ch}
+      .hero-actions{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+      .hero-visual{min-height:400px}
+      .brand-text span{display:none}
+      .wheel-panel{min-height:auto}
+      .wheel-wrap{height:auto;display:grid;gap:1rem}
+      .wheel-svg{position:relative;height:auto;min-height:420px}
+      .wheel-center{
+        position:relative;left:auto;top:auto;transform:none;width:100%;height:auto;border-radius:24px;padding:1.2rem;
+      }
+      .phase-tile{
+        position:relative !important;inset:auto !important;width:100%;transform:none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="Agavi AI home">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
+            <defs>
+              <linearGradient id="miniLeaf" x1="18" y1="16" x2="98" y2="98" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8AFFF7"/>
+                <stop offset=".52" stop-color="#63D6FF"/>
+                <stop offset="1" stop-color="#F0C26E"/>
+              </linearGradient>
+              <filter id="miniGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2.5" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <rect x="1" y="1" width="118" height="118" rx="20" fill="url(#miniBg)"/>
+            <g filter="url(#miniGlow)" stroke="url(#miniLeaf)" stroke-width="3" fill="rgba(12,34,58,.18)">
+              <path d="M60 92 C54 65 57 40 62 16 C69 40 70 66 60 92 Z"/>
+              <path d="M60 92 C44 71 31 59 17 46 C39 51 54 63 60 92 Z"/>
+              <path d="M60 92 C47 77 36 70 24 63 C41 67 54 76 60 92 Z"/>
+              <path d="M60 92 C52 68 46 54 42 32 C53 48 59 64 60 92 Z"/>
+              <path d="M60 92 C76 71 89 59 103 46 C81 51 66 63 60 92 Z"/>
+              <path d="M60 92 C73 77 84 70 96 63 C79 67 66 76 60 92 Z"/>
+              <path d="M60 92 C68 68 74 54 78 32 C67 48 61 64 60 92 Z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>Agavi AI</strong>
+          <span>Architecting Transformation</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="about.html">Founder</a>
+        <a href="#services">Services</a>
+        <a href="#engine">Beatitude Engine</a>
+        <a href="#why">Why Agavi</a>
+        <a href="#contact">Contact</a>
+        <a href="https://diagnostic.agaviai.com" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700;">Free Diagnostic</a>
+        <a class="btn btn-primary" href="#contact">Schedule a Discovery Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">Boutique AI Consultancy</div>
+        <h1>AI That Grows With You</h1>
+        <p class="lead">
+          Agavi AI helps businesses harness the power of artificial intelligence across every department with tailored automation, better systems, and grounded execution.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Schedule a Discovery Call</a>
+          <a class="btn btn-secondary" href="https://diagnostic.agaviai.com" target="_blank" rel="noopener">Take the Free Diagnostic →</a>
+        </div>
+        <div class="hero-tags">
+          <span>CRM</span>
+          <span>Finance</span>
+          <span>Sales</span>
+          <span>Operations</span>
+          <span>Customer Service</span>
+          <span>Marketing</span>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <svg class="hero-agave" viewBox="0 0 980 760" aria-label="Stylized agave plant representing business functions">
+          <defs>
+            <radialGradient id="heroGlow" cx="50%" cy="54%" r="54%">
+              <stop offset="0%" stop-color="rgba(90,246,238,.24)"/>
+              <stop offset="100%" stop-color="rgba(90,246,238,0)"/>
+            </radialGradient>
+            <linearGradient id="leafGrad" x1="292" y1="96" x2="794" y2="560" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#92FFF7"/>
+              <stop offset=".48" stop-color="#67D9FF"/>
+              <stop offset="1" stop-color="#F0C26E"/>
+            </linearGradient>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop stop-color="#69DFFF"/>
+              <stop offset="1" stop-color="#F0C26E"/>
+            </linearGradient>
+            <filter id="heroBlur" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <rect width="980" height="760" fill="none"/>
+          <circle cx="610" cy="430" r="220" fill="url(#heroGlow)"/>
+          <circle cx="610" cy="430" r="310" fill="none" stroke="rgba(95,140,200,.07)"/>
+          <circle cx="610" cy="430" r="360" fill="none" stroke="rgba(95,140,200,.05)"/>
+
+          <g opacity=".34" stroke="#63D6FF">
+            <line x1="610" y1="430" x2="380" y2="118"/>
+            <line x1="610" y1="430" x2="225" y2="296"/>
+            <line x1="610" y1="430" x2="232" y2="586"/>
+            <line x1="610" y1="430" x2="896" y2="122"/>
+            <line x1="610" y1="430" x2="958" y2="290"/>
+            <line x1="610" y1="430" x2="932" y2="598"/>
+          </g>
+
+          <g filter="url(#heroBlur)" stroke="url(#leafGrad)" stroke-width="3" fill="rgba(7,22,36,.42)">
+            <path d="M610 438 C588 330 593 204 626 58 C664 206 668 332 610 438 Z"/>
+            <path d="M610 438 C537 356 463 284 364 196 C484 244 573 304 610 438 Z"/>
+            <path d="M610 438 C494 356 409 314 256 266 C411 306 535 367 610 438 Z"/>
+            <path d="M610 438 C545 336 512 244 481 118 C557 205 601 309 610 438 Z"/>
+            <path d="M610 438 C684 356 758 284 856 196 C735 245 646 305 610 438 Z"/>
+            <path d="M610 438 C725 356 812 314 964 266 C810 305 685 368 610 438 Z"/>
+            <path d="M610 438 C675 336 708 244 739 118 C663 204 619 309 610 438 Z"/>
+            <path d="M610 442 C533 448 438 468 314 518 C446 533 550 510 610 442 Z"/>
+            <path d="M610 442 C693 448 784 468 903 518 C780 533 670 511 610 442 Z"/>
+            <path d="M610 438 C566 378 531 318 505 236 C567 287 602 350 610 438 Z"/>
+            <path d="M610 438 C653 378 689 318 715 236 C652 286 617 350 610 438 Z"/>
+          </g>
+
+          <g stroke="url(#lineGrad)" stroke-width="1.7" fill="none" opacity=".82">
+            <path d="M470 186 H400 l-30 -22"/>
+            <path d="M760 186 H850 l30 -22"/>
+            <path d="M300 286 H212 l-36 0"/>
+            <path d="M842 286 H932 l28 0"/>
+            <path d="M318 520 H224 l-34 16"/>
+            <path d="M818 520 H910 l34 16"/>
+          </g>
+
+          <g font-family="Inter, sans-serif" font-size="18" font-weight="600">
+            <g>
+              <path d="M330 162 h82 l18 22 -18 22 h-82 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(104,220,255,.34)"/>
+              <text x="371" y="191" text-anchor="middle" fill="#DDF6FF">CRM</text>
+            </g>
+            <g>
+              <path d="M760 162 h106 l18 22 -18 22 h-106 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(240,194,110,.34)"/>
+              <text x="813" y="191" text-anchor="middle" fill="#FFE1A4">Finance</text>
+            </g>
+            <g>
+              <path d="M176 262 h132 l18 22 -18 22 h-132 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(104,220,255,.34)"/>
+              <text x="242" y="291" text-anchor="middle" fill="#63D6FF">Marketing</text>
+            </g>
+            <g>
+              <path d="M868 262 h106 l18 22 -18 22 h-106 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(240,194,110,.34)"/>
+              <text x="921" y="291" text-anchor="middle" fill="#FFE1A4">Sales</text>
+            </g>
+            <g>
+              <path d="M148 496 h188 l18 22 -18 22 h-188 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(240,194,110,.34)"/>
+              <text x="242" y="525" text-anchor="middle" fill="#FFE1A4">Customer Service</text>
+            </g>
+            <g>
+              <path d="M868 496 h138 l18 22 -18 22 h-138 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(104,220,255,.34)"/>
+              <text x="937" y="525" text-anchor="middle" fill="#DDF6FF">Operations</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="about">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">About Agavi AI</div>
+            <h2>We don’t sell software. We architect transformation.</h2>
+          </div>
+          <p>
+            Agavi AI is a boutique consultancy that partners with businesses to identify inefficiencies, implement intelligent systems, and unlock growth through tailored AI strategy and execution.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel copy-card reveal">
+            <h3>Built for operating reality</h3>
+            <p>
+              Businesses do not need more noise. They need clear thinking, disciplined implementation, and AI that fits the way the business actually runs. Agavi AI helps leadership teams move from curiosity to capability with systems that create leverage across the enterprise.
+            </p>
+            <div class="stats">
+              <div class="stat"><strong>Strategy</strong><p>Opportunity mapping and ROI prioritization.</p></div>
+              <div class="stat"><strong>Systems</strong><p>Workflow design, integrations, and operating discipline.</p></div>
+              <div class="stat"><strong>Scale</strong><p>Training, governance, iteration, and adoption.</p></div>
+            </div>
+          </div>
+
+          <div class="panel copy-card reveal">
+            <h3>How Agavi works</h3>
+            <p>
+              Agavi AI operates like an advisory partner, not a generic platform. We diagnose the real bottlenecks, design the right architecture, and help deploy the tools that fit your stack, your team, and your economics.
+            </p>
+            <div class="about-highlight">
+              <div class="item"><strong>Tailored by design</strong><p>Every engagement begins with your workflow, your data, and your business model.</p></div>
+              <div class="item"><strong>Leadership-level clarity</strong><p>Recommendations stay practical, commercially grounded, and tied to measurable return.</p></div>
+            </div>
+            <a href="about.html" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:1.2rem;color:var(--teal);font-weight:700;font-size:.95rem;">Meet the founder behind Agavi AI →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">What We Do</div>
+            <h2>AI systems across every major business function.</h2>
+          </div>
+          <p>
+            Each branch of the agave represents a high-leverage function where intelligence can take root, remove friction, and improve performance.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="panel service-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V8l8-4 8 4v11l-8 4-8-4Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 8l8 4 8-4M12 12v11" stroke="currentColor" stroke-width="1.6"/></svg></div>
+            <h3>CRM Intelligence</h3>
+            <p>AI-enhanced relationship tracking, lead scoring, pipeline visibility, and next-best-action prompts that sharpen commercial execution.</p>
+            <span class="tag">Relationships + Revenue</span>
+          </article>
+          <article class="panel service-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 16l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="16" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg></div>
+            <h3>Financial Automation</h3>
+            <p>Forecasting, anomaly detection, reporting automation, and better decision support for leaders who need stronger financial signal.</p>
+            <span class="tag">Control + Insight</span>
+          </article>
+          <article class="panel service-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0v5l-3-2-3 2-3-2-3 2-3-2V12Z" stroke="currentColor" stroke-width="1.6"/><path d="M9 10h6M8 13h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <h3>Customer Service AI</h3>
+            <p>Chatbots, sentiment analysis, service routing, and automated resolution flows that improve response time and retention.</p>
+            <span class="tag">Service + Retention</span>
+          </article>
+          <article class="panel service-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-5 3 3 8-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8h5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Sales Enablement</h3>
+            <p>AI-driven outreach, account prioritization, rep coaching tools, and conversion modeling that help teams perform better.</p>
+            <span class="tag">Pipeline + Conversion</span>
+          </article>
+          <article class="panel service-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 15l4-4 3 3 6-7 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <h3>Operations &amp; Logistics</h3>
+            <p>Workflow automation, resource optimization, predictive planning, and exception handling that reduce waste and improve throughput.</p>
+            <span class="tag">Efficiency + Throughput</span>
+          </article>
+          <article class="panel service-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="18" cy="17" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg></div>
+            <h3>Marketing Intelligence</h3>
+            <p>Campaign analytics, audience segmentation, personalization, and reporting automation that sharpen growth decisions.</p>
+            <span class="tag">Signal + Demand</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="engine">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">The Beatitude Engine</div>
+            <h2>Optional values alignment layered into practical AI architecture.</h2>
+          </div>
+          <p>
+            The Beatitude Engine is Agavi AI’s proprietary diagnostic and deployment framework. It can also be added as an optional alignment layer for owners who want automation shaped by standards, tone, and principles consistent with how they lead.
+          </p>
+        </div>
+
+        <div class="engine-wrap">
+          <div class="panel engine-copy reveal">
+            <h3>Framework first. Alignment when desired.</h3>
+            <div class="engine-badge">Optional Add-On Feature</div>
+            <p>
+              Every Agavi AI engagement can use the Beatitude Engine as an execution model: assess, align, architect, activate, and amplify. For owners who want it, the same architecture can include a values layer that helps AI outputs remain consistent with conviction, service standards, and leadership tone.
+            </p>
+
+            <div class="engine-points">
+              <div class="engine-point"><span>1</span><div><strong>Principled guidance, not rigid control</strong><p>The alignment layer guides recommendations, messaging, and exception handling without becoming a requirement for every client.</p></div></div>
+              <div class="engine-point"><span>2</span><div><strong>Teachings translated into operating principles</strong><p>Humility can shape tone. Mercy can influence service recovery. Integrity can guide truthfulness, escalation, and reporting.</p></div></div>
+              <div class="engine-point"><span>3</span><div><strong>Useful for high-trust businesses</strong><p>This is especially useful for founder-led, family-owned, and values-driven organizations where AI should reflect ownership standards.</p></div></div>
+            </div>
+          </div>
+
+          <div class="panel wheel-panel reveal">
+            <div class="wheel-wrap">
+              <svg class="wheel-svg" viewBox="0 0 700 660" aria-label="Beatitude Engine wheel diagram">
+                <defs>
+                  <linearGradient id="wheelRing" x1="114" y1="140" x2="600" y2="570" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#61FFF3"/>
+                    <stop offset=".52" stop-color="#60B8FF"/>
+                    <stop offset="1" stop-color="#F0C26E"/>
+                  </linearGradient>
+                  <filter id="wheelGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="3" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+
+                <circle cx="350" cy="340" r="198" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="54"/>
+                <circle cx="350" cy="340" r="198" fill="none" stroke="url(#wheelRing)" stroke-width="10.5" stroke-linecap="round"
+                        stroke-dasharray="145 84 142 80 138 82 142 82 146 90" transform="rotate(-90 350 340)" filter="url(#wheelGlow)"/>
+                <circle cx="350" cy="340" r="142" fill="none" stroke="rgba(95,154,214,.18)" stroke-width="1.5" stroke-dasharray="5 10"/>
+
+                <path d="M350 197 C386 196 423 205 455 224" stroke="#78F4F0" stroke-opacity=".22" stroke-width="2"/>
+                <path d="M489 265 C515 296 532 335 534 375" stroke="#76CFFF" stroke-opacity=".22" stroke-width="2"/>
+                <path d="M504 440 C483 475 453 504 417 524" stroke="#F0C26E" stroke-opacity=".22" stroke-width="2"/>
+                <path d="M280 525 C245 512 213 489 188 460" stroke="#79F2DD" stroke-opacity=".22" stroke-width="2"/>
+                <path d="M168 268 C190 238 220 213 255 198" stroke="#78D9FF" stroke-opacity=".22" stroke-width="2"/>
+              </svg>
+
+              <div class="wheel-center">
+                <div>
+                  <h3>Beatitude<br>Engine</h3>
+                  <p>Execution framework with an optional values-alignment layer.</p>
+                </div>
+              </div>
+
+              <div class="phase-tile phase-1">
+                <small>Phase 1</small>
+                <strong>Assess</strong>
+                <p>Audit systems, data, standards, and the places where judgment matters most.</p>
+              </div>
+
+              <div class="phase-tile phase-2">
+                <small>Phase 2</small>
+                <strong>Align</strong>
+                <p>Map AI use cases to ROI goals and, when desired, to ownership values and tone.</p>
+              </div>
+
+              <div class="phase-tile phase-3">
+                <small>Phase 3</small>
+                <strong>Architect</strong>
+                <p>Design prompts, rules, escalation paths, and review layers around the business.</p>
+              </div>
+
+              <div class="phase-tile phase-4">
+                <small>Phase 4</small>
+                <strong>Activate</strong>
+                <p>Implement tools, train teams, and deploy the optional alignment layer where useful.</p>
+              </div>
+
+              <div class="phase-tile phase-5">
+                <small>Phase 5</small>
+                <strong>Amplify</strong>
+                <p>Monitor outcomes, improve quality, and refine how the system performs over time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Why Agavi AI</div>
+            <h2>A sharper way to bring AI into the business.</h2>
+          </div>
+          <p>
+            Most firms either sell software or sell strategy decks. Agavi AI closes the gap and stays accountable from discovery through implementation.
+          </p>
+        </div>
+
+        <div class="why-grid">
+          <article class="panel why-card reveal"><strong>Boutique, hands-on consulting</strong><p>You work directly with a focused advisory partner, not a bloated delivery team or a generic support queue.</p></article>
+          <article class="panel why-card reveal"><strong>Industry-agnostic, vertically aware</strong><p>Agavi applies durable operating principles across industries while still respecting the realities of each vertical.</p></article>
+          <article class="panel why-card reveal"><strong>Vendor-neutral recommendations</strong><p>The goal is not to force a platform. The goal is to fit the right tools into the stack your business actually needs.</p></article>
+          <article class="panel why-card reveal"><strong>End-to-end execution</strong><p>From roadmap design to implementation, training, and iteration, the work carries through the full lifecycle.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section diag-section" id="diagnostic">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="diag-badge reveal">AI Readiness Diagnostic</div>
+        <h2 class="reveal">Know exactly where AI will move the needle.</h2>
+        <p class="lead reveal">
+          Before spending a dollar on AI tools or consultants, find out where your business actually stands. The Agavi Diagnostic scores your operations across 8 dimensions and delivers a personalized roadmap in under 10 minutes.
+        </p>
+
+        <div class="diag-cards">
+          <div class="diag-card reveal">
+            <div class="diag-card-icon">📊</div>
+            <strong>8-Dimension Score</strong>
+            <p>See exactly where your operations are strong, exposed, and ready to leverage AI for the highest return.</p>
+          </div>
+          <div class="diag-card reveal">
+            <div class="diag-card-icon">🎯</div>
+            <strong>Personalized Roadmap</strong>
+            <p>Get a prioritized set of solution tracks matched to your business profile, revenue range, and team size.</p>
+          </div>
+          <div class="diag-card reveal">
+            <div class="diag-card-icon">⚡</div>
+            <strong>Instant AI Analysis</strong>
+            <p>Receive an AI-generated executive summary with your top recommendations and next steps — no waiting.</p>
+          </div>
+        </div>
+
+        <a class="btn btn-primary reveal" href="https://diagnostic.agaviai.com" target="_blank" rel="noopener" style="font-size:1.05rem;padding:1.1rem 2.2rem;margin:0 auto;display:inline-flex;">
+          Take the Free Diagnostic →
+        </a>
+        <p class="diag-meta reveal">
+          <span>Free</span>·<span>No credit card</span>·<span>Results in 10 minutes</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Contact</div>
+            <h2>Ready to root your business in AI?</h2>
+          </div>
+          <p>
+            Start with a discovery conversation. We will look at where friction lives today, where AI can create leverage, and what a sensible path forward looks like.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="panel contact-card reveal">
+            <h3>Book a Call</h3>
+            <p>
+              Agavi AI partners with businesses that want substance, not theater. If you are serious about intelligent operations, workflow automation, and durable execution, start here.
+            </p>
+
+            <div class="contact-points">
+              <div class="item"><strong>Strategic diagnostic</strong><p>Clarify bottlenecks, readiness, and high-value use cases before spending money in the wrong places.</p></div>
+              <div class="item"><strong>Practical roadmap</strong><p>Leave with a clearer picture of what to build, what to buy, and where to start for the strongest return.</p></div>
+              <div class="item"><strong>Implementation partnership</strong><p>Get support from strategy through rollout so the work does not die in a slide deck.</p></div>
+            </div>
+          </div>
+
+          <div class="panel form-card reveal">
+            <form id="contactForm">
+              <div class="form-row">
+                <label>Name<input type="text" name="name" placeholder="Your name" required /></label>
+                <label>Company<input type="text" name="company" placeholder="Company name" required /></label>
+              </div>
+              <div class="form-row">
+                <label>Email<input type="email" name="email" placeholder="you@company.com" required /></label>
+                <label>Phone or Website<input type="text" name="phone" placeholder="Optional" /></label>
+              </div>
+              <label>Message<textarea name="message" placeholder="Tell us about your business, current systems, and what you're trying to solve." required></textarea></label>
+              <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+                <button type="submit" class="btn btn-primary">Book a Call</button>
+                <span class="form-note">This production form posts securely to your backend endpoint and can forward leads to email, CRM, and Agavi.</span>
+              </div>
+              <div id="formStatus" class="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Agavi AI. All rights reserved.</span>
+      <a href="about.html" style="color:var(--muted);text-decoration:underline">About the Founder</a>
+      <span>jay@agaviai.com</span>
+    </div>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.14 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e){
+        const id = this.getAttribute('href');
+        const target = document.querySelector(id);
+        if(target){
+          e.preventDefault();
+          const navHeight = document.querySelector('.nav').offsetHeight;
+          const y = target.getBoundingClientRect().top + window.scrollY - navHeight + 1;
+          window.scrollTo({ top:y, behavior:'smooth' });
+        }
+      });
+    });
+
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+
+    function showStatus(message, type){
+      statusEl.textContent = message;
+      statusEl.className = `status show ${type}`;
+    }
+
+form.addEventListener('submit', async function(e){
+  e.preventDefault();
+  const data = new FormData(form);
+  const payload = {
+    name: data.get('name').trim(),
+    company: data.get('company').trim(),
+    email: data.get('email').trim(),
+    phone: data.get('phone').trim(),
+    message: data.get('message').trim(),
+    source: 'agaviai.com',
+    page: window.location.href,
+    submittedAt: new Date().toISOString()
+  };
+
+  if(!payload.name || !payload.company || !payload.email || !payload.message){
+    showStatus('Please complete the required fields before submitting.', 'error');
+    return;
+  }
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalLabel = submitButton.textContent;
+  submitButton.disabled = true;
+  submitButton.textContent = 'Submitting...';
+
+  try{
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if(!response.ok){
+      throw new Error(result.error || 'Submission failed.');
+    }
+
+    showStatus('Message received. We will reach out shortly.', 'success');
+    form.reset();
+  } catch(err){
+    showStatus(err.message || 'There was a problem submitting the form.', 'error');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalLabel;
+  }
+});
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
