@@ -41,3 +41,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# knowledge base: keep structure, exclude private content
+knowledge-bases/*/raw/*
+!knowledge-bases/*/raw/.gitkeep
+knowledge-bases/*/output/*
+!knowledge-bases/*/output/.gitkeep
+!knowledge-bases/*/output/beatitude/
+knowledge-bases/*/output/beatitude/*
+!knowledge-bases/*/output/beatitude/.gitkeep
+knowledge-bases/*/.aliases.json
