@@ -23,6 +23,13 @@ Checks (each becomes a section in the report):
 5. **Beatitude coverage.** Every `wiki/synthesis/*.md` has a corresponding
    `output/beatitude/<slug>.beatitude.md` (stub or scored).
 6. **Page size.** No `wiki/` page exceeds 400 lines.
+7. **Frontmatter (P1).** Every wiki page has `title`, `created`,
+   `last_updated`, `source_count`, `status`. Pages stale >90 days still in
+   `draft` are flagged.
+8. **Citations (P1).** Every factual claim on a `status: reviewed` page
+   has a `[Source: …]` citation. List uncited claim lines.
+9. **Contradictions (P1).** Surface every `> CONTRADICTION:` marker. These
+   block promotion of the host page back to `reviewed`.
 
 Write the report to
 `knowledge-bases/agavi-playbook/output/lint/<YYYY-MM-DD>.md` (create

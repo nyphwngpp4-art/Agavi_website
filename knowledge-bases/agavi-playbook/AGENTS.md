@@ -68,7 +68,40 @@ Ingest rejects files without `source_url`, `captured_at`, and `source_type`.
   - `concepts/` — automation patterns, ROI heuristics, frameworks, rubrics.
   - `synthesis/` — cross-source comparisons, opinionated playbook pages,
     decision guides. **These are the pages prospects would pay for.**
-- Every page opens with a one-paragraph summary (2–4 sentences).
+- Every wiki page begins with YAML frontmatter:
+
+  ```yaml
+  ---
+  title: SMB CRM Rollout Patterns
+  created: 2026-04-07
+  last_updated: 2026-04-07
+  source_count: 0          # number of distinct raw/ files cited
+  status: draft            # draft | reviewed | needs_update
+  tags: [crm, smb]
+  ---
+  ```
+
+  Lint enforces presence and freshness of these fields.
+- After the frontmatter, every page opens with a one-paragraph summary
+  (2–4 sentences).
+- **Citation rule (non-negotiable).** Every factual claim — every number,
+  quote, vendor capability, client outcome, dated event — must end with an
+  inline citation in the form `[Source: <raw-filename>.md]`. Multiple
+  sources: `[Source: a.md, b.md]`. Claims without a source citation are a
+  P1 lint violation. Opinion / synthesis sentences are exempt **only** when
+  the page's `status` is `draft`; once promoted to `reviewed`, every
+  sentence with a verifiable claim must cite.
+- **Contradiction marker.** When ingest finds a new source contradicting an
+  existing wiki page, do **not** silently overwrite. Insert a blockquote
+  at the point of conflict in the form:
+
+  ```
+  > CONTRADICTION: [old claim, with citation] vs [new claim, with citation]
+  ```
+
+  Lint surfaces every `CONTRADICTION:` marker as a P1 requiring human
+  resolution. The contradicted page's `status` flips to `needs_update`
+  until a human resolves it on the next ingest.
 - Cross-link with `[[wiki-link]]` syntax. Every entity and concept reference
   must be a link, not bare text.
 - Keep pages short and additive. If a page exceeds ~400 lines, split it.
@@ -88,13 +121,21 @@ Trigger: new file(s) in `raw/`, or `/kb-ingest`.
 3. Read the file. Extract: summary, entities, concepts, claims, evidence.
 4. Apply redaction policy.
 5. Create/update `wiki/sources/<slug>.md`, plus any
-   `wiki/entities/*.md` and `wiki/concepts/*.md` pages affected.
-6. If the new material meaningfully changes a synthesis page (or warrants a
+   `wiki/entities/*.md` and `wiki/concepts/*.md` pages affected. **Soft
+   target: a single new source should touch 10–15 wiki pages.** If you
+   only touched 1–3, you are being lazy — re-read the source for entities,
+   adjacent concepts, and synthesis implications you skipped. Note the
+   final count in the log entry.
+6. For every claim that contradicts an existing page, insert the
+   `> CONTRADICTION:` marker per the wiki conventions and flip the
+   contradicted page's `status` to `needs_update`. Do **not** auto-resolve.
+7. If the new material meaningfully changes a synthesis page (or warrants a
    new one), create/update it in `wiki/synthesis/` — and follow the
    **Beatitude hook** below.
-7. Update `wiki/INDEX.md`.
-8. Append a `log.md` entry.
-9. **Stage and commit:** `git add knowledge-bases/agavi-playbook/wiki && git commit -m "ingest: <source>"`. The ingest is not complete until the commit lands.
+8. Bump `last_updated` and `source_count` on every page touched.
+9. Update `wiki/INDEX.md`.
+10. Append a `log.md` entry including the page-touch count.
+11. **Stage and commit:** `git add knowledge-bases/agavi-playbook/wiki && git commit -m "ingest: <source>"`. The ingest is not complete until the commit lands.
 
 ### 2. Query
 
@@ -114,12 +155,21 @@ Trigger: `/kb-lint` (also scheduled monthly).
 
 Checks:
 - Every `wiki/sources/` page references a file that exists in `raw/`.
-- No committed wiki page contains any real identifier from `.aliases.json`.
+- **P0:** No committed wiki page contains any real identifier from
+  `.aliases.json`.
 - Every `[[wiki-link]]` resolves to an existing page.
 - `INDEX.md` matches the actual file tree.
 - Every `wiki/synthesis/` page has a corresponding
   `output/beatitude/<slug>.beatitude.md` (stub or scored).
 - No `wiki/` page exceeds 400 lines.
+- **P1:** Every wiki page has valid frontmatter (`title`, `created`,
+  `last_updated`, `source_count`, `status`). Pages whose `last_updated` is
+  more than 90 days stale and whose `status` is still `draft` are flagged.
+- **P1:** Every factual claim on a `status: reviewed` page has a
+  `[Source: …]` citation. List uncited claim lines with file and line
+  number.
+- **P1:** Every `> CONTRADICTION:` marker is surfaced — these block
+  promotion of the host page from `needs_update` back to `reviewed`.
 
 Write the report to `output/lint/<YYYY-MM-DD>.md` and append a `log.md` entry.
 

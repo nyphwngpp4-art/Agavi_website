@@ -1,3 +1,12 @@
+---
+title: Beatitude Rubric
+created: 2026-04-07
+last_updated: 2026-04-07
+source_count: 0
+status: reviewed
+tags: [beatitude, alignment, rubric]
+---
+
 # Beatitude Rubric
 
 The scoring rubric used by the downstream **Beatitude** alignment check
