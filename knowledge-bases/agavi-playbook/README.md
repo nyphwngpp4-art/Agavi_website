@@ -10,6 +10,18 @@ This vault is Jay's compounding consulting brain. The librarian rules live in
 2. Create `.backup` in this directory with one line, e.g. `provider: icloud`.
    Without it, ingest refuses to run.
 3. Create `.aliases.json` (also gitignored) — start empty: `{}`.
+4. **Configure Worker secrets for Beatitude scoring.** From the repo root:
+
+   ```bash
+   wrangler secret put KB_TOKEN       # any random string; mirror in .env
+   wrangler secret put GROK_API_KEY   # xAI API key for /api/beatitude
+   ```
+
+   Then add the same `KB_TOKEN` to your local `.env` so slash commands can
+   call `https://agaviai.com/api/beatitude` from your laptop.
+5. **Run `/kb-bake` once.** It writes `public/wiki-index.json` (gitignored)
+   so the Worker can serve the rubric and any wiki pages. `/kb-ingest`
+   chains a bake automatically going forward.
 
 ## The loop
 
@@ -43,9 +55,27 @@ second vault, not a bigger one** — that's why the parent directory is
 its own brain (e.g. `knowledge-bases/agavi-crm-rollouts/`), spin it up with
 its own `AGENTS.md` and let `/kb-*` commands target it explicitly.
 
-## What's next (v2)
+## What's shipped
 
-- Wire `functions/beatitude-check.ts` to Grok and start filling stub scores.
-- Expose `/api/kb/query` and `/api/kb/ingest` through Agavi Dispatch in
-  `src/app/`.
-- Auto-open `*.revision.md` for any synthesis page that scores `revise`.
+- **v1:** vault scaffold, `AGENTS.md` librarian contract, redaction policy,
+  `[Source: …]` citation rule, contradiction marker, `/kb-ingest`,
+  `/kb-query`, `/kb-lint`, `/kb-explore`, `/kb-brief`, Beatitude rubric,
+  Beatitude stub contract.
+- **v2:** Beatitude scoring wired end-to-end via the Cloudflare Worker
+  (`POST /api/beatitude` calls Grok against the rubric), `/api/kb/query`
+  search endpoint, `/kb-bake` slash command, `public/wiki-index.json`
+  manifest, auto-revision-page creation when verdict is `revise`,
+  `KB_TOKEN` + `GROK_API_KEY` Worker secrets.
+
+## What's next (v3)
+
+- Migrate the production deploy from hand-written `worker.js` + static
+  `public/*.html` to a real Next.js build via `@opennextjs/cloudflare`.
+  Once that lands, the existing Agavi Dispatch UI in `src/app/` gets to
+  call `/api/beatitude` and `/api/kb/query` directly, and the brain
+  becomes part of the public proof-of-craft surface. Tracked separately
+  on `claude/nextjs-cloudflare-adapter` (not yet started).
+- Sanitized public read-only slice of `wiki/concepts/` at
+  `agaviai.com/playbook` once v3 lands.
+- Embedding-based retrieval if the wiki crosses ~100 pages (the soft
+  ceiling for prompt-stuffed manifests).

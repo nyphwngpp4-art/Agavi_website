@@ -40,10 +40,36 @@ Then perform **operation 1: Ingest** exactly as specified there:
     `output/beatitude/<slug>.beatitude.md` stub per the Beatitude hook.
 11. Update `wiki/INDEX.md` to match the actual file tree.
 12. Append a dated entry to `wiki/log.md` including the page-touch count.
-13. Stage and commit: `git add knowledge-bases/agavi-playbook/wiki && git commit -m "ingest: <one-line summary>"`. The ingest is **not done** until the commit lands.
+13. **Bake the wiki manifest.** Run the bake step (or invoke `/kb-bake`) to
+    regenerate `public/wiki-index.json` so the deployed Worker stays in sync
+    with the wiki you just changed. The manifest is gitignored.
+14. **Score every new or updated synthesis page.** For each one, call the
+    deployed Worker:
+
+    ```bash
+    curl -sS -X POST https://agaviai.com/api/beatitude \
+      -H "Authorization: Bearer $KB_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d "$(jq -nc --arg sp wiki/synthesis/<slug>.md \
+                   --rawfile body knowledge-bases/agavi-playbook/wiki/synthesis/<slug>.md \
+                   '{source_page:$sp, body:$body}')"
+    ```
+
+    Read `KB_TOKEN` from the local `.env` (the user sets it once via
+    `wrangler secret put KB_TOKEN` for the Worker side and mirrors it in
+    `.env` for local use). Write the JSON response into
+    `knowledge-bases/agavi-playbook/output/beatitude/<slug>.beatitude.md` —
+    overwriting the v1 stub. If the verdict is `revise`, also create
+    `knowledge-bases/agavi-playbook/wiki/synthesis/<slug>.revision.md`
+    quoting the lowest-scoring beatitudes' notes so the next ingest pass
+    can fix them.
+
+    If `KB_TOKEN` is missing or the Worker is unreachable, leave the v1
+    stub in place and surface a warning — do not block the commit.
+15. Stage and commit: `git add knowledge-bases/agavi-playbook/wiki && git commit -m "ingest: <one-line summary>"`. The ingest is **not done** until the commit lands.
 
 Report back: files ingested, files rejected (with reason), wiki pages
 created/updated (with count), contradictions flagged, beatitude stubs
-created, and the commit hash.
+created **with verdicts**, manifest size after bake, and the commit hash.
 
 $ARGUMENTS

@@ -5,6 +5,7 @@
   "main": "worker.js",
   "assets": {
     "directory": "./public",
+    "binding": "ASSETS",
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "none"
   }
