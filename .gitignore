@@ -41,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# hvac-toolkit generated reports (per-prospect, do not commit)
+hvac-toolkit/*-report.html
+hvac-toolkit/sample-report.html

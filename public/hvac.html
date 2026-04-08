@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phoenix HVAC Shops: Stop Losing Summer Jobs to Missed Calls | Agavi AI</title>
+  <meta name="description" content="Phoenix HVAC shops lose $15,000+ a week to missed summer calls. Agavi AI installs an AI receptionist in 7 days that books jobs 24/7. Free 10-minute Missed Call Audit." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!--
+    ================================================================
+    CONFIG — REPLACE BEFORE LAUNCH
+    ================================================================
+    Calendly URL appears exactly 5 times in this file. Search for
+    CALENDLY_URL and replace all occurrences with your real link.
+    Current placeholder: https://calendly.com/agaviai/missed-call-audit
+    ================================================================
+  -->
+  <style>
+    :root{
+      --bg:#020913;
+      --bg2:#071223;
+      --panel:#091627;
+      --panel2:#0c1b2e;
+      --text:#eef6ff;
+      --muted:#aab8c8;
+      --line:rgba(121,166,213,.15);
+      --teal:#5ef6ee;
+      --cyan:#57d6ff;
+      --blue:#6d91ff;
+      --gold:#f0c26e;
+      --heat:#ff8a3d;
+      --green:#9be784;
+      --shadow:0 22px 60px rgba(0,0,0,.35);
+      --glow:0 0 0 1px rgba(109,145,255,.16),0 16px 44px rgba(0,0,0,.32);
+      --radius:22px;
+      --max:1220px;
+      --nav:78px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255,138,61,.12), transparent 22%),
+        radial-gradient(circle at 78% 14%, rgba(240,194,110,.14), transparent 24%),
+        radial-gradient(circle at 52% 58%, rgba(87,214,255,.06), transparent 28%),
+        linear-gradient(180deg,#020913 0%,#05101c 40%,#04111f 100%);
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img,svg{display:block;max-width:100%}
+    button,input,textarea{font:inherit}
+    .container{width:min(calc(100% - 2rem),var(--max));margin:0 auto}
+    .section{padding:96px 0;position:relative}
+    .section::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(113,151,195,.18),transparent);
+    }
+    .nav{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(16px);
+      background:rgba(2,9,19,.72);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .nav-inner{
+      min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .brand{display:flex;align-items:center;gap:.9rem;font-weight:800}
+    .brand-mark{
+      width:48px;height:48px;border-radius:14px;display:grid;place-items:center;overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(94,246,238,.24), transparent 56%),
+        linear-gradient(180deg, rgba(11,24,40,.98), rgba(8,17,28,.98));
+      border:1px solid rgba(111,160,214,.18);
+      box-shadow:0 0 0 1px rgba(87,214,255,.08), 0 10px 28px rgba(0,0,0,.38);
+    }
+    .brand-text{line-height:1}
+    .brand-text strong{
+      display:block;font-family:"Montserrat",sans-serif;font-size:1rem;margin-bottom:.18rem;
+    }
+    .brand-text span{
+      display:block;color:#9db1c7;letter-spacing:.16em;font-size:.72rem;text-transform:uppercase;font-weight:800;
+    }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+      padding:1rem 1.4rem;border-radius:999px;font-weight:800;cursor:pointer;
+      border:1px solid rgba(255,255,255,.08);transition:transform .2s ease,box-shadow .2s ease;
+      box-shadow:var(--glow);white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      background:linear-gradient(90deg,rgba(255,138,61,.28),rgba(240,194,110,.22));
+      color:#fff;border-color:rgba(255,138,61,.35);
+    }
+    .btn-secondary{background:rgba(255,255,255,.03);color:#dbe8f7}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:.6rem;color:var(--heat);
+      font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;
+    }
+    .eyebrow::before{
+      content:"";width:40px;height:1px;background:linear-gradient(90deg,var(--heat),transparent);
+    }
+    h1,h2,h3,h4{
+      font-family:"Montserrat","Inter",sans-serif;
+      letter-spacing:-.03em;line-height:1.08;margin:0 0 .9rem;
+    }
+    h1{font-size:clamp(2.6rem,6.2vw,5.2rem);max-width:16ch}
+    h2{font-size:clamp(1.9rem,3.8vw,3rem);max-width:18ch}
+    h3{font-size:1.25rem}
+    p{margin:0;color:var(--muted);line-height:1.65}
+    .lead{font-size:clamp(1.03rem,1.7vw,1.2rem);max-width:40rem}
+    .panel{
+      position:relative;overflow:hidden;
+      background:linear-gradient(180deg, rgba(9,22,39,.84), rgba(7,18,30,.96));
+      border:1px solid rgba(115,154,198,.12);border-radius:var(--radius);box-shadow:var(--shadow);
+    }
+    .panel::before{
+      content:"";position:absolute;inset:0 0 auto 0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,138,61,.34),transparent);opacity:.6;
+    }
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .hero{
+      min-height:calc(100vh - var(--nav));
+      display:flex;align-items:center;padding:60px 0 80px;position:relative;
+    }
+    .hero h1 span{
+      background:linear-gradient(90deg,var(--heat),var(--gold));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .hero .lead{margin:1.4rem 0 2.2rem}
+    .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+    .hero-trust{display:flex;gap:1.6rem;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+    .hero-trust strong{color:var(--text);font-weight:700}
+    .math-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+    .math-card{padding:2rem;min-height:220px}
+    .math-card .big{
+      font-family:"Montserrat",sans-serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;
+      background:linear-gradient(90deg,var(--heat),var(--gold));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      line-height:1;margin-bottom:.6rem;
+    }
+    .math-card strong{display:block;color:#fff;font-family:"Montserrat",sans-serif;font-size:1.05rem;margin-bottom:.5rem}
+    .offer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2rem}
+    .offer-card{padding:1.8rem;display:flex;flex-direction:column;min-height:360px}
+    .offer-card .tier{color:var(--cyan);font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem}
+    .offer-card h3{color:#fff;margin-bottom:.6rem}
+    .offer-card .price{
+      font-family:"Montserrat",sans-serif;font-size:1.6rem;font-weight:800;
+      color:var(--gold);margin-bottom:1rem;
+    }
+    .offer-card .price small{display:block;font-size:.75rem;color:var(--muted);font-weight:600;margin-top:.2rem}
+    .offer-card ul{margin:0;padding:0 0 0 1.1rem;color:var(--muted);font-size:.92rem;line-height:1.6}
+    .offer-card ul li{margin-bottom:.4rem}
+    .offer-card.featured{border-color:rgba(255,138,61,.4);box-shadow:0 0 0 1px rgba(255,138,61,.22),0 16px 44px rgba(0,0,0,.38)}
+    .offer-card.featured .tier{color:var(--heat)}
+    .why-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;margin-top:1.6rem}
+    .why-copy .lead{margin:1rem 0}
+    .why-bullets{display:grid;gap:.9rem;margin-top:1.4rem}
+    .why-bullets .item{
+      padding:1rem 1rem 1rem 1.15rem;border-left:3px solid rgba(255,138,61,.55);
+      border-radius:0 14px 14px 0;background:rgba(255,255,255,.025);
+    }
+    .why-bullets .item strong{color:#fff;display:block;margin-bottom:.3rem}
+    .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;counter-reset:step}
+    .step{padding:1.6rem;position:relative;counter-increment:step}
+    .step::before{
+      content:counter(step);
+      position:absolute;top:-14px;left:24px;
+      width:36px;height:36px;border-radius:50%;
+      background:linear-gradient(135deg,var(--heat),var(--gold));
+      color:#0a1424;display:grid;place-items:center;font-weight:800;font-family:"Montserrat",sans-serif;
+      box-shadow:0 6px 18px rgba(255,138,61,.28);
+    }
+    .step strong{display:block;color:#fff;font-family:"Montserrat",sans-serif;margin:.5rem 0 .4rem;font-size:1.02rem}
+    .faq{display:grid;gap:.8rem;margin-top:2rem;max-width:52rem}
+    .faq details{
+      padding:1.2rem 1.4rem;border:1px solid rgba(115,154,198,.14);border-radius:16px;
+      background:rgba(9,22,39,.6);transition:border-color .2s ease;
+    }
+    .faq details[open]{border-color:rgba(255,138,61,.3)}
+    .faq summary{cursor:pointer;color:#fff;font-weight:700;font-family:"Montserrat",sans-serif;list-style:none}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";float:right;color:var(--heat);font-weight:800;font-size:1.4rem;line-height:1}
+    .faq details[open] summary::after{content:"−"}
+    .faq details p{margin-top:.8rem}
+    .cta-final{text-align:center}
+    .cta-final h2{max-width:22ch;margin:0 auto .9rem}
+    .cta-final .lead{max-width:40rem;margin:0 auto 2rem}
+    .footer{padding:2rem 0 2.8rem;color:var(--muted);font-size:.9rem}
+    .footer-inner{
+      display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+      border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;
+    }
+    @media (max-width:1120px){
+      .math-grid{grid-template-columns:1fr 1fr}
+      .offer-grid{grid-template-columns:1fr 1fr}
+      .steps-grid{grid-template-columns:1fr 1fr}
+      .why-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      :root{--nav:70px}
+      .section{padding:72px 0}
+      .math-grid,.offer-grid,.steps-grid{grid-template-columns:1fr}
+      .hero-ctas{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+      .brand-text span{display:none}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Agavi AI home">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
+            <defs>
+              <linearGradient id="miniLeaf" x1="18" y1="16" x2="98" y2="98" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFB870"/>
+                <stop offset=".52" stop-color="#FF8A3D"/>
+                <stop offset="1" stop-color="#F0C26E"/>
+              </linearGradient>
+            </defs>
+            <g stroke="url(#miniLeaf)" stroke-width="3" fill="rgba(40,20,8,.18)">
+              <path d="M60 92 C54 65 57 40 62 16 C69 40 70 66 60 92 Z"/>
+              <path d="M60 92 C44 71 31 59 17 46 C39 51 54 63 60 92 Z"/>
+              <path d="M60 92 C47 77 36 70 24 63 C41 67 54 76 60 92 Z"/>
+              <path d="M60 92 C52 68 46 54 42 32 C53 48 59 64 60 92 Z"/>
+              <path d="M60 92 C76 71 89 59 103 46 C81 51 66 63 60 92 Z"/>
+              <path d="M60 92 C73 77 84 70 96 63 C79 67 66 76 60 92 Z"/>
+              <path d="M60 92 C68 68 74 54 78 32 C67 48 61 64 60 92 Z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>Agavi AI</strong>
+          <span>Phoenix HVAC</span>
+        </div>
+      </a>
+      <a class="btn btn-primary" href="https://calendly.com/agaviai/missed-call-audit" target="_blank" rel="noopener">Book Free Audit →</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">For Phoenix HVAC Owners</div>
+        <h1>Stop losing <span>$15,000 a week</span> to missed summer calls.</h1>
+        <p class="lead">
+          When Phoenix hits 115°, your phone doesn't stop — but your CSR is also dispatching, taking payments, and talking to walk-ins. Every call that rolls to voicemail is a $400 to $8,000 job walking to the next contractor. We install an AI receptionist that books jobs 24/7 in 7 days. No new software for you or your team to learn.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://calendly.com/agaviai/missed-call-audit" target="_blank" rel="noopener">Get My Free Missed Call Audit</a>
+          <a class="btn btn-secondary" href="#how">How it works →</a>
+        </div>
+        <div class="hero-trust">
+          <span><strong>10 minutes.</strong> That's all the audit takes.</span>
+          <span><strong>Zero software to learn.</strong> We install it, you keep running your shop.</span>
+          <span><strong>Fixed price.</strong> No hourly, no retainer until you see results.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">The Math</div>
+        <h2>You already know the problem. Here's what it's costing you.</h2>
+        <p class="lead">Industry data from Phoenix-area HVAC shops during July and August. Your numbers are probably worse.</p>
+      </div>
+      <div class="math-grid">
+        <div class="panel math-card reveal">
+          <div class="big">27%</div>
+          <strong>Of summer calls go unanswered</strong>
+          <p>Typical 6-to-10 truck HVAC shop in Maricopa County, peak season. The office is a single CSR handling dispatch, payments, and walk-ins at the same time.</p>
+        </div>
+        <div class="panel math-card reveal">
+          <div class="big">$1,400</div>
+          <strong>Average emergency AC ticket</strong>
+          <p>When a homeowner's AC dies at 4pm on a Saturday, they call the next name on the list in 90 seconds. That job is gone forever.</p>
+        </div>
+        <div class="panel math-card reveal">
+          <div class="big">$15k+</div>
+          <strong>Lost revenue per week</strong>
+          <p>12 missed calls a day × 7 days × conservative close rate = more than you pay a full-time CSR in a month. Every single week of summer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">The Offer</div>
+        <h2>Four steps. Fixed prices. No contracts you can't get out of.</h2>
+        <p class="lead">Most shops start with the free audit and stop worrying after the $1,950 install. A few go further. You decide.</p>
+      </div>
+      <div class="offer-grid">
+        <div class="panel offer-card reveal">
+          <div class="tier">Tier 0</div>
+          <h3>Missed Call Audit</h3>
+          <div class="price">Free<small>10 minutes</small></div>
+          <ul>
+            <li>10-minute screenshare</li>
+            <li>We pull your last 7 days of call data</li>
+            <li>One-page PDF with your actual lost-revenue number</li>
+            <li>No sales pitch, no commitment</li>
+          </ul>
+        </div>
+        <div class="panel offer-card featured reveal">
+          <div class="tier">Tier 1 · Most Shops Start Here</div>
+          <h3>Phone Recovery Setup</h3>
+          <div class="price">$1,950<small>Flat · 7 days</small></div>
+          <ul>
+            <li>AI receptionist answers 24/7</li>
+            <li>Books jobs into your existing scheduler</li>
+            <li>Texts you for real emergencies</li>
+            <li>Talks to callers like a human — not a robot</li>
+            <li>Done in a week, zero training for your team</li>
+          </ul>
+        </div>
+        <div class="panel offer-card reveal">
+          <div class="tier">Tier 2</div>
+          <h3>Shop Operations Sprint</h3>
+          <div class="price">$6,500<small>Flat · 21 days</small></div>
+          <ul>
+            <li>Everything in Tier 1, plus:</li>
+            <li>Automated review requests after every job</li>
+            <li>Customer follow-up sequences</li>
+            <li>Estimate-to-invoice automation</li>
+            <li>Weekly numbers dashboard texted every Monday</li>
+          </ul>
+        </div>
+        <div class="panel offer-card reveal">
+          <div class="tier">Tier 3</div>
+          <h3>Operator Retainer</h3>
+          <div class="price">$850<small>Per month · Month-to-month</small></div>
+          <ul>
+            <li>Monthly health check on the system</li>
+            <li>One new automation added per quarter</li>
+            <li>Text/email access for issues</li>
+            <li>We watch it so you don't have to</li>
+            <li>Cancel anytime, no minimum</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">Why Agavi</div>
+        <h2>Run by a banker, not a tech kid.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-copy reveal">
+          <p class="lead">
+            Jay Messamore spent his career inside commercial banking — sitting across the desk from business owners, reading their financials, understanding unit economics, and helping them make decisions that actually moved the needle. When he looked at what was happening in AI, he saw the same gap he'd seen in banking: great tools, terrible implementation, and nobody on the owner's side of the table.
+          </p>
+          <div class="why-bullets">
+            <div class="item">
+              <strong>Finance brain, operator instincts.</strong>
+              <p>MBA in finance. Years managing middle-market relationships. Can talk gross margin per truck, CAC, and cash flow without flinching.</p>
+            </div>
+            <div class="item">
+              <strong>We work for the owner, not the software vendor.</strong>
+              <p>Vendor-neutral. If the right tool for your shop is RingCentral, we install RingCentral. If it's OpenPhone, we install OpenPhone. No kickbacks.</p>
+            </div>
+            <div class="item">
+              <strong>Phoenix local. Shop visits in person.</strong>
+              <p>We live here. We know what July feels like. We show up at your shop when it matters instead of hiding behind a help desk.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel reveal" style="padding:2rem">
+          <div class="eyebrow" style="color:var(--gold)">The Guarantee</div>
+          <h3 style="color:#fff;font-size:1.4rem;margin-bottom:1rem">Your missed-call count drops by 80% in the first 30 days — or we refund the install.</h3>
+          <p>In writing, on the invoice. We don't get paid to sell you software. We get paid to fix the problem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">How It Works</div>
+        <h2>Start to finish in under two weeks.</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="panel step reveal">
+          <strong>10-minute audit call</strong>
+          <p>Screenshare your phone system. We pull your call data. You get a one-page PDF with your real lost-revenue number. No pitch.</p>
+        </div>
+        <div class="panel step reveal">
+          <strong>Decide in 24 hours</strong>
+          <p>If the number is small, walk away and keep the PDF. If it's not, say yes to the $1,950 Phone Recovery install. One page, one signature.</p>
+        </div>
+        <div class="panel step reveal">
+          <strong>We install it</strong>
+          <p>You give us admin access to your phone system and scheduler. We do the work. Your CSR's workflow doesn't change. Your team doesn't get trained on anything.</p>
+        </div>
+        <div class="panel step reveal">
+          <strong>You watch it work</strong>
+          <p>Within 7 days the AI receptionist is answering every call, booking jobs, and texting you for real emergencies. You see the before-and-after in the first week.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">Questions We Get</div>
+        <h2>Straight answers.</h2>
+      </div>
+      <div class="faq">
+        <details class="reveal">
+          <summary>Is this going to sound like a robot? My customers will hate that.</summary>
+          <p>Modern voice AI is genuinely hard to tell from a human on a booking call. We'll play you live recordings before you sign anything. If you don't like how it sounds, we don't install it.</p>
+        </details>
+        <details class="reveal">
+          <summary>What phone system do I need?</summary>
+          <p>RingCentral, OpenPhone, Google Voice, Nextiva, Dialpad, 8x8, or Vonage — all supported. If you're still on a traditional landline, we'll help you move to a system that works, and that move alone usually saves you money.</p>
+        </details>
+        <details class="reveal">
+          <summary>Will my CSR lose her job?</summary>
+          <p>Opposite. Most shops we talk to can't hire a second CSR fast enough. The AI handles the overflow and the after-hours calls your CSR physically cannot answer. She gets her day back; you stop losing jobs.</p>
+        </details>
+        <details class="reveal">
+          <summary>What about ServiceTitan or Housecall Pro?</summary>
+          <p>Fully compatible. The AI books directly into whatever scheduler you already use. You don't change software. You don't migrate anything.</p>
+        </details>
+        <details class="reveal">
+          <summary>Why $1,950? That seems low.</summary>
+          <p>Because we want the first install to be obvious. A single missed week of summer calls is worth 7 times that. Once you see it working, most shops come back for the $850/mo retainer so we keep it running. That's the real business — and the retainer is month-to-month.</p>
+        </details>
+        <details class="reveal">
+          <summary>What if it doesn't work?</summary>
+          <p>Your missed-call count drops by 80% in the first 30 days, or we refund the install. In writing, on the invoice.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-final">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow" style="justify-content:center">Start Here</div>
+        <h2>Find out what missed calls are actually costing you.</h2>
+        <p class="lead">It takes 10 minutes. You'll either walk away with a free report and nothing more, or you'll walk away with a clear number and a simple decision. Either way, you'll know.</p>
+        <a class="btn btn-primary" href="https://calendly.com/agaviai/missed-call-audit" target="_blank" rel="noopener" style="font-size:1.05rem;padding:1.2rem 2.2rem">Book My Free Missed Call Audit →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Agavi AI. Phoenix, AZ.</span>
+      <a href="index.html" style="color:var(--muted);text-decoration:underline">Agavi AI Home</a>
+      <span>jay@agaviai.com</span>
+    </div>
+  </footer>
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.14 });
+    revealEls.forEach(el => revealObserver.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
