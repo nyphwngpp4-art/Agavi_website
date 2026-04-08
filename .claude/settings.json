@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "(jq -r '.tool_response.filePath // .tool_input.file_path' | grep -qE '\\.(ts|tsx)$' && npx tsc --noEmit && npm run test:run --silent) 2>&1 || true",
+            "timeout": 180,
+            "statusMessage": "Typechecking + tests"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Project: Next.js 16.2.1 + React 19. AGENTS.md warning is in effect — read node_modules/next/dist/docs/ before writing framework code. Tests run via npm run test:run (Vitest).\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
