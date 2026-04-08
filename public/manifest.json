@@ -2,20 +2,21 @@
   "name": "Agavi Dispatch",
   "short_name": "Dispatch",
   "description": "Command dispatch interface for Agavi AI workflows",
-  "start_url": "/",
+  "start_url": "/dispatch/",
+  "scope": "/dispatch/",
   "display": "standalone",
   "background_color": "#09090b",
   "theme_color": "#09090b",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/dispatch/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/dispatch/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

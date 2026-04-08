@@ -5,9 +5,14 @@ import { useEffect } from "react";
 export function ServiceWorkerRegistrar() {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
-        // Service worker registration failed — non-critical
-      });
+      // Dispatch is served from /dispatch on the Cloudflare Worker. The
+      // service worker ships at /dispatch/sw.js and only controls
+      // /dispatch/* — the marketing site at / is unaffected.
+      navigator.serviceWorker
+        .register("/dispatch/sw.js", { scope: "/dispatch/" })
+        .catch(() => {
+          // Service worker registration failed — non-critical
+        });
     }
   }, []);
 

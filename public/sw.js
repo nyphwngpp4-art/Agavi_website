@@ -1,5 +1,8 @@
-const CACHE_NAME = "agavi-dispatch-v1";
-const PRECACHE_URLS = ["/", "/manifest.json"];
+// Service worker for Agavi Dispatch. Scope is /dispatch/ — set explicitly
+// in src/components/ServiceWorkerRegistrar.tsx. Marketing site at / is
+// completely outside this SW's control.
+const CACHE_NAME = "agavi-dispatch-v2";
+const PRECACHE_URLS = ["/dispatch/", "/dispatch/manifest.json"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

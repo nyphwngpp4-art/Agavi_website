@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:dispatch": "next build && rm -rf public/dispatch && cp -r out public/dispatch",
     "start": "next start",
     "lint": "eslint"
   },

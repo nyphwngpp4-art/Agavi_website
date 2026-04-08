@@ -2,15 +2,19 @@
 //
 // Routes:
 //   POST /api/contact         lead intake → Make.com / Agavi webhook
+//   POST /api/dispatch/:id    Agavi Dispatch proxy → n8n / OpenClaw webhooks
 //   POST /api/beatitude       Grok-based alignment scoring of a wiki page
 //   POST /api/kb/query        full-text search over the baked wiki manifest
 //
-// Static assets (index.html, about.html, public/wiki-index.json, …) are served
-// automatically from public/ before reaching this Worker. The wiki manifest is
-// baked locally by the /kb-bake slash command and gitignored — see
-// knowledge-bases/agavi-playbook/AGENTS.md for the schema.
+// Static assets (index.html, about.html, public/dispatch/*, public/wiki-index.json, …)
+// are served automatically from public/ before reaching this Worker. The wiki
+// manifest is baked locally by the /kb-bake slash command and gitignored — see
+// knowledge-bases/agavi-playbook/AGENTS.md for the schema. The Dispatch SPA is
+// built by `npm run build:dispatch` into public/dispatch/ and deployed behind
+// Cloudflare Access.
 
 const KB_ROUTES = new Set(["/api/beatitude", "/api/kb/query"]);
+const DISPATCH_ROUTE = /^\/api\/dispatch\/([a-z0-9-]+)\/?$/;
 
 export default {
   async fetch(request, env) {
@@ -19,6 +23,15 @@ export default {
     if (url.pathname === "/api/contact") {
       if (request.method === "OPTIONS") return cors();
       if (request.method === "POST") return handleContact(request, env);
+    }
+
+    const dispatchMatch = url.pathname.match(DISPATCH_ROUTE);
+    if (dispatchMatch) {
+      if (request.method === "OPTIONS") return cors();
+      if (request.method !== "POST") {
+        return json({ error: "Method not allowed" }, 405);
+      }
+      return handleDispatch(request, env, dispatchMatch[1]);
     }
 
     if (KB_ROUTES.has(url.pathname)) {
@@ -93,6 +106,95 @@ async function handleContact(request, env) {
     return json(
       { error: "Invalid request.", detail: error instanceof Error ? error.message : "Unknown error" },
       400
+    );
+  }
+}
+
+// ----- /api/dispatch/:id ----------------------------------------------------
+//
+// Proxies dispatched commands from the Agavi Dispatch SPA (served at
+// /dispatch/*) to the corresponding n8n / OpenClaw webhook. This route was
+// ported from src/app/api/dispatch/[id]/route.ts when Dispatch was flipped
+// to a static export (Next can only emit GET route handlers under
+// `output: "export"`).
+//
+// Trust boundary: server-side Zod validation is intentionally skipped. The
+// Dispatch client already validates every form with Zod before the fetch
+// lands here, and this Worker is gated behind Cloudflare Access on the
+// /dispatch/* SPA. Bundling Zod + lib/workflows.ts into a hand-written
+// Worker is overkill; we trust the post-validation payload and forward it.
+// If this route is ever exposed to untrusted callers, reintroduce schema
+// validation (either by running wrangler's bundler or by hand-porting the
+// schemas).
+//
+// Webhook URLs + optional bearer tokens are resolved from env vars by
+// convention:
+//   WEBHOOK_<ID_UPPERCASE_UNDERSCORED>        → webhook URL (required)
+//   WEBHOOK_TOKEN_<ID_UPPERCASE_UNDERSCORED>  → bearer token (optional)
+// e.g. workflow id `agavi-lead-intake` → WEBHOOK_AGAVI_LEAD_INTAKE.
+//
+// Response shape matches the original Next route for client compatibility:
+//   { success, status, workflowId, target, response }
+
+// Known workflow IDs from src/lib/workflows.ts. Kept in sync by hand.
+// `target` is cosmetic — the client surfaces it in dispatch history. If you
+// add a workflow in lib/workflows.ts, add its id+target here too.
+const DISPATCH_WORKFLOWS = {
+  "agavi-lead-intake": "n8n",
+  "agavi-idea-capture": "n8n",
+  "openclaw-prospect": "openclaw",
+  "openclaw-task": "openclaw",
+  "openclaw-meeting": "openclaw",
+};
+
+async function handleDispatch(request, env, workflowId) {
+  const target = DISPATCH_WORKFLOWS[workflowId];
+  if (!target) {
+    return json({ error: "Unknown workflow" }, 404);
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: "Invalid JSON" }, 400);
+  }
+
+  const envKey = `WEBHOOK_${workflowId.replace(/-/g, "_").toUpperCase()}`;
+  const webhookUrl = env[envKey];
+  if (!webhookUrl) {
+    return json(
+      { error: `Webhook not configured. Set ${envKey} with \`wrangler secret put ${envKey}\`.` },
+      503
+    );
+  }
+
+  const tokenKey = `WEBHOOK_TOKEN_${workflowId.replace(/-/g, "_").toUpperCase()}`;
+  const token = env[tokenKey];
+
+  try {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+
+    const responseData = await response.text();
+
+    return json({
+      success: response.ok,
+      status: response.status,
+      workflowId,
+      target,
+      response: responseData,
+    });
+  } catch (error) {
+    return json(
+      { error: "Dispatch failed", message: errorMessage(error) },
+      502
     );
   }
 }

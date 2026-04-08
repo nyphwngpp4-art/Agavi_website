@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Agavi Dispatch",
   description: "Command dispatch interface for Agavi AI workflows",
-  manifest: "/manifest.json",
+  manifest: "/dispatch/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
-        <link rel="apple-touch-icon" href="/icon-192.png" />
+        <link rel="apple-touch-icon" href="/dispatch/icon-192.png" />
       </head>
       <body className="min-h-full flex flex-col">
         <Providers>
