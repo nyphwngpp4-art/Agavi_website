@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Agavi AI — Client Intake Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #070c14;
+  --bg2:      #0a1020;
+  --card:     #0d1628;
+  --card-hi:  #111e36;
+  --teal:     #00d4c8;
+  --teal-b:   #00ede0;
+  --teal-dim: rgba(0,212,200,0.15);
+  --teal-g:   rgba(0,212,200,0.07);
+  --amber:    #d4a035;
+  --t1: rgba(255,255,255,0.93);
+  --t2: rgba(255,255,255,0.60);
+  --t3: rgba(255,255,255,0.35);
+  --t4: rgba(255,255,255,0.12);
+  --b1: rgba(255,255,255,0.08);
+  --b2: rgba(255,255,255,0.14);
+  --bteal: rgba(0,212,200,0.22);
+  --font: "Inter", -apple-system, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font);
+  font-feature-settings:"cv01","ss03";
+  -webkit-font-smoothing:antialiased;
+  background:var(--bg);
+  color:var(--t2);
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+
+/* ── HEADER ── */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;
+  border-bottom:1px solid var(--b1);
+  background:rgba(7,12,20,0.9);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-mark{
+  width:34px;height:34px;border-radius:8px;
+  background:#0d1e30;border:1px solid var(--bteal);
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-name{font-size:15px;font-weight:700;color:var(--t1);letter-spacing:-0.3px;}
+.logo-name em{font-style:normal;color:var(--teal);}
+.header-label{font-size:12px;color:var(--t3);font-weight:510;letter-spacing:0.04em;}
+
+/* ── PROGRESS ── */
+.progress-wrap{
+  padding:20px 32px 0;
+  max-width:720px;margin:0 auto;width:100%;
+}
+.progress-bar-bg{
+  height:3px;background:var(--b1);border-radius:100px;overflow:hidden;
+  margin-bottom:10px;
+}
+.progress-bar-fill{
+  height:100%;background:var(--teal);border-radius:100px;
+  transition:width 400ms cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 8px rgba(0,212,200,0.5);
+}
+.progress-steps{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:4px;
+}
+.ps{
+  font-size:11px;color:var(--t3);font-weight:510;
+  letter-spacing:0.02em;transition:color 250ms;
+  white-space:nowrap;
+}
+.ps.done{color:var(--teal);}
+.ps.active{color:var(--t1);font-weight:600;}
+
+/* ── MAIN ── */
+main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:32px 16px 80px;}
+
+/* ── SCREEN ── */
+.screen{
+  display:none;
+  width:100%;max-width:680px;
+  animation:fadeUp 300ms ease both;
+}
+.screen.active{display:block;}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ── CARD ── */
+.card{
+  background:var(--card);
+  border:1px solid var(--b1);
+  border-radius:16px;
+  padding:36px 40px;
+  margin-bottom:16px;
+}
+.card-tag{
+  font-size:10.5px;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--teal);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.card-tag::before{content:'';display:block;width:18px;height:1.5px;background:var(--teal);opacity:0.6;}
+.card-h{
+  font-size:clamp(22px,3vw,30px);font-weight:750;
+  color:var(--t1);letter-spacing:-0.8px;line-height:1.15;
+  margin-bottom:10px;
+}
+.card-sub{font-size:15px;color:var(--t2);line-height:1.65;margin-bottom:28px;letter-spacing:-0.05px;}
+
+/* ── FORM ELEMENTS ── */
+.fg{display:flex;flex-direction:column;gap:7px;margin-bottom:20px;}
+.flab{font-size:12px;font-weight:600;color:var(--t3);letter-spacing:0.03em;}
+.flab .req{color:var(--teal);margin-left:2px;}
+
+.fin{
+  font-family:var(--font);font-feature-settings:"cv01","ss03";
+  font-size:14.5px;color:var(--t1);
+  background:rgba(0,0,0,0.3);
+  border:1px solid var(--b2);border-radius:9px;
+  padding:12px 15px;outline:none;width:100%;
+  transition:border-color 150ms,box-shadow 150ms;
+}
+.fin::placeholder{color:var(--t4);}
+.fin:focus{border-color:rgba(0,212,200,0.45);box-shadow:0 0 0 3px rgba(0,212,200,0.07);}
+textarea.fin{resize:vertical;min-height:100px;}
+select.fin{
+  appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.25)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;
+}
+
+/* ── CHOICE BUTTONS ── */
+.choices{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+.choices.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.choice{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(0,0,0,0.25);
+  border:1.5px solid var(--b1);
+  border-radius:11px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background 140ms,border-color 140ms,transform 120ms;
+  user-select:none;
+  text-align:left;
+}
+.choice:hover{background:rgba(255,255,255,0.04);border-color:var(--b2);}
+.choice.selected{
+  background:var(--teal-g);
+  border-color:var(--bteal);
+}
+.choice-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(255,255,255,0.05);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:17px;
+  border:1px solid var(--b1);
+  transition:background 140ms,border-color 140ms;
+}
+.choice.selected .choice-icon{
+  background:var(--teal-dim);border-color:var(--bteal);
+}
+.choice-body{}
+.choice-label{font-size:14.5px;font-weight:600;color:var(--t1);letter-spacing:-0.15px;}
+.choice-desc{font-size:12.5px;color:var(--t3);margin-top:2px;line-height:1.4;}
+
+/* Multi-select hint */
+.multi-hint{font-size:12px;color:var(--t3);margin-bottom:14px;font-style:italic;}
+
+/* ── CHECKBOX LIST ── */
+.check-list{display:flex;flex-direction:column;gap:8px;margin-bottom:8px;}
+.check-item{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;border-radius:9px;
+  border:1px solid var(--b1);background:rgba(0,0,0,0.2);
+  cursor:pointer;transition:background 130ms,border-color 130ms;
+  user-select:none;
+}
+.check-item:hover{background:rgba(255,255,255,0.03);}
+.check-item.checked{background:var(--teal-g);border-color:var(--bteal);}
+.check-box{
+  width:18px;height:18px;border-radius:5px;
+  border:1.5px solid var(--b2);background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all 130ms;
+}
+.check-item.checked .check-box{background:var(--teal);border-color:var(--teal);}
+.check-box svg{display:none;width:10px;height:10px;stroke:#070c14;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.check-item.checked .check-box svg{display:block;}
+.check-label{font-size:14px;color:var(--t1);font-weight:510;}
+
+/* ── FILE UPLOAD ── */
+.upload-zone{
+  border:2px dashed var(--b2);border-radius:12px;
+  padding:32px 24px;text-align:center;
+  cursor:pointer;transition:border-color 160ms,background 160ms;
+  background:rgba(0,0,0,0.2);position:relative;
+  margin-bottom:14px;
+}
+.upload-zone:hover,.upload-zone.drag-over{
+  border-color:var(--bteal);background:var(--teal-g);
+}
+.upload-zone input[type=file]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.upload-icon{font-size:28px;margin-bottom:10px;}
+.upload-title{font-size:14.5px;font-weight:600;color:var(--t1);margin-bottom:4px;}
+.upload-sub{font-size:12.5px;color:var(--t3);}
+.upload-teal{color:var(--teal);}
+
+.file-list{display:flex;flex-direction:column;gap:8px;}
+.file-item{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(0,212,200,0.05);
+  border:1px solid var(--bteal);
+  border-radius:8px;padding:10px 14px;
+}
+.file-icon{font-size:16px;flex-shrink:0;}
+.file-name{font-size:13px;color:var(--t1);font-weight:510;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.file-size{font-size:11.5px;color:var(--t3);}
+.file-rm{
+  background:none;border:none;cursor:pointer;
+  color:var(--t3);font-size:16px;padding:2px 4px;
+  transition:color 120ms;flex-shrink:0;
+}
+.file-rm:hover{color:var(--t1);}
+
+/* ── NAVIGATION ── */
+.nav-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:8px;gap:12px;
+}
+.btn-back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;font-weight:510;color:var(--t3);
+  background:none;border:1px solid var(--b1);
+  padding:11px 20px;border-radius:100px;cursor:pointer;
+  transition:color 140ms,border-color 140ms;
+}
+.btn-back:hover{color:var(--t1);border-color:var(--b2);}
+.btn-next{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14.5px;font-weight:600;
+  color:var(--bg);background:var(--teal);
+  border:none;padding:12px 28px;border-radius:100px;
+  cursor:pointer;letter-spacing:-0.1px;
+  transition:background 140ms,transform 130ms,box-shadow 130ms;
+  box-shadow:0 0 20px rgba(0,212,200,0.2);
+  flex:1;justify-content:center;
+  max-width:260px;
+}
+.btn-next:hover{background:var(--teal-b);transform:translateY(-1px);box-shadow:0 0 28px rgba(0,212,200,0.3);}
+.btn-next:disabled{opacity:0.35;cursor:not-allowed;transform:none;}
+.btn-next svg,.btn-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+
+/* ── BRANCH INDICATOR ── */
+.branch-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:600;letter-spacing:0.06em;
+  text-transform:uppercase;
+  background:rgba(0,212,200,0.08);
+  border:1px solid var(--bteal);
+  border-radius:100px;padding:4px 12px;
+  margin-bottom:16px;color:var(--teal);
+}
+
+/* ── FORM ROW ── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* ── URL INPUT ── */
+.url-input-wrap{position:relative;}
+.url-prefix{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  font-size:13.5px;color:var(--t3);pointer-events:none;
+  font-weight:510;
+}
+.url-input-wrap .fin{padding-left:70px;}
+
+/* ── RADIO PILLS ── */
+.radio-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+.rpill{
+  padding:9px 16px;border-radius:100px;
+  border:1.5px solid var(--b1);background:transparent;
+  font-size:13px;font-weight:510;color:var(--t2);
+  cursor:pointer;transition:all 130ms;
+}
+.rpill:hover{border-color:var(--b2);color:var(--t1);}
+.rpill.selected{background:var(--teal-dim);border-color:var(--bteal);color:var(--teal);}
+
+/* ── THANK YOU ── */
+.thankyou{text-align:center;padding:40px 32px;}
+.ty-icon{font-size:52px;margin-bottom:20px;}
+.ty-h{font-size:32px;font-weight:750;color:var(--t1);letter-spacing:-0.8px;margin-bottom:12px;}
+.ty-sub{font-size:16px;color:var(--t2);line-height:1.65;max-width:440px;margin:0 auto 32px;}
+.ty-details{
+  background:var(--card);border:1px solid var(--bteal);
+  border-radius:14px;padding:24px;text-align:left;
+  margin-bottom:28px;
+}
+.ty-detail-row{display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-bottom:1px solid var(--b1);}
+.ty-detail-row:last-child{border-bottom:none;}
+.ty-dl{font-size:11.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--t3);min-width:110px;padding-top:1px;}
+.ty-dv{font-size:13.5px;color:var(--t1);}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--b1);margin:20px 0;}
+
+/* ── HINT ── */
+.hint{font-size:12px;color:var(--t3);margin-top:-12px;margin-bottom:16px;line-height:1.5;}
+
+/* ── LOADING OVERLAY ── */
+.loading-overlay{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(7,12,20,0.88);
+  backdrop-filter:blur(12px);
+  display:none;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;
+}
+.loading-overlay.active{display:flex;}
+.spinner{
+  width:44px;height:44px;border-radius:50%;
+  border:3px solid rgba(0,212,200,0.15);
+  border-top-color:var(--teal);
+  animation:spin 0.8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:15px;font-weight:600;color:var(--t1);}
+.loading-sub{font-size:13px;color:var(--t3);}
+
+/* ── SETUP BANNER ── */
+.setup-banner{
+  background:rgba(212,160,53,0.08);
+  border:1px solid rgba(212,160,53,0.25);
+  border-radius:10px;padding:14px 18px;
+  margin-bottom:20px;
+  font-size:13px;color:rgba(212,160,53,0.9);
+  line-height:1.6;
+}
+.setup-banner strong{color:#d4a035;}
+.setup-banner code{
+  background:rgba(212,160,53,0.1);
+  padding:1px 6px;border-radius:4px;
+  font-size:12px;font-family:monospace;
+}
+
+/* ── MOBILE ── */
+@media(max-width:580px){
+  .card{padding:24px 20px;}
+  .form-row{grid-template-columns:1fr;}
+  .choices.grid-2{grid-template-columns:1fr;}
+  .header{padding:14px 16px;}
+  .progress-wrap{padding:16px 16px 0;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">Uploading files…</div>
+  <div class="loading-sub" id="loadingSub">This may take a moment</div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="20" height="22" viewBox="0 0 20 22" fill="none">
+        <path d="M10 20C10 20 3 14 4 8C5 3 10 1 10 1C10 1 15 3 16 8C17 14 10 20 10 20Z" stroke="#00d4c8" stroke-width="1.5" fill="none"/>
+        <path d="M10 16C8 13 3 12 1 8C5 10 9 12 10 15Z" fill="rgba(0,212,200,0.5)"/>
+        <path d="M10 16C12 13 17 12 19 8C15 10 11 12 10 15Z" fill="rgba(0,212,200,0.5)"/>
+        <circle cx="10" cy="1.5" r="1.5" fill="#00d4c8"/>
+      </svg>
+    </div>
+    <span class="logo-name">Agavi<em> AI</em></span>
+  </div>
+  <span class="header-label">Client Intake Form</span>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:8%"></div></div>
+  <div class="progress-steps">
+    <span class="ps active" data-step="0">Contact</span>
+    <span class="ps" data-step="1">Services</span>
+    <span class="ps" data-step="2">Details</span>
+    <span class="ps" data-step="3">Assets</span>
+    <span class="ps" data-step="4">Goals</span>
+    <span class="ps" data-step="5">Done</span>
+  </div>
+</div>
+
+<main>
+<div style="width:100%;max-width:680px;">
+
+<!-- ════ SCREEN 0: CONTACT ════ -->
+<div class="screen active" id="s0">
+  <div class="card">
+    <div class="card-tag">Let's get started</div>
+    <h1 class="card-h">Tell us about yourself.</h1>
+    <p class="card-sub">This helps us prepare before we ever get on a call.</p>
+
+    <div class="form-row">
+      <div class="fg">
+        <label class="flab">First name <span class="req">*</span></label>
+        <input type="text" class="fin" id="firstName" placeholder="Alex"/>
+      </div>
+      <div class="fg">
+        <label class="flab">Last name <span class="req">*</span></label>
+        <input type="text" class="fin" id="lastName" placeholder="Rivera"/>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label class="flab">Business name <span class="req">*</span></label>
+      <input type="text" class="fin" id="bizName" placeholder="Your company or DBA name"/>
+    </div>
+
+    <div class="form-row">
+      <div class="fg">
+        <label class="flab">Email <span class="req">*</span></label>
+        <input type="email" class="fin" id="email" placeholder="you@yourbusiness.com"/>
+      </div>
+      <div class="fg">
+        <label class="flab">Phone</label>
+        <input type="tel" class="fin" id="phone" placeholder="(555) 000-0000"/>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label class="flab">Industry / type of business</label>
+      <select class="fin" id="industry">
+        <option value="" disabled selected>Select your industry</option>
+        <option>Landscaping / Lawn Care</option>
+        <option>Construction / Contracting</option>
+        <option>Pest Control</option>
+        <option>HVAC / Plumbing / Electrical</option>
+        <option>Roofing</option>
+        <option>Real Estate / Property Management</option>
+        <option>Dental / Medical / Chiropractic</option>
+        <option>Accounting / Finance</option>
+        <option>Insurance</option>
+        <option>Retail / E-commerce</option>
+        <option>Restaurant / Food</option>
+        <option>Manufacturing / Machine Shop</option>
+        <option>Automotive</option>
+        <option>Cleaning / Janitorial</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label class="flab">How did you hear about Agavi AI?</label>
+      <div class="radio-pills" id="referralPills">
+        <span class="rpill" data-val="referral">Referral</span>
+        <span class="rpill" data-val="google">Google Search</span>
+        <span class="rpill" data-val="instagram">Instagram</span>
+        <span class="rpill" data-val="linkedin">LinkedIn</span>
+        <span class="rpill" data-val="facebook">Facebook</span>
+        <span class="rpill" data-val="other">Other</span>
+      </div>
+    </div>
+    <div class="fg" id="referralOtherWrap" style="display:none">
+      <input type="text" class="fin" id="referralOther" placeholder="Tell us how you found us"/>
+    </div>
+  </div>
+  <div class="nav-row">
+    <div></div>
+    <button class="btn-next" onclick="goNext(0)">
+      Continue
+      <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SCREEN 1: SERVICES ════ -->
+<div class="screen" id="s1">
+  <div class="card">
+    <div class="card-tag">Services</div>
+    <h2 class="card-h">What do you need help with?</h2>
+    <p class="card-sub">Select everything that applies — we'll ask the right follow-up questions for each.</p>
+    <p class="multi-hint">You can select more than one.</p>
+
+    <div class="choices" id="serviceChoices">
+      <div class="choice" data-val="website" onclick="toggleChoice(this)">
+        <div class="choice-icon">🌐</div>
+        <div class="choice-body">
+          <div class="choice-label">Website</div>
+          <div class="choice-desc">New site, redesign, or updates to an existing site</div>
+        </div>
+      </div>
+      <div class="choice" data-val="gbp" onclick="toggleChoice(this)">
+        <div class="choice-icon">📍</div>
+        <div class="choice-body">
+          <div class="choice-label">Google Business Profile</div>
+          <div class="choice-desc">Set up, optimize, or manage your Google presence</div>
+        </div>
+      </div>
+      <div class="choice" data-val="social" onclick="toggleChoice(this)">
+        <div class="choice-icon">📱</div>
+        <div class="choice-body">
+          <div class="choice-label">Social Media</div>
+          <div class="choice-desc">Setup, branding, content, or management</div>
+        </div>
+      </div>
+      <div class="choice" data-val="ai" onclick="toggleChoice(this)">
+        <div class="choice-icon">🤖</div>
+        <div class="choice-body">
+          <div class="choice-label">AI Automation & Workflows</div>
+          <div class="choice-desc">Automate repetitive tasks, build AI tools, save time</div>
+        </div>
+      </div>
+      <div class="choice" data-val="branding" onclick="toggleChoice(this)">
+        <div class="choice-icon">🎨</div>
+        <div class="choice-body">
+          <div class="choice-label">Branding / Logo</div>
+          <div class="choice-desc">New logo, brand identity, or style guide</div>
+        </div>
+      </div>
+      <div class="choice" data-val="notsure" onclick="toggleChoice(this, true)">
+        <div class="choice-icon">💬</div>
+        <div class="choice-body">
+          <div class="choice-label">Not sure yet</div>
+          <div class="choice-desc">I just want to explore what's possible</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-row">
+    <button class="btn-back" onclick="goBack(1)"><svg viewBox="0 0 14 14"><path d="M11 7H3M7 3L3 7l4 4"/></svg> Back</button>
+    <button class="btn-next" onclick="goNext(1)">Continue <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg></button>
+  </div>
+</div>
+
+<!-- ════ SCREEN 2: DETAILS (BRANCHING) ════ -->
+<div class="screen" id="s2">
+
+  <!-- WEBSITE BRANCH -->
+  <div id="branch-website" class="branch-section" style="display:none">
+    <div class="card">
+      <div class="branch-pill">🌐 Website</div>
+      <h2 class="card-h">About your website.</h2>
+      <p class="card-sub">Help us understand where you're starting from.</p>
+
+      <div class="fg">
+        <label class="flab">Do you have an existing website?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="hasWebsite" data-val="yes" onclick="selectRadio(this,'hasWebsite'); showIf('existingUrlWrap', true)">
+            <div class="choice-icon">✅</div>
+            <div class="choice-body"><div class="choice-label">Yes, I have one</div></div>
+          </div>
+          <div class="choice" data-group="hasWebsite" data-val="no" onclick="selectRadio(this,'hasWebsite'); showIf('existingUrlWrap', false)">
+            <div class="choice-icon">🆕</div>
+            <div class="choice-body"><div class="choice-label">No, starting fresh</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="existingUrlWrap" style="display:none">
+        <div class="fg">
+          <label class="flab">Current website URL</label>
+          <div class="url-input-wrap">
+            <span class="url-prefix">https://</span>
+            <input type="text" class="fin" id="existingUrl" placeholder="yourwebsite.com"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="flab">What do you want to keep or change about it?</label>
+          <textarea class="fin" id="websiteNotes" placeholder="e.g. 'Keep the general layout but it feels outdated' or 'Completely redo it'"></textarea>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">What type of website do you need?</label>
+        <div class="check-list" id="siteTypeList">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Informational / Brochure site</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Portfolio / Before & After gallery</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Service booking / scheduling</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">E-commerce / online store</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Lead capture / contact forms</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Blog / content</span></div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Do you have a logo?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="hasLogo" data-val="yes" onclick="selectRadio(this,'hasLogo')">
+            <div class="choice-icon">✅</div>
+            <div class="choice-body"><div class="choice-label">Yes — I'll upload it</div></div>
+          </div>
+          <div class="choice" data-group="hasLogo" data-val="no" onclick="selectRadio(this,'hasLogo')">
+            <div class="choice-icon">🎨</div>
+            <div class="choice-body"><div class="choice-label">No — need one designed</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Do you have brand colors or a color scheme?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="hasColors" data-val="yes" onclick="selectRadio(this,'hasColors'); showIf('colorsInputWrap', true)">
+            <div class="choice-icon">🎨</div>
+            <div class="choice-body"><div class="choice-label">Yes — I know my colors</div></div>
+          </div>
+          <div class="choice" data-group="hasColors" data-val="no" onclick="selectRadio(this,'hasColors'); showIf('colorsInputWrap', false)">
+            <div class="choice-icon">❓</div>
+            <div class="choice-body"><div class="choice-label">No — need help with this</div></div>
+          </div>
+        </div>
+      </div>
+      <div id="colorsInputWrap" style="display:none">
+        <div class="fg">
+          <label class="flab">What are your brand colors? (hex codes, descriptions, or inspiration)</label>
+          <input type="text" class="fin" id="brandColors" placeholder="e.g. dark green #1a3a2e and gold, or 'like Home Depot orange'"/>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Do you have written content / copy for the site?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="hasContent" data-val="yes" onclick="selectRadio(this,'hasContent')">
+            <div class="choice-icon">📝</div>
+            <div class="choice-body"><div class="choice-label">Yes — I can provide it</div></div>
+          </div>
+          <div class="choice" data-group="hasContent" data-val="no" onclick="selectRadio(this,'hasContent')">
+            <div class="choice-icon">✍️</div>
+            <div class="choice-body"><div class="choice-label">No — need it written</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Do you have photos or images for the site?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="hasPhotos" data-val="yes" onclick="selectRadio(this,'hasPhotos')">
+            <div class="choice-icon">📸</div>
+            <div class="choice-body"><div class="choice-label">Yes — I have photos</div></div>
+          </div>
+          <div class="choice" data-group="hasPhotos" data-val="no" onclick="selectRadio(this,'hasPhotos')">
+            <div class="choice-icon">🖼️</div>
+            <div class="choice-body"><div class="choice-label">No — need stock or shot</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE BUSINESS PROFILE BRANCH -->
+  <div id="branch-gbp" class="branch-section" style="display:none">
+    <div class="card">
+      <div class="branch-pill">📍 Google Business Profile</div>
+      <h2 class="card-h">Your Google presence.</h2>
+      <p class="card-sub">Let's see where you're starting from.</p>
+
+      <div class="fg">
+        <label class="flab">Do you have an existing Google Business Profile?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="hasGBP" data-val="yes" onclick="selectRadio(this,'hasGBP'); showIf('gbpUrlWrap', true)">
+            <div class="choice-icon">✅</div>
+            <div class="choice-body"><div class="choice-label">Yes, it exists</div></div>
+          </div>
+          <div class="choice" data-group="hasGBP" data-val="no" onclick="selectRadio(this,'hasGBP'); showIf('gbpUrlWrap', false)">
+            <div class="choice-icon">🆕</div>
+            <div class="choice-body"><div class="choice-label">No, need to create one</div></div>
+          </div>
+        </div>
+      </div>
+      <div id="gbpUrlWrap" style="display:none">
+        <div class="fg">
+          <label class="flab">Business Name on Google (exactly as listed)</label>
+          <input type="text" class="fin" id="gbpName" placeholder="Name as it appears on Google Maps"/>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Business address</label>
+        <input type="text" class="fin" id="bizAddress" placeholder="123 Main St, Canton TX 75103"/>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Business type</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="bizType" data-val="storefront" onclick="selectRadio(this,'bizType')">
+            <div class="choice-icon">🏪</div>
+            <div class="choice-body"><div class="choice-label">Storefront</div><div class="choice-desc">Customers come to me</div></div>
+          </div>
+          <div class="choice" data-group="bizType" data-val="service" onclick="selectRadio(this,'bizType')">
+            <div class="choice-icon">🚗</div>
+            <div class="choice-body"><div class="choice-label">Service Area</div><div class="choice-desc">I go to customers</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Do you have current photos to add to Google?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="gbpPhotos" data-val="yes" onclick="selectRadio(this,'gbpPhotos')">
+            <div class="choice-icon">📸</div>
+            <div class="choice-body"><div class="choice-label">Yes — I'll upload them</div></div>
+          </div>
+          <div class="choice" data-group="gbpPhotos" data-val="no" onclick="selectRadio(this,'gbpPhotos')">
+            <div class="choice-icon">📷</div>
+            <div class="choice-body"><div class="choice-label">No — need to get some</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCIAL MEDIA BRANCH -->
+  <div id="branch-social" class="branch-section" style="display:none">
+    <div class="card">
+      <div class="branch-pill">📱 Social Media</div>
+      <h2 class="card-h">Social presence.</h2>
+
+      <div class="fg">
+        <label class="flab">Which platforms do you need help with?</label>
+        <div class="check-list">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Instagram</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Facebook</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">LinkedIn</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">TikTok</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">YouTube</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">X (Twitter)</span></div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">What do you need done?</label>
+        <div class="check-list">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Set up / create profiles</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Branding & profile design</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Content creation</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Ongoing management / posting</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Posting before & after photos</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI AUTOMATION BRANCH -->
+  <div id="branch-ai" class="branch-section" style="display:none">
+    <div class="card">
+      <div class="branch-pill">🤖 AI Automation</div>
+      <h2 class="card-h">Your operations.</h2>
+      <p class="card-sub">Help us understand what's slowing you down.</p>
+
+      <div class="fg">
+        <label class="flab">How many people are on your team?</label>
+        <div class="radio-pills" id="teamSizePills">
+          <span class="rpill" data-val="solo">Just me</span>
+          <span class="rpill" data-val="2-5">2–5</span>
+          <span class="rpill" data-val="6-15">6–15</span>
+          <span class="rpill" data-val="16-50">16–50</span>
+          <span class="rpill" data-val="50+">50+</span>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">What tools / software do you currently use?</label>
+        <input type="text" class="fin" id="currentTools" placeholder="e.g. QuickBooks, HubSpot, Google Sheets, Jobber, ServiceTitan…"/>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Where does your team spend the most manual time?</label>
+        <div class="check-list">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Scheduling & dispatching</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Invoicing & billing</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Customer follow-up / CRM</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Estimating / quoting</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Data entry / reporting</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Marketing / social content</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Hiring / HR</span></div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Have you used AI tools before?</label>
+        <div class="choices grid-2">
+          <div class="choice" data-group="aiExp" data-val="yes" onclick="selectRadio(this,'aiExp'); showIf('aiToolsWrap', true)">
+            <div class="choice-icon">✅</div>
+            <div class="choice-body"><div class="choice-label">Yes</div></div>
+          </div>
+          <div class="choice" data-group="aiExp" data-val="no" onclick="selectRadio(this,'aiExp'); showIf('aiToolsWrap', false)">
+            <div class="choice-icon">🆕</div>
+            <div class="choice-body"><div class="choice-label">No — first time</div></div>
+          </div>
+        </div>
+      </div>
+      <div id="aiToolsWrap" style="display:none">
+        <div class="fg">
+          <label class="flab">Which AI tools have you used?</label>
+          <input type="text" class="fin" id="aiTools" placeholder="e.g. ChatGPT, Zapier, Make, Copilot…"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRANDING BRANCH -->
+  <div id="branch-branding" class="branch-section" style="display:none">
+    <div class="card">
+      <div class="branch-pill">🎨 Branding</div>
+      <h2 class="card-h">Your brand identity.</h2>
+
+      <div class="fg">
+        <label class="flab">Do you have any existing brand materials?</label>
+        <div class="check-list">
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Logo (even a rough one)</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Business cards</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">Vehicle wrap / signage</span></div>
+          <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg viewBox="0 0 10 8"><polyline points="1,4 3.5,7 9,1"/></svg></div><span class="check-label">None — starting from scratch</span></div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Describe the feel you want for your brand</label>
+        <textarea class="fin" id="brandVibe" placeholder="e.g. 'Professional and trustworthy, like a bank' or 'Rugged, earthy, outdoorsy' or 'Modern and tech-forward'"></textarea>
+      </div>
+
+      <div class="fg">
+        <label class="flab">Any brands or logos you admire? (competitors, other industries, anything)</label>
+        <input type="text" class="fin" id="brandInspo" placeholder="e.g. 'I like how Yeti's brand feels' or paste a URL"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOT SURE BRANCH -->
+  <div id="branch-notsure" class="branch-section" style="display:none">
+    <div class="card">
+      <div class="branch-pill">💬 Discovery</div>
+      <h2 class="card-h">Let's figure it out together.</h2>
+      <p class="card-sub">No problem — tell us about your business and where you feel stuck, and we'll recommend the right path.</p>
+
+      <div class="fg">
+        <label class="flab">Describe your business in a few sentences</label>
+        <textarea class="fin" id="bizDescNotsure" placeholder="What do you do, who do you serve, how long have you been in business?"></textarea>
+      </div>
+
+      <div class="fg">
+        <label class="flab">What's the #1 thing holding your business back right now?</label>
+        <textarea class="fin" id="painPoint" placeholder="e.g. 'We don't have an online presence at all' or 'Too much paperwork' or 'No one can find us on Google'"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-back" onclick="goBack(2)"><svg viewBox="0 0 14 14"><path d="M11 7H3M7 3L3 7l4 4"/></svg> Back</button>
+    <button class="btn-next" onclick="goNext(2)">Continue <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg></button>
+  </div>
+</div>
+
+<!-- ════ SCREEN 3: ASSETS UPLOAD ════ -->
+<div class="screen" id="s3">
+  <div class="card">
+    <div class="card-tag">Assets</div>
+    <h2 class="card-h">Upload your files.</h2>
+    <p class="card-sub">Drop anything useful here — logos, photos, existing content, brand guidelines. We'll sort through it on our end. All file types accepted.</p>
+
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" multiple accept="*/*" onchange="handleFiles(this.files)"/>
+      <div class="upload-icon">📂</div>
+      <div class="upload-title">Drag & drop files here, or <span class="upload-teal">browse to upload</span></div>
+      <div class="upload-sub">Logos, photos, PDFs, Word docs, spreadsheets — anything goes</div>
+    </div>
+
+    <div class="file-list" id="fileList"></div>
+
+    <div class="divider"></div>
+
+    <div class="fg">
+      <label class="flab">Anything specific you want us to know about these files?</label>
+      <textarea class="fin" id="assetNotes" placeholder="e.g. 'The logo file is the most current version' or 'The photos are before/afters from last summer'"></textarea>
+    </div>
+
+    <div class="fg" style="margin-bottom:0">
+      <label class="flab">Don't have files handy right now?</label>
+      <p style="font-size:13.5px;color:var(--t3);line-height:1.6;margin-top:4px;">No worries — just skip this step. You can send files after we connect.</p>
+    </div>
+  </div>
+  <div class="nav-row">
+    <button class="btn-back" onclick="goBack(3)"><svg viewBox="0 0 14 14"><path d="M11 7H3M7 3L3 7l4 4"/></svg> Back</button>
+    <button class="btn-next" onclick="goNext(3)">Continue <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg></button>
+  </div>
+</div>
+
+<!-- ════ SCREEN 4: GOALS & TIMELINE ════ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <div class="card-tag">Goals</div>
+    <h2 class="card-h">Timeline & expectations.</h2>
+    <p class="card-sub">Help us understand your urgency and budget so we can scope the right solution.</p>
+
+    <div class="fg">
+      <label class="flab">When do you need this done?</label>
+      <div class="choices">
+        <div class="choice" data-group="timeline" data-val="asap" onclick="selectRadio(this,'timeline')">
+          <div class="choice-icon">🔥</div>
+          <div class="choice-body"><div class="choice-label">ASAP — within 2 weeks</div></div>
+        </div>
+        <div class="choice" data-group="timeline" data-val="month" onclick="selectRadio(this,'timeline')">
+          <div class="choice-icon">📅</div>
+          <div class="choice-body"><div class="choice-label">Within a month</div></div>
+        </div>
+        <div class="choice" data-group="timeline" data-val="quarter" onclick="selectRadio(this,'timeline')">
+          <div class="choice-icon">🗓️</div>
+          <div class="choice-body"><div class="choice-label">1–3 months</div></div>
+        </div>
+        <div class="choice" data-group="timeline" data-val="flexible" onclick="selectRadio(this,'timeline')">
+          <div class="choice-icon">😌</div>
+          <div class="choice-body"><div class="choice-label">Flexible — no hard deadline</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label class="flab">Approximate budget range</label>
+      <div class="radio-pills" id="budgetPills">
+        <span class="rpill" data-val="under500">Under $500</span>
+        <span class="rpill" data-val="500-1500">$500–$1,500</span>
+        <span class="rpill" data-val="1500-5000">$1,500–$5,000</span>
+        <span class="rpill" data-val="5000-15000">$5,000–$15,000</span>
+        <span class="rpill" data-val="15000+">$15,000+</span>
+        <span class="rpill" data-val="unsure">Not sure yet</span>
+      </div>
+      <p class="hint" style="margin-top:8px">Honest answers help us recommend the right scope. No judgment either way.</p>
+    </div>
+
+    <div class="fg">
+      <label class="flab">What does success look like to you?</label>
+      <textarea class="fin" id="successVision" placeholder="e.g. 'More phone calls from Google' or 'My team saves 10 hours a week' or 'A website I'm proud to hand out at jobs'"></textarea>
+    </div>
+
+    <div class="fg">
+      <label class="flab">Anything else we should know before we connect?</label>
+      <textarea class="fin" id="anythingElse" placeholder="Special circumstances, deadlines, concerns, previous bad experiences with agencies — anything goes"></textarea>
+    </div>
+  </div>
+  <div class="nav-row">
+    <button class="btn-back" onclick="goBack(4)"><svg viewBox="0 0 14 14"><path d="M11 7H3M7 3L3 7l4 4"/></svg> Back</button>
+    <button class="btn-next" onclick="submitForm()">Submit →</button>
+  </div>
+</div>
+
+<!-- ════ SCREEN 5: THANK YOU ════ -->
+<div class="screen" id="s5">
+  <div class="card">
+    <div class="thankyou">
+      <div class="ty-icon">🌿</div>
+      <h2 class="ty-h">You're all set.</h2>
+      <p class="ty-sub">We've got everything we need to have a real conversation. Someone from Agavi AI will reach out within 1 business day.</p>
+
+      <div class="ty-details" id="summaryBox"></div>
+
+      <p style="font-size:13px;color:var(--t3);line-height:1.65;">
+        In the meantime, feel free to email us at <a href="mailto:info@agaviai.com" style="color:var(--teal)">info@agaviai.com</a> or check out <a href="https://agaviai.com" target="_blank" style="color:var(--teal)">agaviai.com</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+</main>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  CONFIGURATION — paste your keys here after signing up
+// ══════════════════════════════════════════════════════════════
+//
+//  1. Formspree  → https://formspree.io  → New Form → copy the ID
+//     Example:  https://formspree.io/f/xpwzgqkj  →  ID = 'xpwzgqkj'
+//
+//  2. Uploadcare → https://uploadcare.com → Dashboard → API Keys → Public Key
+//     Example:  'demopublickey'
+//
+const WEB3FORMS_KEY   = 'b3e011f6-9f04-4d9f-90eb-85258a559823'; // ✅ Web3Forms access key
+const UPLOADCARE_KEY  = 'aed0dbc7547927dc0cdb'; // ✅ Uploadcare public key
+
+const CONFIGURED = WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_KEY' && UPLOADCARE_KEY !== 'YOUR_UPLOADCARE_KEY';
+
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+const state = {
+  currentScreen: 0,
+  selectedServices: [],
+  files: [],
+  uploadedFileURLs: [],
+  data: {}
+};
+
+const PROGRESS = [8, 22, 45, 65, 82, 100];
+
+// Show setup banner if not yet configured
+window.addEventListener('DOMContentLoaded', () => {
+  if (!CONFIGURED) {
+    const banner = document.createElement('div');
+    banner.className = 'setup-banner';
+    banner.innerHTML = `
+      <strong>⚙️ Setup required:</strong> Open this file in a text editor and replace
+      <code>YOUR_UPLOADCARE_KEY</code> near the top of the &lt;script&gt; block.
+      Get your Public Key at
+      <a href="https://uploadcare.com" target="_blank" style="color:#d4a035">uploadcare.com</a> — free.
+    `;
+    document.getElementById('s0').querySelector('.card').prepend(banner);
+  }
+});
+
+// ══════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════
+function goTo(n) {
+  document.getElementById('s' + state.currentScreen).classList.remove('active');
+  state.currentScreen = n;
+  document.getElementById('s' + n).classList.add('active');
+  updateProgress(n);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goNext(from) {
+  if (from === 0) {
+    if (!validateContact()) return;
+    collectContact();
+    goTo(1);
+  } else if (from === 1) {
+    if (state.selectedServices.length === 0) { alert('Please select at least one service.'); return; }
+    setupBranches();
+    goTo(2);
+  } else if (from === 2) {
+    goTo(3);
+  } else if (from === 3) {
+    goTo(4);
+  }
+}
+
+function goBack(from) { if (from > 0) goTo(from - 1); }
+
+function updateProgress(step) {
+  document.getElementById('progressFill').style.width = PROGRESS[step] + '%';
+  document.querySelectorAll('.ps').forEach((el, i) => {
+    el.classList.remove('active','done');
+    if (i < step) el.classList.add('done');
+    if (i === step) el.classList.add('active');
+  });
+}
+
+// ══════════════════════════════════════
+// VALIDATION
+// ══════════════════════════════════════
+function validateContact() {
+  const ids = ['firstName','lastName','bizName','email'];
+  let ok = true;
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { el.style.borderColor='rgba(239,68,68,0.6)'; ok = false; }
+    else el.style.borderColor='';
+  });
+  return ok;
+}
+
+function collectContact() {
+  state.data.firstName = document.getElementById('firstName').value.trim();
+  state.data.lastName  = document.getElementById('lastName').value.trim();
+  state.data.bizName   = document.getElementById('bizName').value.trim();
+  state.data.email     = document.getElementById('email').value.trim();
+  state.data.phone     = document.getElementById('phone').value.trim();
+  state.data.industry  = document.getElementById('industry').value;
+}
+
+// ══════════════════════════════════════
+// CHOICE INTERACTIONS
+// ══════════════════════════════════════
+function toggleChoice(el, exclusive) {
+  const val = el.dataset.val;
+  if (exclusive) {
+    el.closest('.choices').querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.selectedServices = [val];
+    return;
+  }
+  if (val !== 'notsure') {
+    el.closest('.choices').querySelectorAll('[data-val="notsure"]').forEach(c => {
+      c.classList.remove('selected');
+      state.selectedServices = state.selectedServices.filter(v => v !== 'notsure');
+    });
+  }
+  el.classList.toggle('selected');
+  if (el.classList.contains('selected')) {
+    if (!state.selectedServices.includes(val)) state.selectedServices.push(val);
+  } else {
+    state.selectedServices = state.selectedServices.filter(v => v !== val);
+  }
+}
+
+function selectRadio(el, group) {
+  el.closest('.choices') && el.closest('.choices').querySelectorAll('[data-group="' + group + '"]').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function toggleCheck(el) { el.classList.toggle('checked'); }
+function showIf(id, show) { document.getElementById(id).style.display = show ? 'block' : 'none'; }
+
+document.querySelectorAll('.radio-pills').forEach(container => {
+  container.addEventListener('click', e => {
+    const pill = e.target.closest('.rpill');
+    if (!pill) return;
+    container.querySelectorAll('.rpill').forEach(p => p.classList.remove('selected'));
+    pill.classList.add('selected');
+  });
+});
+
+document.getElementById('referralPills').addEventListener('click', e => {
+  const pill = e.target.closest('.rpill');
+  if (!pill) return;
+  document.getElementById('referralOtherWrap').style.display = pill.dataset.val === 'other' ? 'block' : 'none';
+});
+
+// ══════════════════════════════════════
+// BRANCHES
+// ══════════════════════════════════════
+function setupBranches() {
+  ['website','gbp','social','ai','branding','notsure'].forEach(b => {
+    const el = document.getElementById('branch-' + b);
+    if (el) el.style.display = state.selectedServices.includes(b) ? 'block' : 'none';
+  });
+}
+
+// ══════════════════════════════════════
+// FILE UPLOAD (local staging)
+// ══════════════════════════════════════
+function handleFiles(files) {
+  Array.from(files).forEach(f => {
+    if (!state.files.find(x => x.name === f.name)) state.files.push(f);
+  });
+  renderFileList();
+}
+
+function renderFileList() {
+  const list = document.getElementById('fileList');
+  list.innerHTML = '';
+  state.files.forEach((f, i) => {
+    const ext = f.name.split('.').pop().toLowerCase();
+    const icon = ext.match(/png|jpg|jpeg|gif|webp|svg/) ? '🖼️'
+               : ext.match(/pdf/) ? '📄'
+               : ext.match(/doc|docx/) ? '📝'
+               : ext.match(/xls|xlsx|csv/) ? '📊'
+               : ext.match(/zip|rar|7z/) ? '🗜️' : '📁';
+    const size = f.size > 1024*1024 ? (f.size/1024/1024).toFixed(1)+'MB' : (f.size/1024).toFixed(0)+'KB';
+    list.innerHTML += `
+      <div class="file-item">
+        <span class="file-icon">${icon}</span>
+        <span class="file-name">${f.name}</span>
+        <span class="file-size">${size}</span>
+        <button class="file-rm" onclick="removeFile(${i})" title="Remove">✕</button>
+      </div>`;
+  });
+}
+
+function removeFile(i) { state.files.splice(i, 1); renderFileList(); }
+
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => { e.preventDefault(); zone.classList.remove('drag-over'); handleFiles(e.dataTransfer.files); });
+
+// ══════════════════════════════════════
+// UPLOADCARE — push file to CDN, get URL back
+// ══════════════════════════════════════
+async function uploadToUploadcare(file) {
+  const fd = new FormData();
+  fd.append('UPLOADCARE_PUB_KEY', UPLOADCARE_KEY);
+  fd.append('UPLOADCARE_STORE', '1');        // keep file permanently
+  fd.append('file', file, file.name);
+
+  const res = await fetch('https://upload.uploadcare.com/base/', { method:'POST', body:fd });
+  if (!res.ok) throw new Error('Upload failed for ' + file.name);
+  const json = await res.json();
+  // Returns { file: 'uuid' } — CDN URL is https://ucarecdn.com/{uuid}/
+  return `https://ucarecdn.com/${json.file}/${file.name}`;
+}
+
+async function uploadAllFiles() {
+  if (state.files.length === 0) return [];
+  setLoading(true, 'Uploading files…', `0 of ${state.files.length} uploaded`);
+  const urls = [];
+  for (let i = 0; i < state.files.length; i++) {
+    setLoading(true, 'Uploading files…', `${i + 1} of ${state.files.length} — ${state.files[i].name}`);
+    const url = await uploadToUploadcare(state.files[i]);
+    urls.push({ name: state.files[i].name, url });
+  }
+  return urls;
+}
+
+// ══════════════════════════════════════
+// WEB3FORMS — POST form data as JSON
+// ══════════════════════════════════════
+async function postToFormspree(payload) {
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ access_key: WEB3FORMS_KEY, ...payload })
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || !json.success) throw new Error(json.message || 'Submission failed');
+  return json;
+}
+
+// ══════════════════════════════════════
+// LOADING OVERLAY
+// ══════════════════════════════════════
+function setLoading(on, text, sub) {
+  document.getElementById('loadingOverlay').classList.toggle('active', on);
+  if (text) document.getElementById('loadingText').textContent = text;
+  if (sub)  document.getElementById('loadingSub').textContent = sub;
+}
+
+// ══════════════════════════════════════
+// SUBMIT — orchestrates upload → formspree → thank you
+// ══════════════════════════════════════
+async function submitForm() {
+  // Collect final fields
+  state.data.services      = state.selectedServices;
+  state.data.timeline      = document.querySelector('[data-group="timeline"].selected')?.dataset?.val || '';
+  state.data.budget        = document.querySelector('#budgetPills .rpill.selected')?.textContent || '';
+  state.data.successVision = document.getElementById('successVision').value.trim();
+  state.data.anythingElse  = document.getElementById('anythingElse').value.trim();
+  state.data.assetNotes    = document.getElementById('assetNotes').value.trim();
+
+  const serviceLabels = { website:'Website', gbp:'Google Business Profile', social:'Social Media', ai:'AI Automation', branding:'Branding / Logo', notsure:'Discovery Call' };
+  const timelineLabels = { asap:'ASAP (2 weeks)', month:'Within a month', quarter:'1–3 months', flexible:'Flexible' };
+
+  try {
+    // Step 1: Upload files to Uploadcare (skip if not configured)
+    let fileLinks = [];
+    if (CONFIGURED && state.files.length > 0) {
+      fileLinks = await uploadAllFiles();
+    } else if (!CONFIGURED && state.files.length > 0) {
+      // Dev mode: just record file names
+      fileLinks = state.files.map(f => ({ name: f.name, url: '(not uploaded — keys not configured)' }));
+    }
+    state.uploadedFileURLs = fileLinks;
+
+    // Step 2: Send to Formspree
+    if (CONFIGURED) {
+      setLoading(true, 'Submitting form…', 'Almost done');
+
+      const payload = {
+        // Contact
+        _subject: `New Agavi AI Intake — ${state.data.bizName} (${state.data.industry})`,
+        name: `${state.data.firstName} ${state.data.lastName}`,
+        business: state.data.bizName,
+        email: state.data.email,
+        phone: state.data.phone || 'Not provided',
+        industry: state.data.industry,
+        how_they_found_us: document.querySelector('#referralPills .rpill.selected')?.dataset?.val || '',
+        // Services
+        services_requested: state.data.services.map(s => serviceLabels[s] || s).join(', '),
+        // Website branch
+        has_existing_website: document.querySelector('[data-group="hasWebsite"].selected')?.dataset?.val || '',
+        existing_url: document.getElementById('existingUrl')?.value || '',
+        website_notes: document.getElementById('websiteNotes')?.value || '',
+        has_logo: document.querySelector('[data-group="hasLogo"].selected')?.dataset?.val || '',
+        has_brand_colors: document.querySelector('[data-group="hasColors"].selected')?.dataset?.val || '',
+        brand_colors: document.getElementById('brandColors')?.value || '',
+        has_content: document.querySelector('[data-group="hasContent"].selected')?.dataset?.val || '',
+        has_photos: document.querySelector('[data-group="hasPhotos"].selected')?.dataset?.val || '',
+        // GBP branch
+        has_gbp: document.querySelector('[data-group="hasGBP"].selected')?.dataset?.val || '',
+        business_address: document.getElementById('bizAddress')?.value || '',
+        // AI branch
+        team_size: document.querySelector('#teamSizePills .rpill.selected')?.dataset?.val || '',
+        current_tools: document.getElementById('currentTools')?.value || '',
+        ai_experience: document.querySelector('[data-group="aiExp"].selected')?.dataset?.val || '',
+        ai_tools_used: document.getElementById('aiTools')?.value || '',
+        // Goals
+        timeline: timelineLabels[state.data.timeline] || '',
+        budget: state.data.budget,
+        success_vision: state.data.successVision,
+        anything_else: state.data.anythingElse,
+        // Files
+        files_uploaded: fileLinks.length > 0
+          ? fileLinks.map(f => `${f.name}: ${f.url}`).join('\n')
+          : 'None',
+        asset_notes: state.data.assetNotes,
+        // Meta
+        submitted_at: new Date().toLocaleString('en-US', { timeZone:'America/Phoenix' }) + ' (AZ)',
+      };
+
+      await postToFormspree(payload);
+    }
+
+    setLoading(false);
+    showThankYou(serviceLabels, timelineLabels, fileLinks);
+
+  } catch (err) {
+    setLoading(false);
+    console.error(err);
+    alert('Something went wrong: ' + err.message + '\n\nPlease try again or email info@agaviai.com directly.');
+  }
+}
+
+function showThankYou(serviceLabels, timelineLabels, fileLinks) {
+  const serviceNames = (state.data.services || []).map(s => serviceLabels[s] || s).join(', ') || '—';
+  document.getElementById('summaryBox').innerHTML = `
+    <div class="ty-detail-row"><span class="ty-dl">Name</span><span class="ty-dv">${state.data.firstName} ${state.data.lastName}</span></div>
+    <div class="ty-detail-row"><span class="ty-dl">Business</span><span class="ty-dv">${state.data.bizName}</span></div>
+    <div class="ty-detail-row"><span class="ty-dl">Email</span><span class="ty-dv">${state.data.email}</span></div>
+    <div class="ty-detail-row"><span class="ty-dl">Services</span><span class="ty-dv">${serviceNames}</span></div>
+    <div class="ty-detail-row"><span class="ty-dl">Timeline</span><span class="ty-dv">${timelineLabels[state.data.timeline] || '—'}</span></div>
+    <div class="ty-detail-row"><span class="ty-dl">Budget</span><span class="ty-dv">${state.data.budget || '—'}</span></div>
+    <div class="ty-detail-row"><span class="ty-dl">Files</span><span class="ty-dv">${fileLinks.length > 0 ? fileLinks.length + ' file(s) uploaded' : 'None'}</span></div>
+  `;
+  goTo(5);
+}
+</script>
+</body>
+</html>
