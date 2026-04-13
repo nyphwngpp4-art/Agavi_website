@@ -335,6 +335,7 @@
       .hero-visual{min-height:560px}
     }
 
+    @media(max-width:780px){.svc-teaser-grid{grid-template-columns:1fr!important}}
     @media (max-width:780px){
       :root{--nav:70px}
       .section{padding:82px 0}
@@ -397,7 +398,7 @@
 
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="/services">Services</a>
         <a href="/beatitude">Beatitude Engine</a>
         <a href="https://diagnostic.agaviai.com" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700;">Free Diagnostic</a>
         <a class="btn btn-primary" href="#contact">Schedule a Call</a>
@@ -518,96 +519,62 @@
   </header>
 
   <main>
-    <section class="section" id="about">
+    <section class="section" id="about" style="padding:72px 0 56px">
       <div class="container">
         <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="section-head reveal">
-          <div>
-            <div class="eyebrow">About Agavi AI</div>
-            <h2>We don’t sell software. We architect transformation.</h2>
-          </div>
-          <p>
-            Agavi AI is a boutique consultancy that partners with businesses to identify inefficiencies, implement intelligent systems, and unlock growth through tailored AI strategy and execution.
-          </p>
-        </div>
-
-        <div class="grid-2">
-          <div class="panel copy-card reveal">
-            <h3>Built for operating reality</h3>
-            <p>
-              Businesses do not need more noise. They need clear thinking, disciplined implementation, and AI that fits the way the business actually runs. Agavi AI helps leadership teams move from curiosity to capability with systems that create leverage across the enterprise.
-            </p>
-            <div class="stats">
-              <div class="stat"><strong>Strategy</strong><p>Opportunity mapping and ROI prioritization.</p></div>
-              <div class="stat"><strong>Systems</strong><p>Workflow design, integrations, and operating discipline.</p></div>
-              <div class="stat"><strong>Scale</strong><p>Training, governance, iteration, and adoption.</p></div>
-            </div>
-          </div>
-
-          <div class="panel copy-card reveal">
-            <h3>How Agavi works</h3>
-            <p>
-              Agavi AI operates like an advisory partner, not a generic platform. We diagnose the real bottlenecks, design the right architecture, and help deploy the tools that fit your stack, your team, and your economics.
-            </p>
-            <div class="about-highlight">
-              <div class="item"><strong>Tailored by design</strong><p>Every engagement begins with your workflow, your data, and your business model.</p></div>
-              <div class="item"><strong>Leadership-level clarity</strong><p>Recommendations stay practical, commercially grounded, and tied to measurable return.</p></div>
-            </div>
+        <div style="max-width:680px;margin:0 auto;text-align:center" class="reveal">
+          <div class="eyebrow" style="justify-content:center">Boutique AI Consultancy</div>
+          <h2 style="max-width:100%;margin-bottom:1rem">We don’t sell software.<br>We architect transformation.</h2>
+          <p style="font-size:1.05rem;margin-bottom:2rem">Agavi AI partners with businesses to identify inefficiencies, implement intelligent systems, and unlock growth through tailored AI strategy and execution.</p>
+          <div style="display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap">
+            <div class="stat" style="flex:1;min-width:140px;max-width:200px"><strong>Strategy</strong><p>ROI mapping before any spend.</p></div>
+            <div class="stat" style="flex:1;min-width:140px;max-width:200px"><strong>Systems</strong><p>Workflow design and integration.</p></div>
+            <div class="stat" style="flex:1;min-width:140px;max-width:200px"><strong>Scale</strong><p>Training, governance, adoption.</p></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="services">
+    <section class="section" id="services" style="padding:56px 0">
       <div class="container">
         <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="section-head reveal">
-          <div>
-            <div class="eyebrow">What We Do</div>
-            <h2>AI systems across every major business function.</h2>
-          </div>
-          <p>
-            Each branch of the agave represents a high-leverage function where intelligence can take root, remove friction, and improve performance.
-          </p>
+        <div style="text-align:center;margin-bottom:2rem" class="reveal">
+          <div class="eyebrow" style="justify-content:center">What We Do</div>
+          <h2 style="max-width:100%;margin-bottom:.6rem">AI across every major business function.</h2>
+          <p style="max-width:38rem;margin:0 auto">From CRM to operations, we deploy intelligent systems where they create the most leverage.</p>
         </div>
 
-        <div class="cards">
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V8l8-4 8 4v11l-8 4-8-4Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 8l8 4 8-4M12 12v11" stroke="currentColor" stroke-width="1.6"/></svg></div>
-            <h3>CRM Intelligence</h3>
-            <p>AI-enhanced relationship tracking, lead scoring, pipeline visibility, and next-best-action prompts that sharpen commercial execution.</p>
-            <span class="tag">Relationships + Revenue</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 16l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="16" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg></div>
-            <h3>Data &amp; Reporting Intelligence</h3>
-            <p>Automated reporting, anomaly detection, dashboard consolidation, and better decision support for leaders who need clearer operational signal.</p>
-            <span class="tag">Clarity + Insight</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0v5l-3-2-3 2-3-2-3 2-3-2V12Z" stroke="currentColor" stroke-width="1.6"/><path d="M9 10h6M8 13h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-            <h3>Customer Service AI</h3>
-            <p>Chatbots, sentiment analysis, service routing, and automated resolution flows that improve response time and retention.</p>
-            <span class="tag">Service + Retention</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-5 3 3 8-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8h5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h3>Sales Enablement</h3>
-            <p>AI-driven outreach, account prioritization, rep coaching tools, and conversion modeling that help teams perform better.</p>
-            <span class="tag">Pipeline + Conversion</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 15l4-4 3 3 6-7 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-            <h3>Operations &amp; Logistics</h3>
-            <p>Workflow automation, resource optimization, predictive planning, and exception handling that reduce waste and improve throughput.</p>
-            <span class="tag">Efficiency + Throughput</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="18" cy="17" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg></div>
-            <h3>Marketing Intelligence</h3>
-            <p>Campaign analytics, audience segmentation, personalization, and reporting automation that sharpen growth decisions.</p>
-            <span class="tag">Signal + Demand</span>
-          </article>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-bottom:2rem" class="svc-teaser-grid">
+          <a href="/services" class="panel reveal" style="padding:1.2rem 1.3rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+            <div class="service-icon" style="flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19V8l8-4 8 4v11l-8 4-8-4Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 8l8 4 8-4M12 12v11" stroke="currentColor" stroke-width="1.6"/></svg></div>
+            <div><strong style="display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem">CRM Intelligence</strong><span class="tag" style="margin:0">Relationships + Revenue</span></div>
+          </a>
+          <a href="/services" class="panel reveal" style="padding:1.2rem 1.3rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;transition:transform .2s ease" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+            <div class="service-icon" style="flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 16l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><strong style="display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem">Data &amp; Reporting</strong><span class="tag" style="margin:0">Clarity + Insight</span></div>
+          </a>
+          <a href="/services" class="panel reveal" style="padding:1.2rem 1.3rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;transition:transform .2s ease" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+            <div class="service-icon" style="flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0v5l-3-2-3 2-3-2-3 2-3-2V12Z" stroke="currentColor" stroke-width="1.6"/></svg></div>
+            <div><strong style="display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem">Customer Service AI</strong><span class="tag" style="margin:0">Service + Retention</span></div>
+          </a>
+          <a href="/services" class="panel reveal" style="padding:1.2rem 1.3rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;transition:transform .2s ease" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+            <div class="service-icon" style="flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-5 3 3 8-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8h5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><strong style="display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem">Sales Enablement</strong><span class="tag" style="margin:0">Pipeline + Conversion</span></div>
+          </a>
+          <a href="/services" class="panel reveal" style="padding:1.2rem 1.3rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;transition:transform .2s ease" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+            <div class="service-icon" style="flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 15l4-4 3 3 6-7 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <div><strong style="display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem">Operations &amp; Logistics</strong><span class="tag" style="margin:0">Efficiency + Throughput</span></div>
+          </a>
+          <a href="/services" class="panel reveal" style="padding:1.2rem 1.3rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;transition:transform .2s ease" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+            <div class="service-icon" style="flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <div><strong style="display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem">Marketing Intelligence</strong><span class="tag" style="margin:0">Signal + Demand</span></div>
+          </a>
+        </div>
+
+        <div style="text-align:center" class="reveal">
+          <a href="/services" style="color:var(--teal);font-size:.95rem;font-weight:700;display:inline-flex;align-items:center;gap:.4rem">
+            Explore all services →
+          </a>
         </div>
       </div>
     </section>

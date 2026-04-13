@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Agavi AI</title>
+  <meta name="description" content="Agavi AI deploys intelligent systems across every major business function — CRM, data, customer service, sales, operations, and marketing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#020913;--panel:#091627;--text:#eef6ff;--muted:#aab8c8;
+      --teal:#5ef6ee;--cyan:#57d6ff;--blue:#6d91ff;--gold:#f0c26e;--green:#9be784;
+      --shadow:0 22px 60px rgba(0,0,0,.35);--glow:0 0 0 1px rgba(109,145,255,.16),0 16px 44px rgba(0,0,0,.32);
+      --radius:22px;--max:1220px;--nav:78px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;font-family:"Inter",system-ui,sans-serif;color:var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(94,246,238,.11), transparent 20%),
+        radial-gradient(circle at 74% 12%, rgba(109,145,255,.14), transparent 22%),
+        linear-gradient(180deg,#020913 0%,#05101c 40%,#04111f 100%);
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img,svg{display:block;max-width:100%}
+    .container{width:min(calc(100% - 2rem),var(--max));margin:0 auto}
+    .section{padding:96px 0;position:relative}
+    .section::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(113,151,195,.18),transparent)}
+
+    .nav{position:sticky;top:0;z-index:1000;backdrop-filter:blur(16px);background:rgba(2,9,19,.72);border-bottom:1px solid rgba(255,255,255,.05)}
+    .nav-inner{min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .brand{display:flex;align-items:center;gap:.9rem;font-weight:800}
+    .brand-mark{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 38%, rgba(94,246,238,.24), transparent 56%),linear-gradient(180deg, rgba(11,24,40,.98), rgba(8,17,28,.98));border:1px solid rgba(111,160,214,.18);box-shadow:0 0 0 1px rgba(87,214,255,.08), 0 10px 28px rgba(0,0,0,.38)}
+    .brand-text{line-height:1}
+    .brand-text strong{display:block;font-family:"Montserrat",sans-serif;font-size:1rem;margin-bottom:.18rem}
+    .brand-text span{display:block;color:#9db1c7;letter-spacing:.16em;font-size:.72rem;text-transform:uppercase;font-weight:800}
+    .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+    .nav-links a{color:#dce8f8;font-size:.92rem;transition:transform .2s ease}
+    .nav-links a:hover{transform:translateY(-1px)}
+    .nav-links .btn{padding:.7rem 1rem;font-size:.88rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.95rem 1.25rem;border-radius:999px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.08);transition:transform .2s ease,box-shadow .2s ease,background .2s ease;box-shadow:var(--glow)}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(90deg,rgba(240,194,110,.15),rgba(87,214,255,.12))}
+    .btn-secondary{background:rgba(255,255,255,.03);color:#dbe8f7}
+
+    .eyebrow{display:inline-flex;align-items:center;gap:.6rem;color:var(--teal);font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
+    .eyebrow::before{content:"";width:40px;height:1px;background:linear-gradient(90deg,var(--teal),transparent)}
+    h1,h2,h3,h4{font-family:"Montserrat","Inter",sans-serif;letter-spacing:-.03em;line-height:1.06;margin:0 0 .9rem}
+    h1{font-size:clamp(2.6rem,6vw,4.8rem)}
+    h2{font-size:clamp(1.8rem,3.5vw,2.8rem)}
+    h3{font-size:1.15rem}
+    p{margin:0;color:var(--muted);line-height:1.65}
+
+    .dot-divider{display:flex;justify-content:center;gap:.7rem;margin:0 auto 1.2rem}
+    .dot-divider span{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 18px rgba(94,246,238,.55)}
+
+    .panel{position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(9,22,39,.84), rgba(7,18,30,.96));border:1px solid rgba(115,154,198,.12);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .panel::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(94,246,238,.34),transparent);opacity:.6}
+
+    .page-hero{padding:80px 0 48px;text-align:center}
+    .page-hero .eyebrow{justify-content:center}
+    .page-hero h1{margin:0 auto .9rem;max-width:16ch}
+    .page-hero p{max-width:42rem;margin:0 auto;font-size:1.05rem}
+
+    .service-icon{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(94,246,238,.11), rgba(109,145,255,.10));color:var(--teal);border:1px solid rgba(255,255,255,.08);margin-bottom:1rem;flex-shrink:0}
+    .tag{display:inline-block;margin-top:1rem;font-size:.76rem;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-weight:800}
+
+    .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2rem}
+    .svc-card{padding:2rem}
+    .svc-card h3{margin-bottom:.5rem;color:#fff}
+    .svc-card ul{margin:.9rem 0 0;padding:0 0 0 1rem;color:var(--muted);font-size:.92rem;line-height:1.7}
+    .svc-card ul li{margin-bottom:.3rem}
+    .svc-card::after{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--gold))}
+
+    .cta-strip{margin-top:4rem;padding:3rem 2rem;border-radius:var(--radius);text-align:center;background:linear-gradient(135deg,rgba(9,22,39,.9),rgba(7,18,30,.98));border:1px solid rgba(94,246,238,.12)}
+    .cta-strip h2{max-width:20ch;margin:0 auto .9rem}
+    .cta-strip p{max-width:38rem;margin:0 auto 2rem}
+    .cta-actions{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+
+    .footer{padding:1.6rem 0 2.8rem;color:var(--muted);font-size:.9rem}
+    .footer-inner{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:780px){
+      :root{--nav:70px}
+      .nav-links{display:none}
+      .svc-grid{grid-template-columns:1fr}
+      .section{padding:72px 0}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" aria-label="Agavi AI home">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
+            <defs>
+              <linearGradient id="miniLeaf" x1="18" y1="16" x2="98" y2="98" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8AFFF7"/><stop offset=".52" stop-color="#63D6FF"/><stop offset="1" stop-color="#F0C26E"/>
+              </linearGradient>
+              <filter id="miniGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2.5" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#miniGlow)" stroke="url(#miniLeaf)" stroke-width="3" fill="rgba(12,34,58,.18)">
+              <path d="M60 92 C54 65 57 40 62 16 C69 40 70 66 60 92 Z"/>
+              <path d="M60 92 C44 71 31 59 17 46 C39 51 54 63 60 92 Z"/>
+              <path d="M60 92 C47 77 36 70 24 63 C41 67 54 76 60 92 Z"/>
+              <path d="M60 92 C52 68 46 54 42 32 C53 48 59 64 60 92 Z"/>
+              <path d="M60 92 C76 71 89 59 103 46 C81 51 66 63 60 92 Z"/>
+              <path d="M60 92 C73 77 84 70 96 63 C79 67 66 76 60 92 Z"/>
+              <path d="M60 92 C68 68 74 54 78 32 C67 48 61 64 60 92 Z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="brand-text"><strong>Agavi AI</strong><span>Architecting Transformation</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/services" style="color:var(--teal);font-weight:700;">Services</a>
+        <a href="/beatitude">Beatitude Engine</a>
+        <a href="https://diagnostic.agaviai.com" target="_blank" rel="noopener">Free Diagnostic</a>
+        <a class="btn btn-primary" href="/#contact">Schedule a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-hero">
+      <div class="container">
+        <div class="eyebrow reveal">What We Do</div>
+        <h1 class="reveal">AI across every major<br>business function.</h1>
+        <p class="reveal">Each engagement is scoped around the functions where intelligent systems will create the most leverage, reduce friction, and improve performance for your business.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
+
+        <div class="svc-grid">
+
+          <article class="panel svc-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V8l8-4 8 4v11l-8 4-8-4Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 8l8 4 8-4M12 12v11" stroke="currentColor" stroke-width="1.6"/></svg></div>
+            <h3>CRM Intelligence</h3>
+            <p>AI-enhanced relationship management that sharpens how your team tracks, prioritizes, and advances commercial opportunities.</p>
+            <ul>
+              <li>AI-powered lead scoring and pipeline prioritization</li>
+              <li>Automated follow-up triggers and next-best-action prompts</li>
+              <li>Relationship health monitoring and churn signals</li>
+              <li>CRM data hygiene and enrichment automation</li>
+            </ul>
+            <span class="tag">Relationships + Revenue</span>
+          </article>
+
+          <article class="panel svc-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 16l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="16" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg></div>
+            <h3>Data &amp; Reporting Intelligence</h3>
+            <p>Automated intelligence that transforms raw operational data into clear signals leaders can actually act on.</p>
+            <ul>
+              <li>Automated reporting pipelines and dashboard consolidation</li>
+              <li>Anomaly detection and variance flagging</li>
+              <li>KPI monitoring with natural-language summaries</li>
+              <li>Cross-system data integration and normalization</li>
+            </ul>
+            <span class="tag">Clarity + Insight</span>
+          </article>
+
+          <article class="panel svc-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0v5l-3-2-3 2-3-2-3 2-3-2V12Z" stroke="currentColor" stroke-width="1.6"/><path d="M9 10h6M8 13h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <h3>Customer Service AI</h3>
+            <p>Intelligent service systems that improve response quality, reduce resolution time, and build retention at scale.</p>
+            <ul>
+              <li>Conversational AI and chatbot deployment</li>
+              <li>Sentiment analysis and escalation routing</li>
+              <li>Automated resolution flows for common issues</li>
+              <li>Agent assist tools for human-in-the-loop service</li>
+            </ul>
+            <span class="tag">Service + Retention</span>
+          </article>
+
+          <article class="panel svc-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-5 3 3 8-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8h5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Sales Enablement</h3>
+            <p>AI tools that help sales teams find better targets, prioritize their time, and close with more consistency.</p>
+            <ul>
+              <li>AI-driven outreach personalization and sequencing</li>
+              <li>Account prioritization and buying signal detection</li>
+              <li>Rep performance coaching and call analysis</li>
+              <li>Conversion modeling and pipeline forecasting</li>
+            </ul>
+            <span class="tag">Pipeline + Conversion</span>
+          </article>
+
+          <article class="panel svc-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 15l4-4 3 3 6-7 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <h3>Operations &amp; Logistics</h3>
+            <p>Workflow automation and intelligent planning that reduces manual overhead and improves throughput across operations.</p>
+            <ul>
+              <li>End-to-end workflow automation and task routing</li>
+              <li>Resource allocation and capacity planning support</li>
+              <li>Predictive maintenance and exception handling</li>
+              <li>Process documentation and SOP generation</li>
+            </ul>
+            <span class="tag">Efficiency + Throughput</span>
+          </article>
+
+          <article class="panel svc-card reveal">
+            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="18" cy="17" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg></div>
+            <h3>Marketing Intelligence</h3>
+            <p>Data-driven marketing systems that sharpen targeting, improve campaign performance, and make growth decisions clearer.</p>
+            <ul>
+              <li>Audience segmentation and behavioral modeling</li>
+              <li>Campaign performance analytics and attribution</li>
+              <li>Content personalization at scale</li>
+              <li>Marketing reporting automation and dashboards</li>
+            </ul>
+            <span class="tag">Signal + Demand</span>
+          </article>
+
+        </div>
+
+        <div class="cta-strip reveal">
+          <div class="eyebrow" style="justify-content:center">Next Step</div>
+          <h2>Not sure where to start?</h2>
+          <p>Take the free AI Readiness Diagnostic. We'll map where your business stands today, where the highest-leverage opportunities are, and what a realistic first step looks like.</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="https://diagnostic.agaviai.com" target="_blank" rel="noopener">Take the Free Diagnostic →</a>
+            <a class="btn btn-secondary" href="/#contact">Schedule a Call</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Agavi AI. All rights reserved.</span>
+      <span style="display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap">
+        <a href="/intake" style="color:var(--teal);font-size:.88rem">Client Intake</a>
+        <span>hello@agaviai.com</span>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+    }, {threshold:0.08});
+    revealEls.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
