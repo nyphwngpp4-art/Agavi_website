@@ -76,6 +76,18 @@
     .nav-links a{color:#dce8f8;font-size:.92rem;transition:transform .2s ease,opacity .2s ease}
     .nav-links a:hover{transform:translateY(-1px)}
     .nav-links .btn{padding:.7rem 1rem;font-size:.88rem}
+    .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;cursor:pointer;background:none;border:none;padding:6px;border-radius:10px;transition:background .2s}
+    .hamburger:hover{background:rgba(255,255,255,.06)}
+    .hamburger span{display:block;width:22px;height:2px;background:#dce8f8;border-radius:2px;transition:transform .3s ease, opacity .3s ease}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(2,9,19,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem;padding:2rem}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{color:#dce8f8;font-size:1.3rem;font-weight:700;font-family:"Montserrat",sans-serif;letter-spacing:-.01em;transition:color .2s,transform .2s}
+    .mobile-menu a:hover{color:var(--teal);transform:translateX(4px)}
+    .mobile-menu .btn{margin-top:.5rem;font-size:1rem;padding:1rem 2rem;width:100%;max-width:280px;justify-content:center}
+    .mobile-menu-close{position:absolute;top:1.4rem;right:1.4rem;background:none;border:none;color:#dce8f8;font-size:1.8rem;cursor:pointer;line-height:1;padding:.4rem}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;
       padding:.95rem 1.25rem;border-radius:999px;font-weight:700;cursor:pointer;
@@ -206,6 +218,7 @@
       :root{--nav:70px}
       .section{padding:82px 0}
       .nav-links{display:none}
+      .hamburger{display:flex}
       .values-grid{grid-template-columns:1fr}
       .wheel-panel{min-height:auto}
       .wheel-wrap{height:auto;display:grid;gap:1rem}
@@ -251,13 +264,23 @@
       </a>
       <div class="nav-links">
         <a href="/#about">About</a>
-        <a href="/#services">Services</a>
+        <a href="/services">Services</a>
         <a href="/beatitude" style="color:var(--teal);font-weight:700;">Beatitude Engine</a>
         <a href="https://diagnostic.agaviai.com" target="_blank" rel="noopener">Free Diagnostic</a>
         <a class="btn btn-primary" href="/#contact">Schedule a Call</a>
       </div>
+      <button class="hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="menuClose">✕</button>
+    <a href="/">Home</a>
+    <a href="/services" onclick="closeMobileMenu()">Services</a>
+    <a href="/beatitude" onclick="closeMobileMenu()">Beatitude Engine</a>
+    <a href="https://diagnostic.agaviai.com" target="_blank" rel="noopener" style="color:var(--teal)" onclick="closeMobileMenu()">Free Diagnostic</a>
+    <a href="/intake" onclick="closeMobileMenu()">Client Intake</a>
+    <a class="btn btn-primary" href="/#contact" onclick="closeMobileMenu()">Schedule a Call</a>
+  </div>
 
   <main>
     <!-- Page Hero -->
@@ -411,6 +434,11 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    document.getElementById('menuClose').addEventListener('click', closeMobileMenu);
+    function closeMobileMenu(){ mobileMenu.classList.remove('open'); menuBtn.classList.remove('open'); document.body.style.overflow=''; }
+    menuBtn.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMobileMenu() : (mobileMenu.classList.add('open'), menuBtn.classList.add('open'), document.body.style.overflow='hidden'));
     const revealEls = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
