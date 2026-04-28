@@ -1,0 +1,146 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:../data/crm.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Prospect {
+  id            String @id @default(cuid())
+  companyName   String
+  hqAddress     String?
+  city          String @default("Phoenix")
+  state         String @default("AZ")
+  revenue       String?    // display label e.g. "$50M-$100M"
+  revenueMin    Int?       // numeric lower bound in millions for filtering
+  revenueMax    Int?       // numeric upper bound in millions for filtering
+  industry      String?
+  sector        String?
+  website       String?
+  linkedinUrl   String?
+  ownershipType String?    // private / public / pe_backed / family / esop
+
+  // Owner contacts
+  ownerName     String?
+  ownerEmail    String?
+  ownerPhone    String?
+  ownerLinkedin String?
+
+  // CFO contacts
+  cfoName       String?
+  cfoEmail      String?
+  cfoPhone      String?
+  cfoLinkedin   String?
+
+  // Controller contacts
+  controllerName     String?
+  controllerEmail    String?
+  controllerPhone    String?
+  controllerLinkedin String?
+
+  // CEO contacts
+  ceoName       String?
+  ceoEmail      String?
+  ceoPhone      String?
+  ceoLinkedin   String?
+
+  // Banking intel
+  currentBank        String?
+  loanEstimate       String?    // freetext e.g. "$5M revolver"
+  treasuryServices   String?
+  creditFacilityType String?    // revolver / term_loan / both / unknown
+
+  // Pipeline & assignment
+  assignedRm  String?           // RM name from constants
+  stage       String @default("identified")
+  stageOrder  Int    @default(0)
+  priority    String @default("medium") // low / medium / high / critical
+  source      String?                   // csv_import / manual / linkedin / relpro
+  notes       String?
+
+  // Scoring
+  winScore    Int @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  outreachLogs       OutreachLog[]
+  cadenceAssignments CadenceAssignment[]
+  rolloutAssignments RolloutAssignment[]
+}
+
+model OutreachLog {
+  id          String   @id @default(cuid())
+  prospectId  String
+  prospect    Prospect @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+  tier        String   // rm / leader / president
+  type        String   // linkedin / email / call / in_person / letter
+  date        DateTime @default(now())
+  notes       String?
+  followUpDate DateTime?
+  contactName String?
+  createdAt   DateTime @default(now())
+
+  cadenceStepLog CadenceStepLog?
+}
+
+model CadenceTemplate {
+  id          String @id @default(cuid())
+  name        String
+  description String?
+  steps       String // JSON: [{dayOffset, tier, type, description}]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  assignments CadenceAssignment[]
+}
+
+model CadenceAssignment {
+  id                String          @id @default(cuid())
+  prospectId        String
+  prospect          Prospect        @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+  cadenceTemplateId String
+  cadenceTemplate   CadenceTemplate @relation(fields: [cadenceTemplateId], references: [id])
+  startDate         DateTime        @default(now())
+  currentStep       Int             @default(0)
+  status            String          @default("active") // active / completed / paused
+  createdAt         DateTime        @default(now())
+
+  stepLogs CadenceStepLog[]
+}
+
+model CadenceStepLog {
+  id            String            @id @default(cuid())
+  assignmentId  String
+  assignment    CadenceAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  stepIndex     Int
+  status        String            @default("pending") // pending / completed / skipped
+  dueDate       DateTime?
+  completedAt   DateTime?
+  outreachLogId String?           @unique
+  outreachLog   OutreachLog?      @relation(fields: [outreachLogId], references: [id])
+}
+
+model RolloutBatch {
+  id          String   @id @default(cuid())
+  name        String   // e.g. "Week of April 7, 2026"
+  notes       String?
+  status      String   @default("draft") // draft / distributed
+  distributedAt DateTime?
+  createdAt   DateTime @default(now())
+
+  assignments RolloutAssignment[]
+}
+
+model RolloutAssignment {
+  id             String       @id @default(cuid())
+  rolloutBatchId String
+  rolloutBatch   RolloutBatch @relation(fields: [rolloutBatchId], references: [id], onDelete: Cascade)
+  prospectId     String
+  prospect       Prospect     @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+  assignedRm     String
+  rankPosition   Int          @default(0) // ordering within the batch
+  createdAt      DateTime     @default(now())
+}
