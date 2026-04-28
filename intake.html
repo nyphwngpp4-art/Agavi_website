@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client intake · Agavi AI</title>
+  <meta name="description" content="A short intake form so we come to your discovery call already understanding your operation. No pitch. No deck." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Uploadcare config (must come before the widget script) -->
+  <script>
+    UPLOADCARE_PUBLIC_KEY = "aed0dbc7547927dc0cdb";
+    UPLOADCARE_LOCALE = "en";
+    UPLOADCARE_TABS = "file url";
+    UPLOADCARE_IMAGES_ONLY = false;
+    UPLOADCARE_MULTIPLE = true;
+    UPLOADCARE_MULTIPLE_MAX = 8;
+  </script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+
+  <style>
+    :root {
+      --bone: #f3eee4;
+      --bone-2: #ebe4d4;
+      --ink: #1a1f1a;
+      --ink-soft: #2c332b;
+      --ink-mute: #6a6f64;
+      --ink-faint: #9a9d92;
+      --agave-deep: #1f3a32;
+      --terracotta: #b8552d;
+      --rule: rgba(26,31,26,0.14);
+      --rule-strong: rgba(26,31,26,0.28);
+    }
+
+    html, body { margin: 0; padding: 0; background: var(--bone); }
+    body {
+      font-family: "Inter Tight", -apple-system, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ──────────────────────────────────────────── */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-mark {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 22px; letter-spacing: -0.01em; font-weight: 500;
+    }
+    .nav-mark .dot { color: var(--terracotta); }
+    .nav-links {
+      display: flex; gap: 36px; list-style: none; padding: 0; margin: 0;
+      font-size: 14px;
+    }
+    .nav-cta {
+      padding: 10px 18px; border: 1px solid var(--ink);
+      border-radius: 999px; font-size: 13px; font-weight: 500;
+    }
+
+    /* ── Layout ───────────────────────────────────────── */
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 60px; }
+    .header {
+      padding: 96px 60px 80px;
+      border-bottom: 1px solid var(--rule);
+      position: relative; overflow: hidden;
+    }
+    .header-grid {
+      display: grid;
+      grid-template-columns: 80px 1.2fr 1fr;
+      gap: 48px;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .stamp {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); padding-top: 8px;
+    }
+    .kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-mute);
+      margin-bottom: 28px;
+    }
+    h1.title {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 84px; line-height: 0.96; letter-spacing: -0.025em;
+      font-weight: 400; color: var(--ink);
+      margin: 0; max-width: 820px;
+    }
+    h1.title em {
+      color: var(--agave-deep); font-style: italic;
+    }
+    .lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 19px; line-height: 1.5; color: var(--ink-soft);
+      font-style: italic; font-weight: 300;
+      max-width: 460px; padding-top: 24px;
+    }
+
+    /* Decorative agave silhouette in header (CSS-drawn lines) */
+    .agave-bg {
+      position: absolute; right: -80px; top: 20px;
+      width: 520px; height: 520px; opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* ── Form section ─────────────────────────────────── */
+    .form-section {
+      padding: 80px 60px 120px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 48px;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .form-shell {
+      border: 1px solid var(--rule-strong);
+      background: var(--bone);
+      position: relative;
+    }
+    .form-shell::before, .form-shell::after,
+    .form-shell > .corner {
+      content: ""; position: absolute; width: 10px; height: 10px;
+      pointer-events: none;
+    }
+    .form-shell::before { top: -1px; left: -1px; border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+    .form-shell::after { top: -1px; right: -1px; border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+    .form-shell .corner.bl { bottom: -1px; left: -1px; border-bottom: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+    .form-shell .corner.br { bottom: -1px; right: -1px; border-bottom: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+    .form-meta {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 22px 36px;
+      border-bottom: 1px solid var(--rule);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-mute);
+    }
+    .form-meta .right { color: var(--terracotta); }
+
+    .form-body { padding: 48px 56px 56px; }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 36px;
+    }
+    .field-row.full { grid-template-columns: 1fr; }
+
+    .field {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .field label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink);
+      display: flex; align-items: baseline; gap: 10px;
+    }
+    .field label .num {
+      color: var(--terracotta);
+    }
+    .field label .opt {
+      font-style: italic; text-transform: none;
+      letter-spacing: 0; color: var(--ink-faint);
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 13px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 19px; font-weight: 400; color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--rule-strong);
+      padding: 8px 0 12px;
+      outline: none;
+      transition: border-color 160ms ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--ink-faint);
+      font-style: italic;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-bottom-color: var(--ink);
+    }
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%231a1f1a' d='M0 0h10L5 6z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 22px;
+      cursor: pointer;
+    }
+    .field select option { font-family: "Inter Tight", sans-serif; font-size: 14px; }
+    .field textarea {
+      resize: vertical;
+      min-height: 130px;
+      line-height: 1.5;
+      font-size: 17px;
+      border-bottom: 1px solid var(--rule-strong);
+    }
+
+    /* Uploadcare widget styling — match the editorial form */
+    .uc-field {
+      border: 1px dashed var(--rule-strong);
+      padding: 22px 26px;
+      background: var(--bone-2);
+    }
+    .uc-field .uploadcare--widget__button {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      background: var(--ink); color: var(--bone);
+      border-radius: 999px;
+      padding: 11px 18px;
+      box-shadow: none;
+    }
+    .uc-field .uploadcare--widget__button_type_open:hover { background: var(--agave-deep); }
+    .uc-field .uploadcare--widget__text {
+      font-family: "Newsreader", Georgia, serif;
+      font-style: italic; color: var(--ink-soft);
+      font-size: 15px;
+    }
+    .uc-field .uploadcare--widget__file-name { color: var(--ink); }
+    .uc-help {
+      font-family: "Newsreader", Georgia, serif;
+      font-style: italic; font-size: 13.5px;
+      color: var(--ink-mute); margin-top: 10px;
+    }
+
+    /* Submit row */
+    .submit-row {
+      margin-top: 48px;
+      padding-top: 36px;
+      border-top: 1px solid var(--rule);
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 24px;
+    }
+    .privacy {
+      font-family: "Newsreader", Georgia, serif;
+      font-style: italic; font-size: 14px; color: var(--ink-mute);
+      max-width: 460px; line-height: 1.55;
+    }
+    .submit {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 18px 28px;
+      background: var(--ink); color: var(--bone);
+      border-radius: 999px;
+      font-family: "Inter Tight", sans-serif;
+      font-size: 14px; font-weight: 500; letter-spacing: 0.005em;
+      cursor: pointer; border: 0;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+    .submit:hover { background: var(--agave-deep); }
+    .submit:disabled { opacity: 0.55; cursor: not-allowed; }
+    .submit .arrow { font-size: 16px; }
+
+    /* ── Confirmation state ───────────────────────────── */
+    .confirm {
+      display: none;
+      padding: 110px 60px 130px;
+      border-bottom: 1px solid var(--rule);
+      position: relative; overflow: hidden;
+    }
+    .confirm.is-on { display: block; }
+    .confirm-grid {
+      display: grid;
+      grid-template-columns: 80px 1.2fr 1fr;
+      gap: 48px;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .confirm h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 76px; line-height: 0.98; letter-spacing: -0.025em;
+      font-weight: 400; margin: 0; max-width: 820px;
+    }
+    .confirm h2 em {
+      color: var(--agave-deep); font-style: italic;
+    }
+    .confirm-note {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 18px; line-height: 1.55; color: var(--ink-soft);
+      font-style: italic; font-weight: 300;
+      max-width: 460px; padding-top: 24px;
+    }
+    .confirm-meta {
+      margin-top: 44px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); text-transform: uppercase;
+    }
+    .confirm-actions {
+      margin-top: 32px; display: flex; gap: 18px; align-items: center;
+    }
+    .ghost-link {
+      padding: 14px 4px; font-size: 14px;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--ink-soft);
+    }
+
+    /* ── Footer ───────────────────────────────────────── */
+    .foot {
+      padding: 44px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: var(--ink-mute);
+    }
+    .foot .mark {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 18px; color: var(--ink); font-weight: 500;
+    }
+    .foot .meta {
+      display: flex; gap: 28px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .foot .mark .ital {
+      font-style: italic; color: var(--ink-mute); margin-left: 8px;
+    }
+
+    /* error state */
+    .error {
+      margin-top: 16px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; letter-spacing: 0.12em;
+      color: var(--terracotta);
+      text-transform: uppercase;
+      display: none;
+    }
+    .error.is-on { display: block; }
+
+    @media (max-width: 900px) {
+      .nav, .header, .form-section, .confirm, .foot { padding-left: 28px; padding-right: 28px; }
+      .header-grid, .form-grid, .confirm-grid { grid-template-columns: 1fr; gap: 24px; }
+      .stamp { display: none; }
+      h1.title { font-size: 56px; }
+      .form-body { padding: 32px 24px; }
+      .field-row { grid-template-columns: 1fr; gap: 28px; }
+      .submit-row { flex-direction: column; align-items: stretch; }
+      .submit { justify-content: center; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <nav class="nav">
+    <a class="nav-mark" href="/">Agavi<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="/#engine">The Engine</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#results">Work</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="#intake-form">Begin intake →</a>
+  </nav>
+
+  <!-- ── HEADER ──────────────────────────────────────── -->
+  <header class="header">
+    <!-- Decorative agave (line drawing) -->
+    <svg class="agave-bg" viewBox="0 0 520 520" aria-hidden="true">
+      <g transform="translate(260 380)" stroke="#1f3a32" stroke-width="1" fill="none" stroke-linejoin="round" opacity="0.9">
+        <path d="M -22 0 Q -110 -50 -200 -90 Q -110 -20 22 0" />
+        <path d="M -22 0 Q -135 -85 -180 -150 Q -100 -55 22 0" />
+        <path d="M -22 0 Q -110 -130 -130 -200 Q -70 -75 22 0" />
+        <path d="M -22 0 Q -70 -160 -75 -230 Q -35 -90 22 0" />
+        <path d="M -22 0 Q -25 -180 -20 -250 Q 0 -95 22 0" />
+        <path d="M -22 0 Q 25 -180 35 -250 Q 12 -95 22 0" />
+        <path d="M -22 0 Q 70 -160 90 -230 Q 30 -90 22 0" />
+        <path d="M -22 0 Q 110 -130 145 -200 Q 65 -75 22 0" />
+        <path d="M -22 0 Q 135 -85 195 -150 Q 95 -55 22 0" />
+        <path d="M -22 0 Q 110 -50 215 -90 Q 110 -20 22 0" />
+        <path d="M -22 0 Q 0 -130 0 -250" stroke-width="0.5" opacity="0.5" />
+      </g>
+    </svg>
+
+    <div class="header-grid">
+      <div class="stamp">AGV—09<br/>INTAKE</div>
+      <div>
+        <div class="kicker">◇ &nbsp; Client intake form &nbsp; · &nbsp; ~ 4 minutes &nbsp; ◇</div>
+        <h1 class="title">
+          Tell us about your business.
+          <em>We'll do the listening.</em>
+        </h1>
+      </div>
+      <p class="lede">
+        A short read. We use this to come to your discovery call already
+        understanding your operation — phone, web, scheduling, the back-office.
+        No pitch. No deck. Just a real conversation.
+      </p>
+    </div>
+  </header>
+
+  <!-- ── FORM SECTION ────────────────────────────────── -->
+  <section class="form-section" id="intake-form">
+    <div class="form-grid">
+      <div class="stamp">AGV—10<br/>FORM</div>
+
+      <div class="form-shell">
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+
+        <div class="form-meta">
+          <span>◇ Plate · Client intake · v1.0</span>
+          <span class="right">All fields private · Owner reads only</span>
+        </div>
+
+        <form id="intake" class="form-body" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms required + meta -->
+          <input type="hidden" name="access_key" value="b3e011f6-9f04-4d9f-90eb-85258a559823" />
+          <input type="hidden" name="subject" value="New Agavi AI Client Intake" />
+          <input type="hidden" name="from_name" value="Agavi AI Intake Form" />
+          <!-- honeypot -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+          <!-- Uploaded files (group URL from Uploadcare) -->
+          <input type="hidden" id="uc-files" name="uploaded_files" value="" />
+
+          <!-- Row 1 — Business / Owner -->
+          <div class="field-row">
+            <div class="field">
+              <label for="business_name"><span class="num">01</span> Business Name</label>
+              <input id="business_name" name="business_name" type="text" required placeholder="e.g. TX Mulching" />
+            </div>
+            <div class="field">
+              <label for="owner_name"><span class="num">02</span> Owner Name</label>
+              <input id="owner_name" name="owner_name" type="text" required placeholder="Who's the person we'll talk to" />
+            </div>
+          </div>
+
+          <!-- Row 2 — Email / Phone -->
+          <div class="field-row">
+            <div class="field">
+              <label for="email"><span class="num">03</span> Email</label>
+              <input id="email" name="email" type="email" required placeholder="owner@yourbusiness.com" />
+            </div>
+            <div class="field">
+              <label for="phone"><span class="num">04</span> Phone</label>
+              <input id="phone" name="phone" type="tel" required placeholder="(480) 555-0123" />
+            </div>
+          </div>
+
+          <!-- Row 3 — Type / Website -->
+          <div class="field-row">
+            <div class="field">
+              <label for="business_type"><span class="num">05</span> Business Type</label>
+              <select id="business_type" name="business_type" required>
+                <option value="" disabled selected>Choose one…</option>
+                <option>HVAC</option>
+                <option>Plumbing</option>
+                <option>Landscaping</option>
+                <option>Pest Control</option>
+                <option>Dental</option>
+                <option>Property Management</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="current_website">
+                <span class="num">06</span> Current Website
+                <span class="opt">— optional</span>
+              </label>
+              <input id="current_website" name="current_website" type="url" placeholder="https://yourbusiness.com" />
+            </div>
+          </div>
+
+          <!-- Row 4 — What do you need help with -->
+          <div class="field-row full">
+            <div class="field">
+              <label for="needs"><span class="num">07</span> What do you need help with?</label>
+              <textarea id="needs" name="needs" required
+                placeholder="A few sentences is fine. What's broken, what's eating your evenings, what would 'good' look like in 90 days?"></textarea>
+            </div>
+          </div>
+
+          <!-- Row 5 — Uploads -->
+          <div class="field-row full">
+            <div class="field">
+              <label>
+                <span class="num">08</span> Files
+                <span class="opt">— optional · screenshots, PDFs, brand assets</span>
+              </label>
+              <div class="uc-field">
+                <input type="hidden" role="uploadcare-uploader" id="uploadcare-input"
+                  data-public-key="aed0dbc7547927dc0cdb"
+                  data-multiple="true"
+                  data-multiple-max="8"
+                  data-images-only="false"
+                  data-tabs="file url"
+                  data-locale="en" />
+              </div>
+              <div class="uc-help">
+                Drag-and-drop, paste, or import from Drive / Dropbox.
+                Images and PDFs welcome — anything that helps us understand your operation.
+              </div>
+            </div>
+          </div>
+
+          <div class="submit-row">
+            <p class="privacy">
+              We don't share your information. We don't sell it. We don't sign you up
+              for a mailing list. The owner reads every intake personally.
+            </p>
+            <button class="submit" type="submit" id="submit-btn">
+              <span class="label">Send intake</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+          <div class="error" id="form-error">Something went wrong. Please email hello@agavi.ai instead.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONFIRMATION ────────────────────────────────── -->
+  <section class="confirm" id="confirm">
+    <svg class="agave-bg" viewBox="0 0 520 520" aria-hidden="true">
+      <g transform="translate(260 380)" stroke="#1f3a32" stroke-width="1" fill="none" stroke-linejoin="round" opacity="0.9">
+        <path d="M -22 0 Q -110 -50 -200 -90 Q -110 -20 22 0" />
+        <path d="M -22 0 Q -135 -85 -180 -150 Q -100 -55 22 0" />
+        <path d="M -22 0 Q -110 -130 -130 -200 Q -70 -75 22 0" />
+        <path d="M -22 0 Q -70 -160 -75 -230 Q -35 -90 22 0" />
+        <path d="M -22 0 Q -25 -180 -20 -250 Q 0 -95 22 0" />
+        <path d="M -22 0 Q 25 -180 35 -250 Q 12 -95 22 0" />
+        <path d="M -22 0 Q 70 -160 90 -230 Q 30 -90 22 0" />
+        <path d="M -22 0 Q 110 -130 145 -200 Q 65 -75 22 0" />
+        <path d="M -22 0 Q 135 -85 195 -150 Q 95 -55 22 0" />
+        <path d="M -22 0 Q 110 -50 215 -90 Q 110 -20 22 0" />
+      </g>
+    </svg>
+    <div class="confirm-grid">
+      <div class="stamp">AGV—11<br/>RECEIVED</div>
+      <div>
+        <div class="kicker">◇ &nbsp; Intake received &nbsp; · &nbsp; logged at <span id="ts"></span> &nbsp; ◇</div>
+        <h2>
+          Thanks!
+          <em>We'll review your info and reach out within 24 hours.</em>
+        </h2>
+        <div class="confirm-meta">CONFIRMATION REF · <span id="ref">AGV-XXXX</span></div>
+        <div class="confirm-actions">
+          <a class="submit" href="/"><span class="label">Back to homepage</span><span class="arrow">→</span></a>
+          <a class="ghost-link" href="#" id="reset-link">Submit another intake</a>
+        </div>
+      </div>
+      <p class="confirm-note">
+        Jay reads every intake personally. If you don't hear back within a business day,
+        email <strong style="color:var(--ink)">hello@agavi.ai</strong> directly —
+        sometimes the form-mail gateway flags us as a stranger.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────── -->
+  <footer class="foot">
+    <span class="mark">Agavi<span style="color:var(--terracotta)">.</span><span class="ital">Chandler AZ · MMXXVI</span></span>
+    <div class="meta">
+      <span>PRIVACY</span>
+      <span>TERMS</span>
+      <span>HELLO@AGAVI.AI</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── Uploadcare → push uploaded group URL into hidden input ──
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof uploadcare === "undefined") return;
+      var widget = uploadcare.Widget("[role=uploadcare-uploader]");
+      widget.onUploadComplete(function (info) {
+        // info.cdnUrl is the group URL when multiple files are uploaded.
+        document.getElementById("uc-files").value = info.cdnUrl || "";
+      });
+      widget.onChange(function (group) {
+        if (!group) {
+          document.getElementById("uc-files").value = "";
+          return;
+        }
+        if (group.cdnUrl) {
+          document.getElementById("uc-files").value = group.cdnUrl;
+        }
+      });
+    });
+
+    // ── AJAX submission to Web3Forms so we can show inline confirmation ──
+    var form = document.getElementById("intake");
+    var btn = document.getElementById("submit-btn");
+    var errBox = document.getElementById("form-error");
+    var confirmEl = document.getElementById("confirm");
+    var formSection = document.getElementById("intake-form");
+
+    function pad(n){ return n < 10 ? "0"+n : ""+n; }
+    function makeRef() {
+      var d = new Date();
+      var stamp = d.getFullYear().toString().slice(-2)
+        + pad(d.getMonth()+1) + pad(d.getDate())
+        + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
+      return "AGV-" + stamp;
+    }
+    function tsString() {
+      var d = new Date();
+      return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    }
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      errBox.classList.remove("is-on");
+      btn.disabled = true;
+      btn.querySelector(".label").textContent = "Sending…";
+
+      try {
+        var fd = new FormData(form);
+        var resp = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: fd,
+          headers: { "Accept": "application/json" }
+        });
+        var data = await resp.json().catch(function(){ return {}; });
+        if (resp.ok && data.success) {
+          formSection.style.display = "none";
+          confirmEl.classList.add("is-on");
+          document.getElementById("ref").textContent = makeRef();
+          document.getElementById("ts").textContent = tsString();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          throw new Error((data && data.message) || "submit_failed");
+        }
+      } catch (err) {
+        console.error(err);
+        errBox.classList.add("is-on");
+        btn.disabled = false;
+        btn.querySelector(".label").textContent = "Send intake";
+      }
+    });
+
+    document.getElementById("reset-link").addEventListener("click", function (e) {
+      e.preventDefault();
+      confirmEl.classList.remove("is-on");
+      formSection.style.display = "";
+      form.reset();
+      try {
+        var widget = uploadcare.Widget("[role=uploadcare-uploader]");
+        widget.value(null);
+      } catch (e) {}
+      document.getElementById("uc-files").value = "";
+      btn.disabled = false;
+      btn.querySelector(".label").textContent = "Send intake";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>

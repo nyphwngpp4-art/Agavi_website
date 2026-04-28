@@ -1,131 +1,76 @@
-# Agavi AI Production Bundle
+# Agavi AI — agaviai.com
 
-This bundle gives you a live-path setup for:
-
-- hosting the site on Cloudflare Pages
-- capturing real contact form submissions
-- forwarding leads to Make.com / Zapier
-- optionally pushing leads into your local OpenClaw assistant named Agavi
+Production website. Three static pages. No build step, no Pages Functions, no
+backend.
 
 ## Files
 
-- `index.html`
-  - Production website
-  - Form posts to `/api/contact`
-- `functions/api/contact.js`
-  - Cloudflare Pages Function
-  - Validates form data
-  - Forwards leads to Make and optionally to Agavi
-- `.env.example`
-  - Environment variables to configure
-- `openclaw/agavi_receiver_example.py`
-  - Example FastAPI receiver for local/OpenClaw intake
-- `openclaw/agavi_lead_prompt.md`
-  - Lead analysis prompt for Agavi
+- `index.html` — homepage (hero, Beatitude Engine, results, services,
+  principles, founders, FAQ, final CTA)
+- `pricing.html` — pricing page (Discovery / Foundation / Retainer)
+- `intake.html` — client intake form
 
-## Recommended Architecture
+## Form integration
 
-Visitor → agaviai.com → Cloudflare Pages → `/api/contact`
-→ Make.com webhook
-→ Email + CRM + Google Sheets / Airtable
-→ Optional direct webhook to Agavi / OpenClaw
+The intake form posts directly to **Web3Forms** via `fetch`. No server-side
+code. Submissions email a registered inbox; the file-upload widget stores
+attachments on **Uploadcare** and includes the group CDN URL in the email
+body.
 
-## Best Setup
+| Service     | Account / key                             | Purpose                            |
+| ----------- | ----------------------------------------- | ---------------------------------- |
+| Web3Forms   | access key `b3e011f6-9f04-4d9f-90eb-85258a559823` | Receives submissions, sends email |
+| Uploadcare  | public key `aed0dbc7547927dc0cdb`         | Multi-file upload (images + PDFs) |
 
-### Cloudflare Pages
-Use Cloudflare Pages for hosting and Pages Functions for the form endpoint.
+Hidden fields the form sends to Web3Forms:
 
-### Make.com scenario
-Create a scenario with this sequence:
+- `access_key` — auth
+- `subject` — `New Agavi AI Client Intake` (sets the email subject)
+- `from_name` — `Agavi AI Intake Form`
+- `botcheck` — honeypot for spam protection
+- `uploaded_files` — Uploadcare group CDN URL (populated by widget on file
+  upload)
 
-1. **Custom Webhook**
-   - Receives the JSON from `functions/api/contact.js`
+On success, the page swaps to an editorial confirmation card with a generated
+reference number (`AGV-YYMMDD-XXXX`). Failure shows an inline error and
+falls back to `hello@agavi.ai`.
 
-2. **Google Sheets** or **Airtable**
-   - Save the lead
+To change the destination email: log into Web3Forms with the account that
+owns the access key above and update the registered email there. The HTML
+doesn't need to change.
 
-3. **Email**
-   - Notify `jay@agaviai.com`
+## Cloudflare Pages deployment
 
-4. **Optional CRM**
-   - HubSpot / Pipedrive / Airtable / Notion / etc.
+1. Connect this directory's git repo to Cloudflare Pages
+2. Framework preset: **None**
+3. Build command: *(blank)*
+4. Build output directory: `/`
+5. Custom domain: `agaviai.com` and `www.agaviai.com`
 
-5. **Optional HTTP module**
-   - POST the lead to your Agavi endpoint if you prefer Make to handle that hop
+No environment variables needed. The intake form runs entirely client-side.
 
-## Cloudflare Pages Deployment
+URL routing on Cloudflare Pages:
 
-1. Create a GitHub repo
-2. Upload the contents of this bundle
-3. In Cloudflare Pages:
-   - Create project
-   - Connect the GitHub repo
-   - Framework preset: **None**
-   - Build command: leave blank
-   - Build output directory: `/`
+- `/` → `index.html`
+- `/pricing` → `pricing.html`
+- `/intake` → `intake.html`
 
-4. Add environment variables:
-   - `MAKE_WEBHOOK_URL`
-   - `AGAVI_WEBHOOK_URL` (optional)
-   - `AGAVI_WEBHOOK_TOKEN` (optional)
+## Editing content
 
-5. Add your custom domain:
-   - `agaviai.com`
-   - `www.agaviai.com`
+Each page is a single self-contained HTML file with inlined CSS and (for
+homepage + intake) a small JavaScript block at the bottom. Open the file,
+edit, commit, push — Cloudflare auto-deploys.
 
-## Important Note About OpenClaw / Local Agavi
+Design tokens (palette, typography) are inlined in each file's `<style>`
+block under `:root`. Changing a color in one place doesn't propagate; if you
+change the palette, change it in all three files.
 
-A website cannot reach your local OpenClaw machine unless you expose it securely.
+## Pre-launch checklist
 
-Best options:
-- **Cloudflare Tunnel**
-- **Tailscale Funnel**
-- reverse proxy on a cloud VM
-
-The safest path:
-- Website sends to Cloudflare
-- Cloudflare sends to Make
-- Make sends to your Agavi endpoint through a secure tunnel
-
-## Suggested Lead Tables
-
-Minimum fields:
-- submitted_at
-- name
-- company
-- email
-- phone
-- message
-- source
-- ai_summary
-- ai_priority
-- next_action
-- status
-- owner
-
-## Recommended First Production Rollout
-
-### Phase 1
-- Deploy site on Cloudflare Pages
-- Connect form to Make
-- Email yourself every lead
-- Save every lead in Airtable or Google Sheets
-
-### Phase 2
-- Expose Agavi endpoint securely
-- Send leads to Agavi for analysis
-- Write AI summary back to Airtable / Sheets
-
-### Phase 3
-- Auto-generate first-response draft
-- Add lead scoring
-- Add Beatitude Engine fit recommendation
-- Add a diagnostic workflow instead of a simple contact form
-
-## What to do next
-
-1. Publish the site
-2. Create the Make webhook
-3. Set env vars in Cloudflare
-4. Decide whether you want Airtable or Google Sheets as the main lead log
-5. Expose Agavi through Cloudflare Tunnel if you want direct AI intake
+- [ ] Send a real intake submission and confirm the email lands in the
+      Web3Forms inbox
+- [ ] Confirm Uploadcare files in the email render (the group URL should
+      open a viewable bundle)
+- [ ] Click through every CTA on the homepage and pricing page → all should
+      land on `/intake`
+- [ ] Spot-check on mobile (375 px wide)

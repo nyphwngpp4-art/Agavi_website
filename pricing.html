@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing · Agavi</title>
+  <meta name="description" content="Posted prices, posted scopes. Foundation $1,997 one-time, delivered in 7–10 days. Automation Retainer from $297/month, cancel any time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bone: #f3eee4;
+      --bone-2: #ebe4d4;
+      --ink: #1a1f1a;
+      --ink-soft: #2c332b;
+      --ink-mute: #6a6f64;
+      --ink-faint: #9a9d92;
+      --agave-deep: #1f3a32;
+      --agave-pale: #c2cdb9;
+      --terracotta: #b8552d;
+      --rule: rgba(26,31,26,0.14);
+      --rule-strong: rgba(26,31,26,0.28);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bone); }
+    body {
+      font-family: "Inter Tight", -apple-system, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+
+    .serif { font-family: "Newsreader", Georgia, serif; font-optical-sizing: auto; }
+    .mono  { font-family: "JetBrains Mono", ui-monospace, monospace; }
+    .kicker {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-mute);
+    }
+
+    /* ── Nav ──────────────────────────────────────────── */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-mark {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 22px; letter-spacing: -0.01em; font-weight: 500;
+    }
+    .nav-mark .dot { color: var(--terracotta); }
+    .nav-back {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); text-transform: uppercase;
+    }
+    .nav-cta {
+      padding: 10px 18px; border: 1px solid var(--ink);
+      border-radius: 999px; font-size: 13px; font-weight: 500;
+    }
+    .nav-right { display: flex; gap: 24px; align-items: center; }
+
+    /* ── Header ───────────────────────────────────────── */
+    .header {
+      padding: 100px 60px 80px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .header-grid {
+      display: grid; grid-template-columns: 80px 1.4fr 1fr;
+      gap: 48px;
+      max-width: 1320px; margin: 0 auto;
+    }
+    .stamp {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); padding-top: 8px;
+    }
+    h1.title {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 76px; line-height: 1.0; letter-spacing: -0.025em;
+      font-weight: 400; margin: 0;
+    }
+    h1.title em { color: var(--agave-deep); font-style: italic; }
+    .lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 19px; line-height: 1.5; color: var(--ink-soft);
+      padding-top: 20px; font-style: italic; font-weight: 300;
+      max-width: 460px;
+    }
+
+    /* ── Tier grid ────────────────────────────────────── */
+    .tiers {
+      padding: 60px 60px 100px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tier-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--rule-strong);
+      max-width: 1320px; margin: 0 auto;
+    }
+    .tier {
+      padding: 44px 36px;
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+    .tier + .tier { border-left: 1px solid var(--rule-strong); }
+    .tier.featured { background: var(--bone-2); }
+    .tier .badge {
+      position: absolute; top: -12px; left: 24px;
+      padding: 5px 12px;
+      background: var(--terracotta); color: var(--bone);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.16em;
+    }
+    .tier .step {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .tier h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 38px; font-weight: 400; letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .tier .price-row {
+      display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;
+    }
+    .tier .price {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 36px; color: var(--agave-deep);
+      letter-spacing: -0.02em;
+    }
+    .tier .price-note {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); text-transform: uppercase;
+    }
+    .tier .duration {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .tier .summary {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 16px; line-height: 1.5;
+      color: var(--ink-soft); font-style: italic; font-weight: 300;
+      margin-bottom: 28px; padding-bottom: 28px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tier .includes-label {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-mute);
+      margin-bottom: 14px;
+    }
+    .tier .includes {
+      list-style: none; padding: 0; margin: 0 0 32px;
+    }
+    .tier .includes li {
+      font-size: 13.5px; line-height: 1.55;
+      padding: 8px 0; color: var(--ink-soft);
+      display: flex; gap: 10px;
+    }
+    .tier .includes li .plus {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      color: var(--terracotta);
+    }
+    .tier .subplans { margin-bottom: 32px; }
+    .tier .subplan {
+      padding: 16px 0; border-top: 1px solid var(--rule);
+    }
+    .tier .subplan-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .tier .subplan-name {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 18px; font-weight: 500; letter-spacing: -0.01em;
+    }
+    .tier .subplan-price {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 17px; color: var(--agave-deep);
+    }
+    .tier .subplan-desc {
+      font-size: 13px; line-height: 1.5; color: var(--ink-soft);
+    }
+    .tier .best-block {
+      padding-top: 18px; border-top: 1px solid var(--rule);
+      margin-bottom: 22px; margin-top: auto;
+    }
+    .tier .best-block .label {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-mute);
+      margin-bottom: 8px;
+    }
+    .tier .best-block p { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); }
+    .tier-cta {
+      display: block; text-align: center;
+      padding: 14px 18px;
+      border: 1px solid var(--ink); border-radius: 999px;
+      font-size: 13px; font-weight: 500;
+      transition: background 160ms ease, color 160ms ease;
+    }
+    .tier-cta.primary { background: var(--ink); color: var(--bone); }
+    .tier-cta:hover { background: var(--ink); color: var(--bone); }
+    .tier-cta.primary:hover { background: var(--agave-deep); }
+
+    /* ── Differentiator ──────────────────────────────── */
+    .diff {
+      padding: 100px 60px;
+      background: var(--bone-2);
+      border-bottom: 1px solid var(--rule);
+    }
+    .diff-head {
+      display: grid; grid-template-columns: 80px 1.4fr 1fr;
+      gap: 48px;
+      max-width: 1320px; margin: 0 auto 56px;
+    }
+    .diff-head h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 48px; line-height: 1.02; letter-spacing: -0.02em;
+      font-weight: 400;
+    }
+    .diff-head h2 em { color: var(--agave-deep); font-style: italic; }
+    .diff-head .lede {
+      font-size: 17px; line-height: 1.55;
+      padding-top: 12px;
+    }
+    .diff-grid {
+      max-width: 1320px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--rule-strong);
+      background: var(--bone);
+    }
+    .diff-cell {
+      padding: 36px 32px;
+    }
+    .diff-cell + .diff-cell { border-left: 1px solid var(--rule); }
+    .diff-cell .kicker { margin-bottom: 18px; }
+    .diff-cell h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 22px; font-weight: 500; letter-spacing: -0.01em;
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    .diff-cell p {
+      font-size: 14px; line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    /* ── Comparison table ─────────────────────────────── */
+    .compare {
+      padding: 100px 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .compare-head {
+      display: grid; grid-template-columns: 80px 1.4fr 1fr;
+      gap: 48px;
+      max-width: 1320px; margin: 0 auto 48px;
+    }
+    .compare-head h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 44px; line-height: 1.05; letter-spacing: -0.02em;
+      font-weight: 400;
+    }
+    .compare-head h2 em { color: var(--agave-deep); font-style: italic; }
+    .compare-head .lede {
+      font-size: 17px; line-height: 1.55;
+      padding-top: 12px;
+    }
+    .table {
+      max-width: 1320px; margin: 0 auto;
+      border: 1px solid var(--rule-strong);
+      background: var(--bone);
+    }
+    .row {
+      display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--rule);
+      align-items: center;
+    }
+    .row:last-child { border-bottom: 0; }
+    .row.head { background: var(--bone-2); }
+    .row .col-key {
+      font-size: 14px; color: var(--ink); font-weight: 500;
+    }
+    .row.head .col-key,
+    .row.head .col-val {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-mute);
+      font-weight: 400;
+    }
+    .row .col-val {
+      font-size: 13.5px; color: var(--ink-soft);
+      padding: 0 16px;
+    }
+    .row .col-val.feat {
+      background: rgba(184,85,45,0.04);
+    }
+
+    /* ── What we don't do ─────────────────────────────── */
+    .dontdo {
+      padding: 100px 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .dontdo-grid {
+      display: grid; grid-template-columns: 80px 1fr 1.4fr;
+      gap: 48px;
+      max-width: 1320px; margin: 0 auto;
+    }
+    .dontdo h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 44px; line-height: 1.05; letter-spacing: -0.02em;
+      font-weight: 400; max-width: 480px;
+    }
+    .dontdo h2 em { color: var(--agave-deep); font-style: italic; }
+    .dont-list .dont-item {
+      padding: 20px 0;
+      border-top: 1px solid var(--rule-strong);
+      display: grid; grid-template-columns: 240px 1fr;
+      gap: 32px;
+    }
+    .dont-item h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 19px; font-weight: 500; letter-spacing: -0.005em;
+    }
+    .dont-item p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+    /* ── CTA strip ────────────────────────────────────── */
+    .cta {
+      padding: 80px 60px;
+      background: var(--ink); color: var(--bone);
+      text-align: center;
+    }
+    .cta h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 52px; font-weight: 400; letter-spacing: -0.025em;
+      line-height: 1.05; margin-bottom: 16px;
+    }
+    .cta h2 em { color: var(--agave-pale); font-style: italic; }
+    .cta-lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 18px; opacity: 0.7; font-style: italic;
+      max-width: 540px; margin: 0 auto;
+    }
+    .cta .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 28px; padding: 16px 30px;
+      background: var(--bone); color: var(--ink);
+      border-radius: 999px; font-size: 14px; font-weight: 500;
+      transition: background 160ms ease;
+    }
+    .cta .btn:hover { background: var(--bone-2); }
+
+    /* ── Footer ───────────────────────────────────────── */
+    .foot {
+      padding: 44px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: var(--ink-mute);
+    }
+    .foot .mark {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 18px; color: var(--ink); font-weight: 500;
+    }
+    .foot .meta {
+      display: flex; gap: 28px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .foot .ital { font-style: italic; color: var(--ink-mute); margin-left: 8px; }
+
+    @media (max-width: 1100px) {
+      h1.title { font-size: 60px; }
+      .diff-head h2, .compare-head h2, .dontdo h2 { font-size: 36px; }
+      .cta h2 { font-size: 40px; }
+    }
+
+    @media (max-width: 900px) {
+      .nav, .header, .tiers, .diff, .compare, .dontdo, .cta, .foot { padding-left: 28px; padding-right: 28px; }
+      .header-grid, .diff-head, .compare-head, .dontdo-grid { grid-template-columns: 1fr; gap: 24px; }
+      .stamp { display: none; }
+      h1.title { font-size: 48px; }
+      .tier-grid, .diff-grid { grid-template-columns: 1fr; }
+      .tier + .tier, .diff-cell + .diff-cell { border-left: 0; border-top: 1px solid var(--rule-strong); }
+      .row { grid-template-columns: 1fr; gap: 6px; }
+      .row .col-val { padding: 0; }
+      .dont-item { grid-template-columns: 1fr; gap: 8px; }
+      .nav-back { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <nav class="nav">
+    <a class="nav-mark" href="/">Agavi<span class="dot">.</span></a>
+    <div class="nav-right">
+      <a class="nav-back" href="/">← Back to home</a>
+      <a class="nav-cta" href="/intake">Begin intake →</a>
+    </div>
+  </nav>
+
+  <!-- ── HEADER ──────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-grid">
+      <div class="stamp">AGV—P01</div>
+      <div>
+        <div class="kicker" style="margin-bottom:24px">◇ Pricing</div>
+        <h1 class="title serif">A website in ten days.<br/><em>Automation that pays for itself.</em></h1>
+      </div>
+      <p class="lede serif">
+        Posted prices, posted scopes. Most local web shops will build you a site and
+        disappear. We build the site and then walk through your operations to find
+        where you're losing real hours.
+      </p>
+    </div>
+  </header>
+
+  <!-- ── TIERS ───────────────────────────────────────── -->
+  <section class="tiers">
+    <div class="tier-grid">
+      <!-- Discovery -->
+      <div class="tier">
+        <div class="step">Step 00</div>
+        <h2 class="serif">Discovery</h2>
+        <div class="price-row">
+          <span class="price serif">Free</span>
+        </div>
+        <div class="duration">45 minutes</div>
+        <p class="summary">An honest conversation about your business, where you're losing hours, and whether we're the right fit. No deck. No pitch.</p>
+
+        <div class="includes-label">What's included</div>
+        <ul class="includes">
+          <li><span class="plus">+</span><span>45-minute call with the owner of Agavi (not a salesperson)</span></li>
+          <li><span class="plus">+</span><span>Walk through where leads come in, where they fall through</span></li>
+          <li><span class="plus">+</span><span>Plain-language read on whether automation will actually help you</span></li>
+          <li><span class="plus">+</span><span>If we're not the right fit, we'll say so — and tell you who is</span></li>
+          <li><span class="plus">+</span><span>No follow-up sequence, no nurture funnel</span></li>
+        </ul>
+
+        <div class="best-block">
+          <div class="label">Best when</div>
+          <p>You've heard "AI for small business" fifty times and want a straight answer.</p>
+        </div>
+        <a class="tier-cta" href="/intake">Book the call →</a>
+      </div>
+
+      <!-- Foundation (featured) -->
+      <div class="tier featured">
+        <div class="badge">MOST CHOSEN</div>
+        <div class="step">Step 01</div>
+        <h2 class="serif">Foundation</h2>
+        <div class="price-row">
+          <span class="price serif">$1,997</span>
+          <span class="price-note">one-time</span>
+        </div>
+        <div class="duration">7–10 day delivery</div>
+        <p class="summary">A real website that ranks locally — and an operations walkthrough that shows you exactly where you're losing hours.</p>
+
+        <div class="includes-label">What's included</div>
+        <ul class="includes">
+          <li><span class="plus">+</span><span>5-page professional website, mobile-optimized and built for local search</span></li>
+          <li><span class="plus">+</span><span>Google Business Profile integration + foundational local SEO setup</span></li>
+          <li><span class="plus">+</span><span>Operations walkthrough — review of lead flow, scheduling, and follow-up</span></li>
+          <li><span class="plus">+</span><span>Written report: where automation would save real hours in your business</span></li>
+          <li><span class="plus">+</span><span>Fully delivered and live in 7–10 days, not 7–10 weeks</span></li>
+          <li><span class="plus">+</span><span>Owned by you. Hosted wherever you want. No platform lock-in.</span></li>
+        </ul>
+
+        <div class="best-block">
+          <div class="label">Best when</div>
+          <p>You need a real web presence and want to know what to automate next.</p>
+        </div>
+        <a class="tier-cta primary" href="/intake">Start the build →</a>
+      </div>
+
+      <!-- Retainer -->
+      <div class="tier">
+        <div class="step">Step 02+</div>
+        <h2 class="serif">Retainer</h2>
+        <div class="price-row">
+          <span class="price serif">From $297</span>
+          <span class="price-note">per month</span>
+        </div>
+        <div class="duration">Three plans</div>
+        <p class="summary">Quiet AI automation running in the background — handling the repetitive work so you can focus on jobs, not admin.</p>
+
+        <div class="includes-label">Three plans</div>
+        <div class="subplans">
+          <div class="subplan">
+            <div class="subplan-head">
+              <span class="subplan-name serif">Seedling</span>
+              <span class="subplan-price serif">$297/mo</span>
+            </div>
+            <p class="subplan-desc">AI-powered lead follow-up, automated appointment reminders, simple website chat.</p>
+          </div>
+          <div class="subplan">
+            <div class="subplan-head">
+              <span class="subplan-name serif">Growing</span>
+              <span class="subplan-price serif">$597/mo</span>
+            </div>
+            <p class="subplan-desc">Everything in Seedling, plus a performance analytics dashboard and AI-assisted content and review responses.</p>
+          </div>
+          <div class="subplan">
+            <div class="subplan-head">
+              <span class="subplan-name serif">Premium</span>
+              <span class="subplan-price serif">$997/mo</span>
+            </div>
+            <p class="subplan-desc">Full AI operating system — lead nurture, scheduling, follow-up, reporting, and a monthly strategy call.</p>
+          </div>
+        </div>
+
+        <div class="best-block">
+          <div class="label">Best when</div>
+          <p>The website is up and you're ready to stop doing the same admin work twice a day.</p>
+        </div>
+        <a class="tier-cta" href="/intake">Add to your build →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIFFERENTIATOR ──────────────────────────────── -->
+  <section class="diff">
+    <div class="diff-head">
+      <div class="stamp">AGV—P02</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ Why this is different</div>
+        <h2 class="serif">The website isn't the work.<br/><em>The walkthrough is the work.</em></h2>
+      </div>
+      <p class="lede serif">
+        Every local web shop will build you a site and vanish. During Foundation
+        delivery, we sit with you and trace exactly where leads enter, where calls go
+        unreturned, and which evenings you're spending answering the same three questions.
+      </p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-cell">
+        <div class="kicker">01 — Lead flow</div>
+        <h3 class="serif">Where do they come from? Where do they fall through?</h3>
+        <p>Phone, web form, Google Business, Facebook DM, referral. We map each entry point and the response time on each one. Most owners are surprised which channel is actually broken.</p>
+      </div>
+      <div class="diff-cell">
+        <div class="kicker">02 — Scheduling</div>
+        <h3 class="serif">How many phone tags before a confirmed appointment?</h3>
+        <p>We count the round-trips. If it's three, four, five — that's where AI scheduling pays for itself in the first month.</p>
+      </div>
+      <div class="diff-cell">
+        <div class="kicker">03 — Follow-up</div>
+        <h3 class="serif">What happens after a job is done?</h3>
+        <p>Review request? Re-engagement at 90 days? Referral ask? Most local businesses leave the second sale on the table. We show you exactly where, and what to automate first.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPARISON ──────────────────────────────────── -->
+  <section class="compare">
+    <div class="compare-head">
+      <div class="stamp">AGV—P03</div>
+      <div>
+        <h2 class="serif">Side-by-side.<br/><em>For the owner who reads tables.</em></h2>
+      </div>
+      <p class="lede serif">
+        Everything we deliver, in one grid. No asterisks, no "starting at",
+        no enterprise tier hidden behind a contact form.
+      </p>
+    </div>
+    <div class="table">
+      <div class="row head">
+        <div class="col-key">Step</div>
+        <div class="col-val">Discovery</div>
+        <div class="col-val">Foundation</div>
+        <div class="col-val">Retainer</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Investment</div>
+        <div class="col-val">Free</div>
+        <div class="col-val feat">$1,997 one-time</div>
+        <div class="col-val">$297–$997 / month</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Timeline</div>
+        <div class="col-val">45 minutes</div>
+        <div class="col-val feat">7–10 days</div>
+        <div class="col-val">Ongoing</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Website build</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">✓ 5 pages, mobile-optimized</div>
+        <div class="col-val">Maintained</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Local SEO setup</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">✓ Foundational</div>
+        <div class="col-val">Refined</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Google Business Profile</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">✓</div>
+        <div class="col-val">Monitored</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Operations walkthrough</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">✓ Included</div>
+        <div class="col-val">Quarterly review</div>
+      </div>
+      <div class="row">
+        <div class="col-key">AI lead follow-up</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">—</div>
+        <div class="col-val">✓ All plans</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Appointment reminders</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">—</div>
+        <div class="col-val">✓ All plans</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Performance dashboard</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">—</div>
+        <div class="col-val">Growing &amp; Premium</div>
+      </div>
+      <div class="row">
+        <div class="col-key">AI content &amp; review replies</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">—</div>
+        <div class="col-val">Growing &amp; Premium</div>
+      </div>
+      <div class="row">
+        <div class="col-key">Monthly strategy call</div>
+        <div class="col-val">—</div>
+        <div class="col-val feat">—</div>
+        <div class="col-val">Premium only</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT WE DON'T DO ────────────────────────────── -->
+  <section class="dontdo">
+    <div class="dontdo-grid">
+      <div class="stamp">AGV—P04</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ Plainly</div>
+        <h2 class="serif">What we don't do.<br/><em>(Just as important.)</em></h2>
+      </div>
+      <div class="dont-list">
+        <div class="dont-item">
+          <h3 class="serif">Hourly billing</h3>
+          <p>Foundation is fixed-fee. Retainers are flat monthly. We win when the work is right, not when it stretches.</p>
+        </div>
+        <div class="dont-item">
+          <h3 class="serif">Build-and-disappear</h3>
+          <p>We don't hand you a WordPress login and wish you luck. The operations walkthrough is part of every Foundation delivery — not an upsell.</p>
+        </div>
+        <div class="dont-item">
+          <h3 class="serif">Long contracts</h3>
+          <p>Retainers are month-to-month. Cancel any time. If the automation isn't earning back its fee, you shouldn't be paying for it.</p>
+        </div>
+        <div class="dont-item">
+          <h3 class="serif">Vendor referral kickbacks</h3>
+          <p>Zero. Ever. Our recommendations have no second incentive — that's how this works.</p>
+        </div>
+        <div class="dont-item">
+          <h3 class="serif">Selling AI as the answer</h3>
+          <p>If your business doesn't actually need automation yet, we'll tell you. The Discovery call is genuinely free, and "no" is a valid outcome.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────── -->
+  <section class="cta">
+    <h2 class="serif">Forty-five minutes. <em>No deck.</em></h2>
+    <p class="cta-lede serif">
+      We'll trace your lead flow on a whiteboard. You'll leave knowing where the
+      hours are leaking — whether you hire us or not.
+    </p>
+    <a class="btn" href="/intake">Book the call →</a>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────── -->
+  <footer class="foot">
+    <span class="mark">Agavi<span style="color:var(--terracotta)">.</span><span class="ital">Chandler AZ · MMXXVI</span></span>
+    <div class="meta">
+      <span>PRIVACY</span>
+      <span>TERMS</span>
+      <span>HELLO@AGAVI.AI</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,908 +1,1150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agavi AI | AI That Grows With You</title>
-  <meta name="description" content="Agavi AI helps businesses integrate intelligent automation across CRM, Finance, Customer Service, Sales, Operations, and Marketing." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <title>Agavi · Productized AI for founder-led service businesses</title>
+  <meta name="description" content="A website in ten days. Automation that pays for itself. Agavi is a Chandler, AZ family operation building productized AI for local service businesses." />
+  <meta property="og:title" content="Agavi · Productized AI for founder-led service businesses" />
+  <meta property="og:description" content="Foundation in ten days. Automation on a flat retainer. The same five-phase Beatitude Engine every time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
   <style>
-    :root{
-      --bg:#020913;
-      --bg2:#071223;
-      --panel:#091627;
-      --panel2:#0c1b2e;
-      --text:#eef6ff;
-      --muted:#aab8c8;
-      --line:rgba(121,166,213,.15);
-      --teal:#5ef6ee;
-      --cyan:#57d6ff;
-      --blue:#6d91ff;
-      --gold:#f0c26e;
-      --green:#9be784;
-      --shadow:0 22px 60px rgba(0,0,0,.35);
-      --glow:0 0 0 1px rgba(109,145,255,.16),0 16px 44px rgba(0,0,0,.32);
-      --radius:22px;
-      --max:1220px;
-      --nav:78px;
+    :root {
+      --bone: #f3eee4;
+      --bone-2: #ebe4d4;
+      --bone-3: #ded4bf;
+      --ink: #1a1f1a;
+      --ink-soft: #2c332b;
+      --ink-mute: #6a6f64;
+      --ink-faint: #9a9d92;
+      --agave-deep: #1f3a32;
+      --agave: #4f6b5b;
+      --agave-pale: #c2cdb9;
+      --terracotta: #b8552d;
+      --rule: rgba(26,31,26,0.14);
+      --rule-strong: rgba(26,31,26,0.28);
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:"Inter",system-ui,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 18% 12%, rgba(94,246,238,.11), transparent 20%),
-        radial-gradient(circle at 74% 12%, rgba(109,145,255,.14), transparent 22%),
-        radial-gradient(circle at 58% 52%, rgba(87,214,255,.08), transparent 26%),
-        linear-gradient(180deg,#020913 0%,#05101c 40%,#04111f 100%);
-      overflow-x:hidden;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bone); }
+    body {
+      font-family: "Inter Tight", -apple-system, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01", "cv11";
+    }
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+
+    .serif { font-family: "Newsreader", Georgia, serif; font-optical-sizing: auto; }
+    .sans  { font-family: "Inter Tight", -apple-system, sans-serif; }
+    .mono  { font-family: "JetBrains Mono", ui-monospace, monospace; }
+    .kicker {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-mute);
     }
 
-    a{text-decoration:none;color:inherit}
-    img,svg{display:block;max-width:100%}
-    button,input,textarea{font:inherit}
-    .container{width:min(calc(100% - 2rem),var(--max));margin:0 auto}
-    .section{padding:104px 0;position:relative}
-    .section::before{
-      content:"";position:absolute;left:0;right:0;top:0;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(113,151,195,.18),transparent);
+    /* ── Nav ──────────────────────────────────────────── */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-mark {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 22px; letter-spacing: -0.01em; font-weight: 500;
+    }
+    .nav-mark .dot { color: var(--terracotta); }
+    .nav-links {
+      display: flex; gap: 36px; list-style: none; padding: 0; margin: 0;
+      font-size: 14px;
+    }
+    .nav-cta {
+      padding: 10px 18px; border: 1px solid var(--ink);
+      border-radius: 999px; font-size: 13px; font-weight: 500;
     }
 
-    .nav{
-      position:sticky;top:0;z-index:1000;
-      backdrop-filter:blur(16px);
-      background:rgba(2,9,19,.72);
-      border-bottom:1px solid rgba(255,255,255,.05);
+    /* ── Section grid ─────────────────────────────────── */
+    .section-head {
+      display: grid;
+      grid-template-columns: 80px 1.4fr 1fr;
+      gap: 48px;
+      padding: 0 60px;
+      margin-bottom: 64px;
     }
-    .nav-inner{
-      min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    .stamp {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); padding-top: 8px;
     }
-    .brand{display:flex;align-items:center;gap:.9rem;font-weight:800}
-    .brand-mark{
-      width:48px;height:48px;border-radius:14px;display:grid;place-items:center;overflow:hidden;
-      background:
-        radial-gradient(circle at 50% 38%, rgba(94,246,238,.24), transparent 56%),
-        linear-gradient(180deg, rgba(11,24,40,.98), rgba(8,17,28,.98));
-      border:1px solid rgba(111,160,214,.18);
-      box-shadow:0 0 0 1px rgba(87,214,255,.08), 0 10px 28px rgba(0,0,0,.38);
+    .section-head h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 52px; line-height: 1.02; letter-spacing: -0.02em;
+      font-weight: 400;
     }
-    .brand-text{line-height:1}
-    .brand-text strong{
-      display:block;font-family:"Montserrat",sans-serif;font-size:1rem;margin-bottom:.18rem;
-    }
-    .brand-text span{
-      display:block;color:#9db1c7;letter-spacing:.16em;font-size:.72rem;text-transform:uppercase;font-weight:800;
-    }
-
-    .nav-links{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
-    .nav-links a{color:#dce8f8;font-size:.95rem;transition:transform .2s ease,opacity .2s ease}
-    .nav-links a:hover{transform:translateY(-1px)}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:.95rem 1.25rem;border-radius:999px;font-weight:700;cursor:pointer;
-      border:1px solid rgba(255,255,255,.08);transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
-      box-shadow:var(--glow);
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:linear-gradient(90deg,rgba(240,194,110,.15),rgba(87,214,255,.12))}
-    .btn-secondary{background:rgba(255,255,255,.03);color:#dbe8f7}
-
-    .hero{
-      min-height:calc(100vh - var(--nav));
-      display:flex;align-items:center;padding:38px 0 72px;position:relative;overflow:hidden;
-    }
-    .hero::before{
-      content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-      background:linear-gradient(90deg, rgba(2,9,19,.95) 0%, rgba(2,9,19,.78) 38%, rgba(2,9,19,.20) 67%, rgba(2,9,19,.04) 100%);
-    }
-    .hero-grid{
-      position:relative;z-index:1;
-      display:grid;grid-template-columns:.9fr 1.1fr;gap:2rem;align-items:center;
+    .section-head h2 em { color: var(--agave-deep); font-style: italic; }
+    .section-head .lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 19px; line-height: 1.5; color: var(--ink-soft);
+      padding-top: 20px; font-style: italic; font-weight: 300;
+      max-width: 460px;
     }
 
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:.6rem;color:var(--teal);
-      font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;
-    }
-    .eyebrow::before{
-      content:"";width:40px;height:1px;background:linear-gradient(90deg,var(--teal),transparent);
-    }
-
-    h1,h2,h3,h4{
-      font-family:"Montserrat","Inter",sans-serif;
-      letter-spacing:-.03em;line-height:1.06;margin:0 0 .9rem;
-    }
-    h1{font-size:clamp(3rem,7vw,5.9rem);max-width:7.6ch}
-    h2{font-size:clamp(2rem,4vw,3.2rem);max-width:12ch}
-    h3{font-size:1.2rem}
-    p{margin:0;color:var(--muted);line-height:1.65}
-    .lead{font-size:clamp(1.03rem,1.8vw,1.2rem);max-width:31rem}
-
-    .hero-copy p{margin:1.1rem 0 2rem}
-    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
-    .hero-tags{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.7rem}
-    .hero-tags span{
-      padding:.58rem .8rem;border-radius:999px;font-size:.82rem;color:#e2eefb;
-      background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);
+    .body-grid {
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 48px;
     }
 
-    .hero-visual{
-      position:relative;min-height:640px;display:flex;justify-content:flex-end;align-items:center;
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      position: relative; padding: 90px 60px 80px;
+      border-bottom: 1px solid var(--rule); overflow: hidden;
     }
-    .hero-visual::before{
-      content:"";position:absolute;inset:8% 3% 10% 20%;border-radius:50%;
-      background:radial-gradient(circle, rgba(87,214,255,.15), transparent 58%);
-      filter:blur(16px);
-      pointer-events:none;
+    .hero-grid { display: grid; grid-template-columns: 80px 1fr; gap: 0; align-items: start; }
+    .hero h1 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 96px; line-height: 0.96; letter-spacing: -0.025em;
+      font-weight: 400; max-width: 1040px;
     }
-    .hero-agave{width:min(100%,760px);margin-left:auto;filter:drop-shadow(0 22px 68px rgba(0,0,0,.36))}
-
-    .dot-divider{display:flex;justify-content:center;gap:.7rem;margin:0 auto 1.2rem}
-    .dot-divider span{
-      width:9px;height:9px;border-radius:50%;background:var(--teal);
-      box-shadow:0 0 18px rgba(94,246,238,.55);
+    .hero h1 em { color: var(--agave-deep); font-style: italic; }
+    .hero-row {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 64px; margin-top: 44px; align-items: end;
     }
-
-    .section-head{
-      display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem;
+    .hero-lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 22px; line-height: 1.45; max-width: 640px;
+      color: var(--ink-soft); font-style: italic; font-weight: 300;
     }
-    .section-head p{max-width:38rem}
-
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 1.5rem}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem;margin-top:2rem}
-    .panel{
-      position:relative;overflow:hidden;
-      background:linear-gradient(180deg, rgba(9,22,39,.84), rgba(7,18,30,.96));
-      border:1px solid rgba(115,154,198,.12);border-radius:var(--radius);box-shadow:var(--shadow);
+    .hero-actions {
+      display: flex; gap: 16px; align-items: center; justify-content: flex-end;
     }
-    .panel::before{
-      content:"";position:absolute;inset:0 0 auto 0;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(94,246,238,.34),transparent);opacity:.6;
+    .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 16px 24px; border-radius: 999px;
+      font-family: "Inter Tight", sans-serif;
+      font-size: 14px; font-weight: 500; letter-spacing: 0.005em;
+      transition: background 160ms ease, color 160ms ease;
     }
-
-    .copy-card{padding:2rem}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:1.4rem}
-    .stat{
-      padding:1rem;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);
-    }
-    .stat strong{display:block;font-family:"Montserrat",sans-serif;font-size:1.1rem;color:#fff;margin-bottom:.2rem}
-    .about-highlight{display:grid;gap:.85rem;margin-top:1.2rem}
-    .about-highlight .item{
-      padding:1rem 1rem 1rem 1.15rem;border-left:3px solid rgba(94,246,238,.62);
-      border-radius:0 14px 14px 0;background:rgba(255,255,255,.025);
+    .btn-dark { background: var(--ink); color: var(--bone); }
+    .btn-dark:hover { background: var(--agave-deep); }
+    .btn-light { background: var(--bone); color: var(--ink); }
+    .btn-light:hover { background: var(--bone-2); }
+    .btn-ghost {
+      padding: 16px 4px; font-size: 14px;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--ink-soft);
     }
 
-    .service-card{padding:1.3rem;min-height:235px}
-    .service-card::after{
-      content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;
-      background:linear-gradient(90deg,var(--teal),var(--blue),var(--gold));
-    }
-    .service-icon{
-      width:50px;height:50px;border-radius:15px;display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(94,246,238,.11), rgba(109,145,255,.10));
-      color:var(--teal);border:1px solid rgba(255,255,255,.08);margin-bottom:1rem;
-    }
-    .service-card .tag{
-      display:inline-block;margin-top:1rem;font-size:.76rem;color:var(--gold);
-      letter-spacing:.08em;text-transform:uppercase;font-weight:800;
+    /* Decorative agave silhouette (corner placement) */
+    .agave-bg {
+      position: absolute; pointer-events: none;
+      width: 560px; height: 560px;
+      right: -80px; top: 0; opacity: 0.5;
     }
 
-    .engine-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:1.5rem;align-items:center;margin-top:2rem}
-    .engine-copy{padding:2rem}
-    .engine-badge{
-      display:inline-flex;align-items:center;padding:.5rem .8rem;border-radius:999px;
-      background:rgba(240,194,110,.10);border:1px solid rgba(240,194,110,.22);
-      color:var(--gold);font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:1rem 0;
+    /* ── Engine section ───────────────────────────────── */
+    .engine {
+      padding: 100px 0 110px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--bone);
     }
-    .engine-points{display:grid;gap:.9rem;margin-top:1rem}
-    .engine-point{
-      display:grid;grid-template-columns:auto 1fr;gap:.8rem;padding:1rem;border-radius:16px;
-      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+    .engine-head h2 {
+      font-size: 64px; line-height: 1.0;
     }
-    .engine-point span{
-      width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(94,246,238,.12), rgba(109,145,255,.08));
-      border:1px solid rgba(255,255,255,.06);color:var(--teal);font-family:"Montserrat",sans-serif;font-weight:800;
+    .plate-wrap { padding: 0 60px; margin-bottom: 80px; }
+    .plate {
+      padding: 48px 24px 24px;
+      border: 1px solid var(--rule-strong);
+      background: var(--bone-2);
+      position: relative;
+    }
+    .plate .corner {
+      position: absolute; width: 10px; height: 10px;
+    }
+    .plate .corner.tl { top: -1px; left: -1px; border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+    .plate .corner.tr { top: -1px; right: -1px; border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+    .plate .corner.bl { bottom: -1px; left: -1px; border-bottom: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+    .plate .corner.br { bottom: -1px; right: -1px; border-bottom: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+    .plate-meta-l, .plate-meta-r {
+      position: absolute; top: 16px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10.5px; letter-spacing: 0.16em;
+      color: var(--ink-mute); text-transform: uppercase;
+    }
+    .plate-meta-l { left: 24px; }
+    .plate-meta-r { right: 24px; }
+
+    .plate svg { width: 100%; display: block; overflow: visible; }
+
+    /* Engine phase animation transitions */
+    .ph-title, .ph-verb, .ph-ring, .ph-dot { transition: all 0.6s ease; }
+    .now-indicator { transition: transform 0.6s cubic-bezier(.6,.05,.3,1); }
+
+    /* Phase detail cards strip */
+    .phase-cards {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--rule-strong);
+    }
+    .phase-cards > div { padding: 32px 22px; }
+    .phase-cards > div + div { border-left: 1px solid var(--rule); }
+    .phase-tag {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.16em;
+      color: var(--terracotta); margin-bottom: 14px;
+    }
+    .phase-cards h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 26px; font-weight: 400; letter-spacing: -0.015em;
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .phase-cards h3 .dot { color: var(--terracotta); }
+    .phase-cards .ph-lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 14.5px; font-style: italic; color: var(--agave-deep);
+      margin-bottom: 14px; line-height: 1.4;
+    }
+    .phase-cards .ph-body {
+      font-size: 13px; line-height: 1.55; color: var(--ink-soft);
+    }
+    .phase-cards .ph-days {
+      margin-top: 18px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.14em;
+      color: var(--ink-mute); text-transform: uppercase;
+    }
+    .engine-caption {
+      margin-top: 28px; padding: 0 60px;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 13.5px; font-style: italic; color: var(--ink-mute);
+      text-align: center;
     }
 
-    .wheel-panel{
-      padding:1.5rem;min-height:700px;
-      background:
-        radial-gradient(circle at 54% 48%, rgba(87,214,255,.12), transparent 28%),
-        linear-gradient(180deg, rgba(9,22,39,.84), rgba(7,18,30,.96));
+    /* ── Results ──────────────────────────────────────── */
+    .results {
+      padding: 120px 0 110px;
+      background: var(--bone-2);
+      border-bottom: 1px solid var(--rule);
     }
-    .wheel-wrap{
-      position:relative;width:min(100%,700px);height:660px;margin:0 auto;
+    .results-row {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px;
     }
-    .wheel-svg{
-      position:absolute;inset:0;width:100%;height:100%;
-      filter:drop-shadow(0 18px 44px rgba(0,0,0,.34));
+    .pull-quote {
+      padding: 40px;
+      background: var(--bone);
+      border: 1px solid var(--rule-strong);
     }
-    .wheel-center{
-      position:absolute;z-index:5;
-      width:182px;height:182px;left:50%;top:51%;transform:translate(-50%,-50%);
-      border-radius:50%;display:grid;place-items:center;text-align:center;padding:1rem;
-      background:radial-gradient(circle at 35% 30%, rgba(82,119,255,.16), rgba(5,15,28,.98) 62%);
-      border:1px solid rgba(104,149,201,.22);
-      box-shadow:0 0 0 1px rgba(22,70,120,.24) inset, 0 14px 38px rgba(0,0,0,.30);
+    .pull-quote .meta {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10.5px; letter-spacing: 0.18em;
+      color: var(--terracotta); margin-bottom: 22px;
     }
-    .wheel-center h3{font-size:1.36rem;line-height:1.04;margin:0 0 .45rem}
-    .wheel-center p{font-size:.8rem;line-height:1.38;max-width:18ch}
+    .pull-quote p {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 30px; line-height: 1.3; font-style: italic;
+      color: var(--ink); font-weight: 300; letter-spacing: -0.005em;
+    }
+    .pull-quote .author {
+      margin-top: 32px; padding-top: 24px;
+      display: flex; align-items: center; gap: 14px;
+      border-top: 1px solid var(--rule);
+    }
+    .pull-quote .avatar {
+      width: 40px; height: 40px; border-radius: 99px;
+      background: var(--agave-deep); color: var(--bone);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600;
+    }
+    .pull-quote .author-info .name { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .pull-quote .author-info .role { font-size: 12.5px; color: var(--ink-mute); }
 
-    .phase-tile{
-      position:absolute;z-index:6;width:184px;padding:1rem 1rem 1.05rem;
-      border-radius:18px;background:linear-gradient(180deg, rgba(8,17,29,.97), rgba(7,15,26,.99));
-      border:1px solid rgba(103,149,199,.24);box-shadow:var(--glow);
+    .metrics {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--rule-strong);
     }
-    .phase-tile small{
-      display:block;font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.34rem;
+    .metric {
+      padding: 32px 26px;
+      background: var(--bone);
     }
-    .phase-tile strong{
-      display:block;color:#fff;font-family:"Montserrat",sans-serif;font-size:1rem;margin-bottom:.24rem;
+    .metric:nth-child(1), .metric:nth-child(2) { border-bottom: 1px solid var(--rule); }
+    .metric:nth-child(odd) { border-right: 1px solid var(--rule); }
+    .metric .num {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 56px; color: var(--agave-deep);
+      letter-spacing: -0.025em; line-height: 1; font-weight: 400;
     }
-    .phase-tile p{font-size:.84rem;line-height:1.45}
-    .phase-1 small,.phase-5 small,.phase-4 small{color:var(--green)}
-    .phase-2 small,.phase-3 small{color:var(--gold)}
-
-    .phase-1{top:58px;left:50%;transform:translateX(-50%)}
-    .phase-2{top:196px;right:26px}
-    .phase-3{bottom:112px;right:50px}
-    .phase-4{bottom:112px;left:50px}
-    .phase-5{top:196px;left:36px}
-
-    .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
-    .why-card{padding:1.25rem;min-height:220px}
-    .why-card strong{
-      display:block;font-family:"Montserrat",sans-serif;color:#fff;font-size:1rem;margin-bottom:.45rem;
+    .metric .num .unit {
+      font-size: 20px; color: var(--ink-mute); margin-left: 4px;
     }
-
-    .contact-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:1.5rem;margin-top:2rem}
-    .contact-card,.form-card{padding:2rem}
-    .contact-points{display:grid;gap:.9rem;margin-top:1.3rem}
-    .contact-points .item{
-      padding:1rem 1rem 1rem 1.15rem;border-left:3px solid rgba(94,246,238,.6);
-      background:rgba(255,255,255,.025);border-radius:0 14px 14px 0;
+    .metric .label {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10.5px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--terracotta);
+      margin-top: 14px; margin-bottom: 8px;
     }
-
-    form{display:grid;gap:1rem}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    label{display:grid;gap:.45rem;color:#dbe8f7;font-weight:600;font-size:.93rem}
-    input,textarea{
-      width:100%;padding:.95rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.035);color:#fff;outline:none;transition:border-color .2s ease, box-shadow .2s ease;
-    }
-    input:focus,textarea:focus{
-      border-color:rgba(87,214,255,.42);box-shadow:0 0 0 4px rgba(87,214,255,.12);
-    }
-    textarea{min-height:150px;resize:vertical}
-    .form-note{font-size:.88rem;color:var(--muted)}
-    .status{
-      display:none;padding:.9rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.035);font-size:.92rem;
-    }
-    .status.show{display:block}
-    .status.success{border-color:rgba(94,246,238,.28);color:#d8fffd}
-    .status.error{border-color:rgba(255,92,120,.28);color:#ffe0e8}
-
-    /* ── Diagnostic CTA section ── */
-    .diag-section{
-      background:linear-gradient(180deg, rgba(7,18,30,.0) 0%, rgba(10,22,38,.9) 40%, rgba(7,18,30,.0) 100%);
-      text-align:center;
-    }
-    .diag-badge{
-      display:inline-flex;align-items:center;gap:.55rem;
-      padding:.45rem 1.1rem;border-radius:999px;margin-bottom:1.4rem;
-      background:rgba(94,246,238,.08);border:1px solid rgba(94,246,238,.22);
-      font-size:.78rem;font-weight:800;color:var(--teal);letter-spacing:.13em;text-transform:uppercase;
-    }
-    .diag-section h2{max-width:18ch;margin:0 auto .9rem}
-    .diag-section .lead{max-width:42rem;margin:0 auto 2.4rem}
-    .diag-cards{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;
-      margin:2.8rem auto 3rem;max-width:860px;
-    }
-    .diag-card{
-      padding:1.6rem 1.4rem;border-radius:var(--radius);text-align:left;
-      background:linear-gradient(160deg,rgba(9,22,39,.9),rgba(7,18,30,.98));
-      border:1px solid rgba(94,246,238,.12);
-    }
-    .diag-card-icon{font-size:1.5rem;margin-bottom:.8rem}
-    .diag-card strong{display:block;font-family:"Montserrat",sans-serif;font-size:.95rem;margin-bottom:.45rem;color:var(--text)}
-    .diag-card p{font-size:.88rem;line-height:1.55}
-    .diag-meta{font-size:.84rem;color:#7a96b2;margin-top:1.1rem}
-    .diag-meta span{margin:0 .6rem}
-    @media(max-width:780px){.diag-cards{grid-template-columns:1fr}}
-
-    .footer{padding:1.6rem 0 2.8rem;color:var(--muted);font-size:.9rem}
-    .footer-inner{
-      display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-      border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;
+    .metric .body {
+      font-size: 12.5px; line-height: 1.55; color: var(--ink-soft);
     }
 
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
-    .reveal.visible{opacity:1;transform:translateY(0)}
+    /* ── Services ─────────────────────────────────────── */
+    .services {
+      padding: 120px 0 110px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tier-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--rule-strong);
+    }
+    .tier {
+      padding: 44px 36px;
+      background: var(--bone);
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+    .tier + .tier { border-left: 1px solid var(--rule-strong); }
+    .tier.featured { background: var(--bone-2); }
+    .tier .badge {
+      position: absolute; top: 18px; right: 28px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px; letter-spacing: 0.16em;
+      color: var(--terracotta);
+    }
+    .tier .tag {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--terracotta); margin-bottom: 18px;
+    }
+    .tier h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 32px; font-weight: 400; letter-spacing: -0.02em;
+      line-height: 1.05; margin-bottom: 18px;
+    }
+    .tier h3 em { color: var(--agave-deep); font-style: italic; }
+    .tier .summary {
+      font-size: 14.5px; line-height: 1.6;
+      color: var(--ink-soft); margin-bottom: 28px;
+    }
+    .tier .includes-block {
+      padding-top: 22px; border-top: 1px solid var(--rule);
+      margin-bottom: 24px;
+    }
+    .tier .includes-label {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-mute);
+      margin-bottom: 12px;
+    }
+    .tier .includes {
+      list-style: none; padding: 0; margin: 0;
+      font-size: 13.5px; line-height: 1.8; color: var(--ink-soft);
+    }
+    .tier .price-block {
+      display: flex; align-items: baseline; gap: 14px;
+      padding-top: 22px; border-top: 1px solid var(--rule);
+    }
+    .tier .price {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 38px; color: var(--agave-deep);
+      letter-spacing: -0.02em;
+    }
+    .tier .price-unit {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--ink-mute); text-transform: uppercase;
+    }
+    .tier .duration {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10.5px; letter-spacing: 0.14em;
+      color: var(--ink-mute); margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .tier .subplans {
+      list-style: none; padding: 0; margin: 0 0 24px;
+    }
+    .tier .subplan {
+      padding: 16px 0; border-top: 1px solid var(--rule);
+    }
+    .tier .subplan-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .tier .subplan-name {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 18px; font-weight: 500; letter-spacing: -0.01em;
+    }
+    .tier .subplan-price {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 17px; color: var(--agave-deep);
+    }
+    .tier .subplan-desc {
+      font-size: 13px; line-height: 1.5; color: var(--ink-soft);
+    }
+    .tier-cta {
+      display: block; text-align: center;
+      padding: 14px 18px;
+      border: 1px solid var(--ink); border-radius: 999px;
+      font-size: 13px; font-weight: 500;
+      margin-top: auto;
+    }
+    .tier-cta.primary { background: var(--ink); color: var(--bone); }
 
-    @media (max-width:1120px){
-      .hero-grid,.grid-2,.engine-wrap,.contact-grid{grid-template-columns:1fr}
-      .cards{grid-template-columns:repeat(2,1fr)}
-      .why-grid{grid-template-columns:repeat(2,1fr)}
-      .hero-visual{min-height:560px}
+    .services-foot {
+      padding: 28px 60px 0; max-width: 1280px; margin: 0 auto;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 14px; font-style: italic; color: var(--ink-mute);
+      text-align: center;
     }
 
-    @media (max-width:780px){
-      :root{--nav:70px}
-      .section{padding:82px 0}
-      .nav-links{display:none}
-      .section-head{flex-direction:column;align-items:start}
-      .cards,.why-grid,.stats,.form-row{grid-template-columns:1fr}
-      .hero{padding:34px 0 56px}
-      .hero-grid{gap:1rem}
-      h1{max-width:9ch}
-      .hero-actions{display:grid;grid-template-columns:1fr}
-      .btn{width:100%}
-      .hero-visual{min-height:400px}
-      .brand-text span{display:none}
-      .wheel-panel{min-height:auto}
-      .wheel-wrap{height:auto;display:grid;gap:1rem}
-      .wheel-svg{position:relative;height:auto;min-height:420px}
-      .wheel-center{
-        position:relative;left:auto;top:auto;transform:none;width:100%;height:auto;border-radius:24px;padding:1.2rem;
-      }
-      .phase-tile{
-        position:relative !important;inset:auto !important;width:100%;transform:none !important;
-      }
+    /* ── Principles ───────────────────────────────────── */
+    .principles {
+      padding: 120px 0 110px;
+      background: var(--bone-2);
+      border-bottom: 1px solid var(--rule);
+    }
+    .principles-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--rule-strong);
+    }
+    .principle { padding: 40px 32px; }
+    .principle:first-child { padding-left: 0; }
+    .principle + .principle { border-left: 1px solid var(--rule); }
+    .principle .num {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--terracotta); margin-bottom: 18px;
+    }
+    .principle h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 30px; font-weight: 400; letter-spacing: -0.015em;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .principle h3 .dot { color: var(--terracotta); }
+    .principle p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+    /* ── Founders ─────────────────────────────────────── */
+    .founders {
+      padding: 120px 0 110px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .founders-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--rule-strong);
+    }
+    .founder { padding: 40px 28px; }
+    .founder:first-child { padding-left: 0; }
+    .founder + .founder { border-left: 1px solid var(--rule); }
+    .founder .role {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: var(--terracotta); margin-bottom: 12px;
+    }
+    .founder h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 28px; font-weight: 400; letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+    .founder p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+
+    /* ── FAQ ──────────────────────────────────────────── */
+    .faq {
+      padding: 120px 0 110px;
+      background: var(--bone-2);
+      border-bottom: 1px solid var(--rule);
+    }
+    .faq-list { border-top: 1px solid var(--rule-strong); }
+    .faq-item {
+      padding: 32px 0; border-bottom: 1px solid var(--rule-strong);
+      cursor: pointer;
+    }
+    .faq-item .row {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 32px;
+    }
+    .faq-item h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 28px; letter-spacing: -0.01em; font-weight: 400;
+      max-width: 720px;
+    }
+    .faq-item .toggle {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 14px; color: var(--ink-mute);
+    }
+    .faq-item .answer {
+      display: none;
+      font-size: 16px; line-height: 1.6;
+      color: var(--ink-soft); margin-top: 18px;
+      max-width: 720px;
+    }
+    .faq-item.is-open .answer { display: block; }
+
+    /* ── Final CTA ────────────────────────────────────── */
+    .cta {
+      padding: 140px 60px 110px;
+      background: var(--ink); color: var(--bone);
+      position: relative; overflow: hidden;
+    }
+    .cta-grid {
+      position: relative;
+      display: grid; grid-template-columns: 80px 1.4fr 1fr;
+      gap: 48px;
+    }
+    .cta-stamp {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: rgba(243,238,228,0.55); padding-top: 8px;
+    }
+    .cta h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 88px; line-height: 0.96; letter-spacing: -0.03em;
+      font-weight: 400;
+    }
+    .cta h2 em { color: var(--agave-pale); font-style: italic; }
+    .cta-side { align-self: end; }
+    .cta-lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 19px; line-height: 1.5; font-style: italic;
+      color: rgba(243,238,228,0.78); font-weight: 300;
+      max-width: 460px; margin-bottom: 28px;
+    }
+    .cta-kicker {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: rgba(243,238,228,0.6);
+      text-transform: uppercase; margin-bottom: 22px;
+    }
+    .cta-meta {
+      margin-top: 18px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: rgba(243,238,228,0.55);
+    }
+    .agave-cta { position: absolute; left: -90px; top: -50px; opacity: 0.55; }
+
+    /* ── Footer ───────────────────────────────────────── */
+    .foot {
+      padding: 44px 60px;
+      background: var(--bone);
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: var(--ink-mute);
+    }
+    .foot .mark {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 18px; color: var(--ink); font-weight: 500;
+    }
+    .foot .meta {
+      display: flex; gap: 28px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .foot .ital {
+      font-style: italic; color: var(--ink-mute); margin-left: 8px;
+    }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .hero h1 { font-size: 76px; }
+      .engine-head h2 { font-size: 52px; }
+      .cta h2 { font-size: 68px; }
+    }
+
+    @media (max-width: 900px) {
+      .nav, .hero, .cta, .foot { padding-left: 28px; padding-right: 28px; }
+      .nav-links { display: none; }
+      .hero-grid, .body-grid, .section-head, .cta-grid { grid-template-columns: 1fr; gap: 24px; }
+      .stamp, .cta-stamp { display: none; }
+      .hero h1 { font-size: 56px; }
+      .section-head h2, .engine-head h2 { font-size: 40px; }
+      .cta h2 { font-size: 48px; }
+      .hero-row { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; }
+      .hero-actions { justify-content: flex-start; }
+      .results-row { grid-template-columns: 1fr; gap: 32px; }
+      .pull-quote p { font-size: 22px; }
+      .tier-grid, .principles-row, .founders-row { grid-template-columns: 1fr; }
+      .tier + .tier, .principle + .principle, .founder + .founder { border-left: 0; border-top: 1px solid var(--rule-strong); }
+      .principle, .founder { padding-left: 0 !important; padding-right: 0 !important; }
+      .phase-cards { grid-template-columns: 1fr; }
+      .phase-cards > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+      .agave-bg, .agave-cta { display: none; }
+      .plate-wrap { padding: 0 28px; }
+      .plate { padding: 28px 12px 16px; }
+      .services-foot { padding: 24px 28px 0; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="#home" aria-label="Agavi AI home">
-        <div class="brand-mark" aria-hidden="true">
-          <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
-            <defs>
-              <linearGradient id="miniLeaf" x1="18" y1="16" x2="98" y2="98" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#8AFFF7"/>
-                <stop offset=".52" stop-color="#63D6FF"/>
-                <stop offset="1" stop-color="#F0C26E"/>
-              </linearGradient>
-              <filter id="miniGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="2.5" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <rect x="1" y="1" width="118" height="118" rx="20" fill="url(#miniBg)"/>
-            <g filter="url(#miniGlow)" stroke="url(#miniLeaf)" stroke-width="3" fill="rgba(12,34,58,.18)">
-              <path d="M60 92 C54 65 57 40 62 16 C69 40 70 66 60 92 Z"/>
-              <path d="M60 92 C44 71 31 59 17 46 C39 51 54 63 60 92 Z"/>
-              <path d="M60 92 C47 77 36 70 24 63 C41 67 54 76 60 92 Z"/>
-              <path d="M60 92 C52 68 46 54 42 32 C53 48 59 64 60 92 Z"/>
-              <path d="M60 92 C76 71 89 59 103 46 C81 51 66 63 60 92 Z"/>
-              <path d="M60 92 C73 77 84 70 96 63 C79 67 66 76 60 92 Z"/>
-              <path d="M60 92 C68 68 74 54 78 32 C67 48 61 64 60 92 Z"/>
-            </g>
-          </svg>
-        </div>
-        <div class="brand-text">
-          <strong>Agavi AI</strong>
-          <span>Architecting Transformation</span>
-        </div>
-      </a>
 
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#engine">Beatitude Engine</a>
-        <a href="#why">Why Agavi</a>
-        <a href="#contact">Contact</a>
-        <a href="https://diagnostic.agaviai.com" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700;">Free Diagnostic</a>
-        <a class="btn btn-primary" href="#contact">Schedule a Discovery Call</a>
-      </div>
-    </div>
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <nav class="nav">
+    <a class="nav-mark" href="/">Agavi<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="#engine">The Engine</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#results">Work</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="/intake">Begin intake →</a>
   </nav>
 
-  <header class="hero" id="home">
-    <div class="container hero-grid">
-      <div class="hero-copy reveal">
-        <div class="eyebrow">Boutique AI Consultancy</div>
-        <h1>AI That Grows With You</h1>
-        <p class="lead">
-          Agavi AI helps businesses harness the power of artificial intelligence across every department with tailored automation, better systems, and grounded execution.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#contact">Schedule a Discovery Call</a>
-          <a class="btn btn-secondary" href="https://diagnostic.agaviai.com" target="_blank" rel="noopener">Take the Free Diagnostic →</a>
+  <!-- ── HERO ────────────────────────────────────────── -->
+  <header class="hero">
+    <svg class="agave-bg" viewBox="0 0 520 520" aria-hidden="true">
+      <g transform="translate(260 380)" stroke="#1f3a32" stroke-width="1" fill="none" stroke-linejoin="round" opacity="0.55">
+        <path d="M -22 0 Q -110 -50 -200 -90 Q -110 -20 22 0" />
+        <path d="M -22 0 Q -135 -85 -180 -150 Q -100 -55 22 0" />
+        <path d="M -22 0 Q -110 -130 -130 -200 Q -70 -75 22 0" />
+        <path d="M -22 0 Q -70 -160 -75 -230 Q -35 -90 22 0" />
+        <path d="M -22 0 Q -25 -180 -20 -250 Q 0 -95 22 0" />
+        <path d="M -22 0 Q 25 -180 35 -250 Q 12 -95 22 0" />
+        <path d="M -22 0 Q 70 -160 90 -230 Q 30 -90 22 0" />
+        <path d="M -22 0 Q 110 -130 145 -200 Q 65 -75 22 0" />
+        <path d="M -22 0 Q 135 -85 195 -150 Q 95 -55 22 0" />
+        <path d="M -22 0 Q 110 -50 215 -90 Q 110 -20 22 0" />
+        <path d="M -22 0 Q 0 -130 0 -250" stroke-width="0.5" opacity="0.5" />
+      </g>
+    </svg>
+    <div class="hero-grid">
+      <div class="stamp">AGV—01<br/>HOMEPAGE</div>
+      <div>
+        <div class="kicker" style="margin-bottom:32px">◇ &nbsp; Productized AI consultancy · founder-led service businesses &nbsp; ◇</div>
+        <h1 class="serif">High-speed outcomes<br/><em>for humans.</em></h1>
+        <div class="hero-row">
+          <p class="hero-lede serif">
+            Your growth engine, productized. Foundation in ten days, automation
+            on a flat retainer, the same five-phase methodology every time. No agency
+            bloat, no twelve-week timelines, no sales call to get a quote.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="/intake">Begin intake</a>
+            <a class="btn-ghost" href="#engine">See the Engine ↓</a>
+          </div>
         </div>
-        <div class="hero-tags">
-          <span>CRM</span>
-          <span>Finance</span>
-          <span>Sales</span>
-          <span>Operations</span>
-          <span>Customer Service</span>
-          <span>Marketing</span>
-        </div>
-      </div>
-
-      <div class="hero-visual reveal">
-        <svg class="hero-agave" viewBox="0 0 980 760" aria-label="Stylized agave plant representing business functions">
-          <defs>
-            <radialGradient id="heroGlow" cx="50%" cy="54%" r="54%">
-              <stop offset="0%" stop-color="rgba(90,246,238,.24)"/>
-              <stop offset="100%" stop-color="rgba(90,246,238,0)"/>
-            </radialGradient>
-            <linearGradient id="leafGrad" x1="292" y1="96" x2="794" y2="560" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#92FFF7"/>
-              <stop offset=".48" stop-color="#67D9FF"/>
-              <stop offset="1" stop-color="#F0C26E"/>
-            </linearGradient>
-            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop stop-color="#69DFFF"/>
-              <stop offset="1" stop-color="#F0C26E"/>
-            </linearGradient>
-            <filter id="heroBlur" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-
-          <rect width="980" height="760" fill="none"/>
-          <circle cx="610" cy="430" r="220" fill="url(#heroGlow)"/>
-          <circle cx="610" cy="430" r="310" fill="none" stroke="rgba(95,140,200,.07)"/>
-          <circle cx="610" cy="430" r="360" fill="none" stroke="rgba(95,140,200,.05)"/>
-
-          <g opacity=".34" stroke="#63D6FF">
-            <line x1="610" y1="430" x2="380" y2="118"/>
-            <line x1="610" y1="430" x2="225" y2="296"/>
-            <line x1="610" y1="430" x2="232" y2="586"/>
-            <line x1="610" y1="430" x2="896" y2="122"/>
-            <line x1="610" y1="430" x2="958" y2="290"/>
-            <line x1="610" y1="430" x2="932" y2="598"/>
-          </g>
-
-          <g filter="url(#heroBlur)" stroke="url(#leafGrad)" stroke-width="3" fill="rgba(7,22,36,.42)">
-            <path d="M610 438 C588 330 593 204 626 58 C664 206 668 332 610 438 Z"/>
-            <path d="M610 438 C537 356 463 284 364 196 C484 244 573 304 610 438 Z"/>
-            <path d="M610 438 C494 356 409 314 256 266 C411 306 535 367 610 438 Z"/>
-            <path d="M610 438 C545 336 512 244 481 118 C557 205 601 309 610 438 Z"/>
-            <path d="M610 438 C684 356 758 284 856 196 C735 245 646 305 610 438 Z"/>
-            <path d="M610 438 C725 356 812 314 964 266 C810 305 685 368 610 438 Z"/>
-            <path d="M610 438 C675 336 708 244 739 118 C663 204 619 309 610 438 Z"/>
-            <path d="M610 442 C533 448 438 468 314 518 C446 533 550 510 610 442 Z"/>
-            <path d="M610 442 C693 448 784 468 903 518 C780 533 670 511 610 442 Z"/>
-            <path d="M610 438 C566 378 531 318 505 236 C567 287 602 350 610 438 Z"/>
-            <path d="M610 438 C653 378 689 318 715 236 C652 286 617 350 610 438 Z"/>
-          </g>
-
-          <g stroke="url(#lineGrad)" stroke-width="1.7" fill="none" opacity=".82">
-            <path d="M470 186 H400 l-30 -22"/>
-            <path d="M760 186 H850 l30 -22"/>
-            <path d="M300 286 H212 l-36 0"/>
-            <path d="M842 286 H932 l28 0"/>
-            <path d="M318 520 H224 l-34 16"/>
-            <path d="M818 520 H910 l34 16"/>
-          </g>
-
-          <g font-family="Inter, sans-serif" font-size="18" font-weight="600">
-            <g>
-              <path d="M330 162 h82 l18 22 -18 22 h-82 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(104,220,255,.34)"/>
-              <text x="371" y="191" text-anchor="middle" fill="#DDF6FF">CRM</text>
-            </g>
-            <g>
-              <path d="M760 162 h106 l18 22 -18 22 h-106 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(240,194,110,.34)"/>
-              <text x="813" y="191" text-anchor="middle" fill="#FFE1A4">Finance</text>
-            </g>
-            <g>
-              <path d="M176 262 h132 l18 22 -18 22 h-132 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(104,220,255,.34)"/>
-              <text x="242" y="291" text-anchor="middle" fill="#63D6FF">Marketing</text>
-            </g>
-            <g>
-              <path d="M868 262 h106 l18 22 -18 22 h-106 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(240,194,110,.34)"/>
-              <text x="921" y="291" text-anchor="middle" fill="#FFE1A4">Sales</text>
-            </g>
-            <g>
-              <path d="M148 496 h188 l18 22 -18 22 h-188 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(240,194,110,.34)"/>
-              <text x="242" y="525" text-anchor="middle" fill="#FFE1A4">Customer Service</text>
-            </g>
-            <g>
-              <path d="M868 496 h138 l18 22 -18 22 h-138 l-18 -22z" fill="rgba(8,16,27,.92)" stroke="rgba(104,220,255,.34)"/>
-              <text x="937" y="525" text-anchor="middle" fill="#DDF6FF">Operations</text>
-            </g>
-          </g>
-        </svg>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="section" id="about">
-      <div class="container">
-        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="section-head reveal">
-          <div>
-            <div class="eyebrow">About Agavi AI</div>
-            <h2>We don’t sell software. We architect transformation.</h2>
-          </div>
-          <p>
-            Agavi AI is a boutique consultancy that partners with businesses to identify inefficiencies, implement intelligent systems, and unlock growth through tailored AI strategy and execution.
-          </p>
+  <!-- ── ENGINE ──────────────────────────────────────── -->
+  <section class="engine" id="engine">
+    <div class="section-head engine-head">
+      <div class="stamp">AGV—02</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ The methodology · Our moat</div>
+        <h2 class="serif">The Beatitude Engine.<br/><em>Five phases. Same shape every time.</em></h2>
+      </div>
+      <p class="lede serif">
+        We built it because the standard consulting playbook — discovery deck,
+        six-month timeline, twelve-person team — doesn't fit a founder-led business. This does.
+      </p>
+    </div>
+
+    <div class="plate-wrap">
+      <div class="plate">
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+        <div class="plate-meta-l">◇ Plate · The Beatitude Engine · Five phases</div>
+        <div class="plate-meta-r">Diagram 02 · v1.4</div>
+
+        <svg id="engine-svg" viewBox="0 0 1240 440" aria-label="The Beatitude Engine — five phases">
+          <defs>
+            <radialGradient id="ed-glow" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#b8552d" stop-opacity="0.10" />
+              <stop offset="60%" stop-color="#b8552d" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <ellipse cx="620" cy="220" rx="640" ry="140" fill="url(#ed-glow)" />
+          <line x1="60" y1="220" x2="1180" y2="220" stroke="#1f3a32" stroke-width="0.6" opacity="0.32" />
+          <g id="ticks"></g>
+          <g id="phases"></g>
+          <g class="now-indicator" id="now-indicator">
+            <line x1="60" y1="182" x2="60" y2="190" stroke="#b8552d" stroke-width="1" />
+            <text x="60" y="176" text-anchor="middle"
+              style="font:500 10px 'JetBrains Mono', monospace; letter-spacing:0.18em; fill:#b8552d">◇ NOW</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="body-grid">
+      <div></div>
+      <div class="phase-cards">
+        <div>
+          <div class="phase-tag">PHASE 01 · LISTEN</div>
+          <h3 class="serif">Assess<span class="dot">.</span></h3>
+          <div class="ph-lede">We sit in the business before we propose anything.</div>
+          <p class="ph-body">Two on-site sessions. We watch how a lead actually reaches you, where the bottlenecks live, what the back-office costs in hours every week. No deck, no template diagnostic — we leave with a one-page operational read.</p>
+          <div class="ph-days">Days 01–02</div>
         </div>
-
-        <div class="grid-2">
-          <div class="panel copy-card reveal">
-            <h3>Built for operating reality</h3>
-            <p>
-              Businesses do not need more noise. They need clear thinking, disciplined implementation, and AI that fits the way the business actually runs. Agavi AI helps leadership teams move from curiosity to capability with systems that create leverage across the enterprise.
-            </p>
-            <div class="stats">
-              <div class="stat"><strong>Strategy</strong><p>Opportunity mapping and ROI prioritization.</p></div>
-              <div class="stat"><strong>Systems</strong><p>Workflow design, integrations, and operating discipline.</p></div>
-              <div class="stat"><strong>Scale</strong><p>Training, governance, iteration, and adoption.</p></div>
-            </div>
-          </div>
-
-          <div class="panel copy-card reveal">
-            <h3>How Agavi works</h3>
-            <p>
-              Agavi AI operates like an advisory partner, not a generic platform. We diagnose the real bottlenecks, design the right architecture, and help deploy the tools that fit your stack, your team, and your economics.
-            </p>
-            <div class="about-highlight">
-              <div class="item"><strong>Tailored by design</strong><p>Every engagement begins with your workflow, your data, and your business model.</p></div>
-              <div class="item"><strong>Leadership-level clarity</strong><p>Recommendations stay practical, commercially grounded, and tied to measurable return.</p></div>
-            </div>
-          </div>
+        <div>
+          <div class="phase-tag">PHASE 02 · LOCATE</div>
+          <h3 class="serif">Align<span class="dot">.</span></h3>
+          <div class="ph-lede">Where AI compounds. Where it's a distraction.</div>
+          <p class="ph-body">We rank candidate initiatives by ROI, time-to-value, and fragility. Half the value of this phase is what we tell you not to build. You leave with a costed, ranked roadmap — even if you stop here.</p>
+          <div class="ph-days">Day 03</div>
+        </div>
+        <div>
+          <div class="phase-tag">PHASE 03 · DESIGN</div>
+          <h3 class="serif">Architect<span class="dot">.</span></h3>
+          <div class="ph-lede">Vendor-neutral system design. Specific tools, specific costs.</div>
+          <p class="ph-body">Architecture happens with your team in the room. Every decision is documented with the alternative we considered and why we didn't pick it. The site, the automations, the data flow — drawn before it's built.</p>
+          <div class="ph-days">Day 04</div>
+        </div>
+        <div>
+          <div class="phase-tag">PHASE 04 · BUILD</div>
+          <h3 class="serif">Activate<span class="dot">.</span></h3>
+          <div class="ph-lede">We ship. Production-ready, live in days not weeks.</div>
+          <p class="ph-body">Foundation goes live by day ten. Automations roll out staged, with a rollback path on each. We pair-program the last 20% with whoever will own this on your side after we leave.</p>
+          <div class="ph-days">Days 05–09</div>
+        </div>
+        <div>
+          <div class="phase-tag">PHASE 05 · ENDURE</div>
+          <h3 class="serif">Amplify<span class="dot">.</span></h3>
+          <div class="ph-lede">Ninety-day shadow. We leave when it runs without us.</div>
+          <p class="ph-body">Most agencies disappear the day it ships — that's the moment systems fail. We stay through the first 90 days of real use, write the SOPs, instrument the dashboards, answer Slack messages. Then we leave.</p>
+          <div class="ph-days">Day 10+</div>
         </div>
       </div>
-    </section>
+    </div>
+    <div class="engine-caption">
+      Same five phases for the $1,997 Foundation as for the largest engagement. Speed comes from the shape — not from skipping steps.
+    </div>
+  </section>
 
-    <section class="section" id="services">
-      <div class="container">
-        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="section-head reveal">
-          <div>
-            <div class="eyebrow">What We Do</div>
-            <h2>AI systems across every major business function.</h2>
-          </div>
-          <p>
-            Each branch of the agave represents a high-leverage function where intelligence can take root, remove friction, and improve performance.
-          </p>
-        </div>
-
-        <div class="cards">
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V8l8-4 8 4v11l-8 4-8-4Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 8l8 4 8-4M12 12v11" stroke="currentColor" stroke-width="1.6"/></svg></div>
-            <h3>CRM Intelligence</h3>
-            <p>AI-enhanced relationship tracking, lead scoring, pipeline visibility, and next-best-action prompts that sharpen commercial execution.</p>
-            <span class="tag">Relationships + Revenue</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 16l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="16" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg></div>
-            <h3>Financial Automation</h3>
-            <p>Forecasting, anomaly detection, reporting automation, and better decision support for leaders who need stronger financial signal.</p>
-            <span class="tag">Control + Insight</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0v5l-3-2-3 2-3-2-3 2-3-2V12Z" stroke="currentColor" stroke-width="1.6"/><path d="M9 10h6M8 13h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-            <h3>Customer Service AI</h3>
-            <p>Chatbots, sentiment analysis, service routing, and automated resolution flows that improve response time and retention.</p>
-            <span class="tag">Service + Retention</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-5 3 3 8-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8h5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h3>Sales Enablement</h3>
-            <p>AI-driven outreach, account prioritization, rep coaching tools, and conversion modeling that help teams perform better.</p>
-            <span class="tag">Pipeline + Conversion</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 15l4-4 3 3 6-7 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-            <h3>Operations &amp; Logistics</h3>
-            <p>Workflow automation, resource optimization, predictive planning, and exception handling that reduce waste and improve throughput.</p>
-            <span class="tag">Efficiency + Throughput</span>
-          </article>
-          <article class="panel service-card reveal">
-            <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="18" cy="17" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg></div>
-            <h3>Marketing Intelligence</h3>
-            <p>Campaign analytics, audience segmentation, personalization, and reporting automation that sharpen growth decisions.</p>
-            <span class="tag">Signal + Demand</span>
-          </article>
-        </div>
+  <!-- ── RESULTS ─────────────────────────────────────── -->
+  <section class="results" id="results">
+    <div class="section-head">
+      <div class="stamp">AGV—03</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ Proven results · TX Mulching</div>
+        <h2 class="serif">One Engine.<br/><em>Real numbers.</em></h2>
       </div>
-    </section>
-
-    <section class="section" id="engine">
-      <div class="container">
-        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="section-head reveal">
-          <div>
-            <div class="eyebrow">The Beatitude Engine</div>
-            <h2>Optional values alignment layered into practical AI architecture.</h2>
-          </div>
-          <p>
-            The Beatitude Engine is Agavi AI’s proprietary diagnostic and deployment framework. It can also be added as an optional alignment layer for owners who want automation shaped by standards, tone, and principles consistent with how they lead.
-          </p>
-        </div>
-
-        <div class="engine-wrap">
-          <div class="panel engine-copy reveal">
-            <h3>Framework first. Alignment when desired.</h3>
-            <div class="engine-badge">Optional Add-On Feature</div>
-            <p>
-              Every Agavi AI engagement can use the Beatitude Engine as an execution model: assess, align, architect, activate, and amplify. For owners who want it, the same architecture can include a values layer that helps AI outputs remain consistent with conviction, service standards, and leadership tone.
-            </p>
-
-            <div class="engine-points">
-              <div class="engine-point"><span>1</span><div><strong>Principled guidance, not rigid control</strong><p>The alignment layer guides recommendations, messaging, and exception handling without becoming a requirement for every client.</p></div></div>
-              <div class="engine-point"><span>2</span><div><strong>Teachings translated into operating principles</strong><p>Humility can shape tone. Mercy can influence service recovery. Integrity can guide truthfulness, escalation, and reporting.</p></div></div>
-              <div class="engine-point"><span>3</span><div><strong>Useful for high-trust businesses</strong><p>This is especially useful for founder-led, family-owned, and values-driven organizations where AI should reflect ownership standards.</p></div></div>
-            </div>
-          </div>
-
-          <div class="panel wheel-panel reveal">
-            <div class="wheel-wrap">
-              <svg class="wheel-svg" viewBox="0 0 700 660" aria-label="Beatitude Engine wheel diagram">
-                <defs>
-                  <linearGradient id="wheelRing" x1="114" y1="140" x2="600" y2="570" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#61FFF3"/>
-                    <stop offset=".52" stop-color="#60B8FF"/>
-                    <stop offset="1" stop-color="#F0C26E"/>
-                  </linearGradient>
-                  <filter id="wheelGlow" x="-30%" y="-30%" width="160%" height="160%">
-                    <feGaussianBlur stdDeviation="3" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                </defs>
-
-                <circle cx="350" cy="340" r="198" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="54"/>
-                <circle cx="350" cy="340" r="198" fill="none" stroke="url(#wheelRing)" stroke-width="10.5" stroke-linecap="round"
-                        stroke-dasharray="145 84 142 80 138 82 142 82 146 90" transform="rotate(-90 350 340)" filter="url(#wheelGlow)"/>
-                <circle cx="350" cy="340" r="142" fill="none" stroke="rgba(95,154,214,.18)" stroke-width="1.5" stroke-dasharray="5 10"/>
-
-                <path d="M350 197 C386 196 423 205 455 224" stroke="#78F4F0" stroke-opacity=".22" stroke-width="2"/>
-                <path d="M489 265 C515 296 532 335 534 375" stroke="#76CFFF" stroke-opacity=".22" stroke-width="2"/>
-                <path d="M504 440 C483 475 453 504 417 524" stroke="#F0C26E" stroke-opacity=".22" stroke-width="2"/>
-                <path d="M280 525 C245 512 213 489 188 460" stroke="#79F2DD" stroke-opacity=".22" stroke-width="2"/>
-                <path d="M168 268 C190 238 220 213 255 198" stroke="#78D9FF" stroke-opacity=".22" stroke-width="2"/>
-              </svg>
-
-              <div class="wheel-center">
-                <div>
-                  <h3>Beatitude<br>Engine</h3>
-                  <p>Execution framework with an optional values-alignment layer.</p>
-                </div>
-              </div>
-
-              <div class="phase-tile phase-1">
-                <small>Phase 1</small>
-                <strong>Assess</strong>
-                <p>Audit systems, data, standards, and the places where judgment matters most.</p>
-              </div>
-
-              <div class="phase-tile phase-2">
-                <small>Phase 2</small>
-                <strong>Align</strong>
-                <p>Map AI use cases to ROI goals and, when desired, to ownership values and tone.</p>
-              </div>
-
-              <div class="phase-tile phase-3">
-                <small>Phase 3</small>
-                <strong>Architect</strong>
-                <p>Design prompts, rules, escalation paths, and review layers around the business.</p>
-              </div>
-
-              <div class="phase-tile phase-4">
-                <small>Phase 4</small>
-                <strong>Activate</strong>
-                <p>Implement tools, train teams, and deploy the optional alignment layer where useful.</p>
-              </div>
-
-              <div class="phase-tile phase-5">
-                <small>Phase 5</small>
-                <strong>Amplify</strong>
-                <p>Monitor outcomes, improve quality, and refine how the system performs over time.</p>
-              </div>
+      <p class="lede serif">
+        We don't run a logo wall. We post build logs and measured outcomes — starting
+        with our most-cited delivery, an East Valley landscaping owner-operator we shipped in eleven days.
+      </p>
+    </div>
+    <div class="body-grid">
+      <div></div>
+      <div class="results-row">
+        <div class="pull-quote">
+          <div class="meta">◇ TX MULCHING · LANDSCAPING · EAST VALLEY AZ</div>
+          <p class="serif">"Inbound calls started before the launch invoice was paid. Jay walked us through every change. It's the first time tech has actually felt like ours."</p>
+          <div class="author">
+            <div class="avatar">TX</div>
+            <div class="author-info">
+              <div class="name">Owner · TX Mulching</div>
+              <div class="role">Landscaping · East Valley AZ</div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="why">
-      <div class="container">
-        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="section-head reveal">
-          <div>
-            <div class="eyebrow">Why Agavi AI</div>
-            <h2>A sharper way to bring AI into the business.</h2>
+        <div class="metrics">
+          <div class="metric">
+            <div class="num serif">11<span class="unit">days</span></div>
+            <div class="label">Foundation delivered</div>
+            <div class="body">From kickoff to launch. Ten was the goal — eleven was reality, with one weekend.</div>
           </div>
-          <p>
-            Most firms either sell software or sell strategy decks. Agavi AI closes the gap and stays accountable from discovery through implementation.
-          </p>
-        </div>
-
-        <div class="why-grid">
-          <article class="panel why-card reveal"><strong>Boutique, hands-on consulting</strong><p>You work directly with a focused advisory partner, not a bloated delivery team or a generic support queue.</p></article>
-          <article class="panel why-card reveal"><strong>Industry-agnostic, vertically aware</strong><p>Agavi applies durable operating principles across industries while still respecting the realities of each vertical.</p></article>
-          <article class="panel why-card reveal"><strong>Vendor-neutral recommendations</strong><p>The goal is not to force a platform. The goal is to fit the right tools into the stack your business actually needs.</p></article>
-          <article class="panel why-card reveal"><strong>End-to-end execution</strong><p>From roadmap design to implementation, training, and iteration, the work carries through the full lifecycle.</p></article>
+          <div class="metric">
+            <div class="num serif">+40%</div>
+            <div class="label">Operational efficiency</div>
+            <div class="body">Hours measurably returned to the owner — phone tag, scheduling, nurture, follow-up.</div>
+          </div>
+          <div class="metric">
+            <div class="num serif">3.5×</div>
+            <div class="label">ROI in first 90 days</div>
+            <div class="body">Retainer fees against new closed-won inbound. Tracked, not estimated.</div>
+          </div>
+          <div class="metric">
+            <div class="num serif">1</div>
+            <div class="label">Owner answering Slack</div>
+            <div class="body">No sales funnel, no account manager. Jay is on the channel. So is the work.</div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section diag-section" id="diagnostic">
-      <div class="container">
-        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="diag-badge reveal">AI Readiness Diagnostic</div>
-        <h2 class="reveal">Know exactly where AI will move the needle.</h2>
-        <p class="lead reveal">
-          Before spending a dollar on AI tools or consultants, find out where your business actually stands. The Agavi Diagnostic scores your operations across 8 dimensions and delivers a personalized roadmap in under 10 minutes.
+  <!-- ── SERVICES ────────────────────────────────────── -->
+  <section class="services" id="services">
+    <div class="section-head">
+      <div class="stamp">AGV—04</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ Productized engagements · Posted prices</div>
+        <h2 class="serif">One Foundation.<br/><em>One automation retainer.</em></h2>
+      </div>
+      <p class="lede serif">
+        Stack them as needed. No sales funnel, no scoping calls to learn the price.
+        The same Engine drives both.
+      </p>
+    </div>
+    <div class="body-grid">
+      <div></div>
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="tag">FOUNDATION</div>
+          <h3 class="serif">Digital Foundation.<br/><em>The starting line.</em></h3>
+          <p class="summary">A real website that ranks locally — and an operations walkthrough that shows you exactly where you're losing hours. Owned by you outright. No platform lock-in.</p>
+          <div class="includes-block">
+            <div class="includes-label">What's included</div>
+            <ul class="includes">
+              <li>+ &nbsp;5-page mobile-first website</li>
+              <li>+ &nbsp;Local SEO + Google Business setup</li>
+              <li>+ &nbsp;Operations walkthrough · written report</li>
+              <li>+ &nbsp;Two on-site discovery sessions</li>
+              <li>+ &nbsp;Source code, hosting, the keys — owned by you</li>
+            </ul>
+          </div>
+          <div class="price-block">
+            <span class="price serif">$1,997</span>
+            <span class="price-unit">one-time</span>
+          </div>
+          <div class="duration">Delivered in 7–10 days</div>
+          <div style="margin-top:24px">
+            <a class="tier-cta" href="/intake">Start the build →</a>
+          </div>
+        </div>
+
+        <div class="tier featured">
+          <div class="badge">◇ MOST CHOSEN</div>
+          <div class="tag">AUTOMATION RETAINER</div>
+          <h3 class="serif">Automation Retainer.<br/><em>Quiet hours, returned.</em></h3>
+          <p class="summary">AI automation running quietly in the background — handling the repetitive work so the owner can focus on jobs, not admin. Three plans. Cancel any month.</p>
+
+          <div class="includes-label" style="padding-top:22px;border-top:1px solid var(--rule);">Three plans</div>
+          <ul class="subplans">
+            <li class="subplan">
+              <div class="subplan-head">
+                <span class="subplan-name serif">Seedling</span>
+                <span class="subplan-price serif">$297/mo</span>
+              </div>
+              <p class="subplan-desc">AI-powered lead follow-up, automated appointment reminders, simple website chat.</p>
+            </li>
+            <li class="subplan">
+              <div class="subplan-head">
+                <span class="subplan-name serif">Growing</span>
+                <span class="subplan-price serif">$597/mo</span>
+              </div>
+              <p class="subplan-desc">Everything in Seedling, plus a performance dashboard and AI-assisted content + review responses.</p>
+            </li>
+            <li class="subplan">
+              <div class="subplan-head">
+                <span class="subplan-name serif">Premium</span>
+                <span class="subplan-price serif">$997/mo</span>
+              </div>
+              <p class="subplan-desc">Full AI operating system — lead nurture, scheduling, follow-up, reporting, and a monthly strategy call.</p>
+            </li>
+          </ul>
+
+          <div class="price-block">
+            <span class="price serif">From $297</span>
+            <span class="price-unit">/ month</span>
+          </div>
+          <div class="duration">Month-to-month · cancel any time</div>
+          <div style="margin-top:24px">
+            <a class="tier-cta primary" href="/intake">Begin intake →</a>
+          </div>
+        </div>
+      </div>
+      <div class="services-foot">
+        Both can be combined. Most owners start with Foundation and add a retainer plan after the operations walkthrough makes the case for itself.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRINCIPLES ──────────────────────────────────── -->
+  <section class="principles">
+    <div class="section-head">
+      <div class="stamp">AGV—05</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ How we work</div>
+        <h2 class="serif">Three principles.<br/><em>Non-negotiable.</em></h2>
+      </div>
+      <p class="lede serif">
+        These are the lines we don't cross — the reasons clients tell us we feel
+        different from the agency they hired before us.
+      </p>
+    </div>
+    <div class="body-grid">
+      <div></div>
+      <div class="principles-row">
+        <div class="principle">
+          <div class="num">PRINCIPLE 01</div>
+          <h3 class="serif">Speed<span class="dot">.</span></h3>
+          <p>Foundation in ten days because a six-month consulting engagement doesn't fit a business with one owner and twelve trucks. The Engine is built around a calendar that respects yours.</p>
+        </div>
+        <div class="principle">
+          <div class="num">PRINCIPLE 02</div>
+          <h3 class="serif">No jargon · ROI in plain numbers<span class="dot">.</span></h3>
+          <p>Every recommendation has a dollar figure and a timeline next to it. If we can't tell you in plain language what something will earn back, we don't recommend it.</p>
+        </div>
+        <div class="principle">
+          <div class="num">PRINCIPLE 03</div>
+          <h3 class="serif">Fractional focus<span class="dot">.</span></h3>
+          <p>We work on a capped roster. Slack channel, named people, owner-on-the-call. You're not a ticket queue, and we're not pretending to be a 200-person agency we're not.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOUNDERS ────────────────────────────────────── -->
+  <section class="founders">
+    <div class="section-head">
+      <div class="stamp">AGV—06</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ Who we are</div>
+        <h2 class="serif">Jay, Maddy,<br/><em>and Nora.</em></h2>
+      </div>
+      <p class="lede serif">
+        Agavi isn't a faceless agency. It's a Chandler, AZ family operation built on the
+        belief that local businesses deserve the same technology advantages as the big guys —
+        without the big price tag.
+      </p>
+    </div>
+    <div class="body-grid">
+      <div></div>
+      <div class="founders-row">
+        <div class="founder">
+          <div class="role">FOUNDER · OWNER</div>
+          <h3 class="serif">Jay Messamore</h3>
+          <p>Corporate finance professional and technologist based in Chandler, AZ. Years spent helping businesses navigate growth and operations — now applied to websites and automation that help local service businesses stop losing leads and reclaim their time.</p>
+        </div>
+        <div class="founder">
+          <div class="role">COFOUNDER · DESIGN</div>
+          <h3 class="serif">Maddy Messamore</h3>
+          <p>Part of the process from the start. Brings fresh design perspective, challenges what looks right, and is learning how to build with AI tools alongside her dad. The reason the work doesn't look like every other agency's.</p>
+        </div>
+        <div class="founder">
+          <div class="role">COFOUNDER · BUILD</div>
+          <h3 class="serif">Nora Messamore</h3>
+          <p>Part of the process from the start. Contributes design ideas and is learning the toolset hands-on — building real things, not running errands. Family operation, by design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ─────────────────────────────────────────── -->
+  <section class="faq" id="faq">
+    <div class="section-head">
+      <div class="stamp">AGV—07</div>
+      <div>
+        <div class="kicker" style="margin-bottom:16px">◇ Plainly answered</div>
+        <h2 class="serif">What owners <em>actually ask first.</em></h2>
+      </div>
+      <p class="lede serif">
+        If your question isn't here, the discovery call is a real conversation — bring it then.
+      </p>
+    </div>
+    <div class="body-grid">
+      <div></div>
+      <div class="faq-list">
+        <div class="faq-item is-open">
+          <div class="row"><h3 class="serif">What does $1,997 actually include?</h3><span class="toggle">−</span></div>
+          <p class="answer">A live, mobile-first 5-page website you own outright. Local SEO foundation + Google Business Profile setup. Two on-site discovery sessions. The operations walkthrough — written report on where automation would save real hours. Source code, hosting setup, the keys. Delivered live in 7–10 days.</p>
+        </div>
+        <div class="faq-item">
+          <div class="row"><h3 class="serif">Why ten days when other agencies say ten weeks?</h3><span class="toggle">+</span></div>
+          <p class="answer">Because the Engine is the same shape every time. The work is real — we just don't pad it with kickoff decks, change-order theatrics, or a designer who's never run a service business.</p>
+        </div>
+        <div class="faq-item">
+          <div class="row"><h3 class="serif">Do I need an Automation Retainer?</h3><span class="toggle">+</span></div>
+          <p class="answer">Maybe not. Some owners just need the Foundation. We'll tell you on the discovery call. Adding the retainer is a different question than buying the website, and we keep them separate on purpose.</p>
+        </div>
+        <div class="faq-item">
+          <div class="row"><h3 class="serif">How does the retainer cancel?</h3><span class="toggle">+</span></div>
+          <p class="answer">Email Jay. End of the month. No exit fee, no thirty-day notice clause. We'd rather keep you on a handshake than a contract.</p>
+        </div>
+        <div class="faq-item">
+          <div class="row"><h3 class="serif">Where are you based, and do you travel?</h3><span class="toggle">+</span></div>
+          <p class="answer">Chandler, AZ. We work in person across the East Valley — Mesa, Gilbert, Chandler, Queen Creek — and remotely everywhere else. The two on-site discovery sessions are non-negotiable; the rest is your call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ───────────────────────────────────── -->
+  <section class="cta">
+    <svg class="agave-cta" viewBox="0 0 520 520" width="520" height="520" aria-hidden="true">
+      <g transform="translate(260 380)" stroke="#c2cdb9" stroke-width="1" fill="none" stroke-linejoin="round" opacity="0.5">
+        <path d="M -22 0 Q -110 -50 -200 -90 Q -110 -20 22 0" />
+        <path d="M -22 0 Q -135 -85 -180 -150 Q -100 -55 22 0" />
+        <path d="M -22 0 Q -110 -130 -130 -200 Q -70 -75 22 0" />
+        <path d="M -22 0 Q -70 -160 -75 -230 Q -35 -90 22 0" />
+        <path d="M -22 0 Q -25 -180 -20 -250 Q 0 -95 22 0" />
+        <path d="M -22 0 Q 25 -180 35 -250 Q 12 -95 22 0" />
+        <path d="M -22 0 Q 70 -160 90 -230 Q 30 -90 22 0" />
+        <path d="M -22 0 Q 110 -130 145 -200 Q 65 -75 22 0" />
+        <path d="M -22 0 Q 135 -85 195 -150 Q 95 -55 22 0" />
+        <path d="M -22 0 Q 110 -50 215 -90 Q 110 -20 22 0" />
+      </g>
+    </svg>
+    <div class="cta-grid">
+      <div class="cta-stamp">AGV—08<br/>DISCOVERY</div>
+      <div>
+        <div class="cta-kicker">◇ Discovery call · Forty-five minutes</div>
+        <h2 class="serif">Forty-five minutes.<br/><em>No deck.</em></h2>
+      </div>
+      <div class="cta-side">
+        <p class="cta-lede serif">
+          Tell us how a lead reaches you today and what happens next. We'll trace it
+          on a whiteboard. You'll leave knowing where the hours are leaking — whether
+          you hire us or not.
         </p>
-
-        <div class="diag-cards">
-          <div class="diag-card reveal">
-            <div class="diag-card-icon">📊</div>
-            <strong>8-Dimension Score</strong>
-            <p>See exactly where your operations are strong, exposed, and ready to leverage AI for the highest return.</p>
-          </div>
-          <div class="diag-card reveal">
-            <div class="diag-card-icon">🎯</div>
-            <strong>Personalized Roadmap</strong>
-            <p>Get a prioritized set of solution tracks matched to your business profile, revenue range, and team size.</p>
-          </div>
-          <div class="diag-card reveal">
-            <div class="diag-card-icon">⚡</div>
-            <strong>Instant AI Analysis</strong>
-            <p>Receive an AI-generated executive summary with your top recommendations and next steps — no waiting.</p>
-          </div>
-        </div>
-
-        <a class="btn btn-primary reveal" href="https://diagnostic.agaviai.com" target="_blank" rel="noopener" style="font-size:1.05rem;padding:1.1rem 2.2rem;margin:0 auto;display:inline-flex;">
-          Take the Free Diagnostic →
-        </a>
-        <p class="diag-meta reveal">
-          <span>Free</span>·<span>No credit card</span>·<span>Results in 10 minutes</span>
-        </p>
+        <a class="btn btn-light" href="/intake">Begin intake →</a>
+        <div class="cta-meta">CALENDAR.AGAVI.AI · THE OWNER ANSWERS</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="dot-divider reveal"><span></span><span></span><span></span></div>
-        <div class="section-head reveal">
-          <div>
-            <div class="eyebrow">Contact</div>
-            <h2>Ready to root your business in AI?</h2>
-          </div>
-          <p>
-            Start with a discovery conversation. We will look at where friction lives today, where AI can create leverage, and what a sensible path forward looks like.
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="panel contact-card reveal">
-            <h3>Book a Call</h3>
-            <p>
-              Agavi AI partners with businesses that want substance, not theater. If you are serious about intelligent operations, workflow automation, and durable execution, start here.
-            </p>
-
-            <div class="contact-points">
-              <div class="item"><strong>Strategic diagnostic</strong><p>Clarify bottlenecks, readiness, and high-value use cases before spending money in the wrong places.</p></div>
-              <div class="item"><strong>Practical roadmap</strong><p>Leave with a clearer picture of what to build, what to buy, and where to start for the strongest return.</p></div>
-              <div class="item"><strong>Implementation partnership</strong><p>Get support from strategy through rollout so the work does not die in a slide deck.</p></div>
-            </div>
-          </div>
-
-          <div class="panel form-card reveal">
-            <form id="contactForm">
-              <div class="form-row">
-                <label>Name<input type="text" name="name" placeholder="Your name" required /></label>
-                <label>Company<input type="text" name="company" placeholder="Company name" required /></label>
-              </div>
-              <div class="form-row">
-                <label>Email<input type="email" name="email" placeholder="you@company.com" required /></label>
-                <label>Phone or Website<input type="text" name="phone" placeholder="Optional" /></label>
-              </div>
-              <label>Message<textarea name="message" placeholder="Tell us about your business, current systems, and what you're trying to solve." required></textarea></label>
-              <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
-                <button type="submit" class="btn btn-primary">Book a Call</button>
-                <span class="form-note">This production form posts securely to your backend endpoint and can forward leads to email, CRM, and Agavi.</span>
-              </div>
-              <div id="formStatus" class="status" aria-live="polite"></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> Agavi AI. All rights reserved.</span>
-      <span>jay@agaviai.com</span>
+  <!-- ── FOOTER ──────────────────────────────────────── -->
+  <footer class="foot">
+    <span class="mark">Agavi<span style="color:var(--terracotta)">.</span><span class="ital">Chandler AZ · MMXXVI</span></span>
+    <div class="meta">
+      <span>PRIVACY</span>
+      <span>TERMS</span>
+      <span>HELLO@AGAVI.AI</span>
     </div>
   </footer>
 
   <script>
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
-      });
-    }, { threshold: 0.14 });
-    revealEls.forEach(el => revealObserver.observe(el));
+    // ── Engine plate animation ──────────────────────────
+    (function () {
+      var phases = [
+        { code: "Assess",    n: "01", verb: "Listen",  days: "Days 01–02" },
+        { code: "Align",     n: "02", verb: "Locate",  days: "Day 03" },
+        { code: "Architect", n: "03", verb: "Design",  days: "Day 04" },
+        { code: "Activate",  n: "04", verb: "Build",   days: "Days 05–09" },
+        { code: "Amplify",   n: "05", verb: "Endure",  days: "Day 10+" },
+      ];
+      var W = 1240, pad = 60;
+      var usable = W - pad * 2;
+      var positions = [0,1,2,3,4].map(function(i){ return pad + (usable / 4) * i; });
+      var cy = 220;
+      var SVGNS = "http://www.w3.org/2000/svg";
 
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', function(e){
-        const id = this.getAttribute('href');
-        const target = document.querySelector(id);
-        if(target){
-          e.preventDefault();
-          const navHeight = document.querySelector('.nav').offsetHeight;
-          const y = target.getBoundingClientRect().top + window.scrollY - navHeight + 1;
-          window.scrollTo({ top:y, behavior:'smooth' });
+      var ticks = document.getElementById("ticks");
+      for (var i = 0; i <= 40; i++) {
+        var x = pad + (usable / 40) * i;
+        var line = document.createElementNS(SVGNS, "line");
+        line.setAttribute("x1", x); line.setAttribute("y1", cy - 4);
+        line.setAttribute("x2", x); line.setAttribute("y2", cy + 4);
+        line.setAttribute("stroke", "#1f3a32");
+        line.setAttribute("stroke-width", "0.4");
+        line.setAttribute("opacity", i % 10 === 0 ? "0.5" : "0.15");
+        ticks.appendChild(line);
+      }
+
+      var phasesG = document.getElementById("phases");
+      var nodes = [];
+      phases.forEach(function (p, idx) {
+        var x = positions[idx];
+        var g = document.createElementNS(SVGNS, "g");
+
+        var title = document.createElementNS(SVGNS, "text");
+        title.setAttribute("x", x); title.setAttribute("y", cy - 110);
+        title.setAttribute("text-anchor", "middle");
+        title.setAttribute("class", "ph-title");
+        title.textContent = p.code;
+
+        var ph = document.createElementNS(SVGNS, "text");
+        ph.setAttribute("x", x); ph.setAttribute("y", cy - 78);
+        ph.setAttribute("text-anchor", "middle");
+        ph.setAttribute("style", "font:500 11px 'JetBrains Mono', monospace; letter-spacing:0.16em; fill:#6a6f64; text-transform:uppercase");
+        ph.textContent = "Phase " + p.n;
+
+        var ring = document.createElementNS(SVGNS, "circle");
+        ring.setAttribute("cx", x); ring.setAttribute("cy", cy);
+        ring.setAttribute("r", 22); ring.setAttribute("fill", "none");
+        ring.setAttribute("class", "ph-ring");
+
+        var dot = document.createElementNS(SVGNS, "circle");
+        dot.setAttribute("cx", x); dot.setAttribute("cy", cy);
+        dot.setAttribute("class", "ph-dot");
+        dot.setAttribute("stroke", "#1f3a32");
+        dot.setAttribute("stroke-width", "1");
+
+        var verb = document.createElementNS(SVGNS, "text");
+        verb.setAttribute("x", x); verb.setAttribute("y", cy + 50);
+        verb.setAttribute("text-anchor", "middle");
+        verb.setAttribute("class", "ph-verb");
+        verb.textContent = p.verb;
+
+        var days = document.createElementNS(SVGNS, "text");
+        days.setAttribute("x", x); days.setAttribute("y", cy + 80);
+        days.setAttribute("text-anchor", "middle");
+        days.setAttribute("style", "font:500 11px 'JetBrains Mono', monospace; letter-spacing:0.14em; fill:#6a6f64; text-transform:uppercase");
+        days.textContent = p.days;
+
+        g.appendChild(title); g.appendChild(ph);
+        g.appendChild(ring); g.appendChild(dot);
+        g.appendChild(verb); g.appendChild(days);
+        phasesG.appendChild(g);
+        nodes.push({ title: title, ring: ring, dot: dot, verb: verb });
+      });
+
+      var indicator = document.getElementById("now-indicator");
+      var active = 0;
+
+      function applyState() {
+        nodes.forEach(function (node, i) {
+          var isActive = i === active;
+          var isPast = i < active;
+          node.title.setAttribute("style",
+            "font:400 " + (isActive ? 56 : 46) + "px Newsreader, 'Source Serif Pro', Georgia, serif;" +
+            "letter-spacing:-0.02em;" +
+            "fill:" + (isActive ? "#1f3a32" : "#2c332b") + ";" +
+            "font-style:" + (isActive ? "italic" : "normal") + ";" +
+            "opacity:" + (isActive ? 1 : (isPast ? 0.85 : 0.55))
+          );
+          node.ring.setAttribute("stroke", isActive ? "#b8552d" : "#1f3a32");
+          node.ring.setAttribute("stroke-width", isActive ? "1.3" : "0.7");
+          node.ring.setAttribute("opacity", isActive ? "1" : "0.35");
+          if (!isActive) {
+            node.ring.setAttribute("stroke-dasharray", "2 3");
+          } else {
+            node.ring.removeAttribute("stroke-dasharray");
+          }
+          node.dot.setAttribute("r", isActive ? 8 : 5);
+          node.dot.setAttribute("fill", isActive ? "#b8552d" : (isPast ? "#4f6b5b" : "#f3eee4"));
+          node.verb.setAttribute("style",
+            "font:400 " + (isActive ? 22 : 19) + "px Newsreader, Georgia, serif;" +
+            "font-style:italic;" +
+            "letter-spacing:-0.01em;" +
+            "fill:#1a1f1a;" +
+            "opacity:" + (isActive ? 1 : 0.7)
+          );
+        });
+        indicator.style.transform = "translateX(" + (positions[active] - 60) + "px)";
+      }
+
+      applyState();
+      setInterval(function () {
+        active = (active + 1) % phases.length;
+        applyState();
+      }, 2400);
+    })();
+
+    // ── FAQ accordion ───────────────────────────────────
+    document.querySelectorAll(".faq-item").forEach(function (item) {
+      item.addEventListener("click", function () {
+        var open = item.classList.contains("is-open");
+        document.querySelectorAll(".faq-item").forEach(function (other) {
+          other.classList.remove("is-open");
+          var t = other.querySelector(".toggle"); if (t) t.textContent = "+";
+        });
+        if (!open) {
+          item.classList.add("is-open");
+          var t = item.querySelector(".toggle"); if (t) t.textContent = "−";
         }
       });
     });
-
-    const form = document.getElementById('contactForm');
-    const statusEl = document.getElementById('formStatus');
-
-    function showStatus(message, type){
-      statusEl.textContent = message;
-      statusEl.className = `status show ${type}`;
-    }
-
-form.addEventListener('submit', async function(e){
-  e.preventDefault();
-  const data = new FormData(form);
-  const payload = {
-    name: data.get('name').trim(),
-    company: data.get('company').trim(),
-    email: data.get('email').trim(),
-    phone: data.get('phone').trim(),
-    message: data.get('message').trim(),
-    source: 'agaviai.com',
-    page: window.location.href,
-    submittedAt: new Date().toISOString()
-  };
-
-  if(!payload.name || !payload.company || !payload.email || !payload.message){
-    showStatus('Please complete the required fields before submitting.', 'error');
-    return;
-  }
-
-  const submitButton = form.querySelector('button[type="submit"]');
-  const originalLabel = submitButton.textContent;
-  submitButton.disabled = true;
-  submitButton.textContent = 'Submitting...';
-
-  try{
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    const result = await response.json();
-
-    if(!response.ok){
-      throw new Error(result.error || 'Submission failed.');
-    }
-
-    showStatus('Message received. We will reach out shortly.', 'success');
-    form.reset();
-  } catch(err){
-    showStatus(err.message || 'There was a problem submitting the form.', 'error');
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = originalLabel;
-  }
-});
-
-    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
